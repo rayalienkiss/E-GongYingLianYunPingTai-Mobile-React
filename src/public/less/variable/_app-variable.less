@@ -1,0 +1,93 @@
+@charset "UTF-8";
+
+
+/*
+// 样式参数
+// --------------------------------------------------
+*/
+
+
+//图片所在目录
+@images-url: "../../images/";
+
+
+//字体图标所在目录
+@iconfont-url: "../iconfont/";
+
+
+//
+// -------- 全局样式参数 --------
+// -------- 全局参数命名规范：“属性名称 - 作用域”，如：@fontColor-default 尽量吧！！！语死早
+
+
+//主要元素色调
+@domColor1-mobile: rgba(213,78,31,1);
+@domColor2-mobile: rgba(75,31,86,1);
+@domColor3-mobile: rgba(118,153,200,1);
+@domColor4-mobile: rgba(75,81,86,1);
+
+
+//字体
+  //基础
+  @fontSize-base: 28px;
+    //默认字体尺寸
+    @fontSize-default: @fontSize-base;
+
+
+//文本色调
+  //基础
+  @fontColor-base: rgba(153,153,153,1);
+    //标题色调
+    @fontColor-heading: rgba(51,51,51,1);
+    //默认文本色调
+    @fontColor-default: rgba(51,51,51,1);
+    //副文本色调
+    @fontColor-viceText: @fontColor-base;
+
+
+//行高
+  //基础
+  @lineHeight-base: 1.428;
+
+
+//公共圆角尺寸
+@borderRadius-public: 5px;
+
+//公共距离尺寸
+@gapSize-public: 20px;
+
+
+//边框
+  //基础
+  @borderColor-base: rgba(230,229,233,1);
+    //主要边框色调
+    @borderColor-primary: @borderColor-base;
+
+
+//背景色
+  //基础
+  @bgColor-base: rgba(255,255,255,1);
+    //主要背景色
+    @bgColor-primary: @bgColor-base;
+
+
+//
+// -------- 组件样式参数 --------
+// -------- 组件参数命名规范：“属性名称 - 作用域 - 组件名称”，如：@bgColor-warning-alert  尽量吧！！！语死早
+
+
+//各组件的 Z 轴排序
+
+
+//头部
+  //色调
+  @bgColor-header: @domColor1-mobile;
+  //尺寸
+  @height-header: 80px;
+
+//页脚
+  //色调
+  @bgColor-footer: @domColor4-mobile;
+  @fontColor-content-footer: darken(@fontColor-viceText,15%);
+  //尺寸
+  @height-footer: 186px;
