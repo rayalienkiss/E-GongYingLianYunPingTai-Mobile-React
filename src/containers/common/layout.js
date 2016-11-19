@@ -5,9 +5,7 @@
  */
 import React, { Component } from 'react'
 
-import { Modal,Header,Footer } from 'components'
-
-import { Link } from 'react-router'
+import { Modal } from 'components'
 
 export default class App extends Component {
 
@@ -34,18 +32,9 @@ export default class App extends Component {
     render() {
         return (
             <div className="container">
-                <div className="container-inner">
-                    <Header title="供应链云平台"></Header>
-                    {
-                        this.props.children && React.cloneElement(this.props.children, { parent: this })
-                    }
-                    <Footer>
-                        <Link to="" className="footer-link">关于钱途</Link>
-                        <Link to="" className="footer-link">关于平台</Link>
-                        <Link to="" className="footer-link">电脑版</Link>
-                        <Link to="" className="footer-link">分享</Link>
-                    </Footer>
-                </div>
+                {
+                    this.props.children && React.cloneElement(this.props.children, { parent: this })
+                }
                 {/* <Modal show={ this.state.modal.show } /> */}
             </div>
         )

@@ -1,32 +1,45 @@
 @charset "utf-8";
 
 .header {
-  background-color: @bgColor-header;
-  position: relative;
-  .clearfix();
+    background-color: @bgColor-header;
+    position: relative;
+    .clearfix();
 
-  &-title {
-    font-size: floor(@fontSize-default*1.22);
-    color: rgba(255,255,255,1);
-    height: @height-header;
-    line-height: @height-header;
-    padding: 0 @height-header + 20px;
-    text-align: center;
-    .text-hide();
-  }
-
-  &-btn {
-    .square(@height-header);
-    position: absolute;
-    top: 0;
-    left: 0;
-    line-height: @height-header;
-    text-align: center;
-    background: url("@{images-url}svg-icon/chevron-thin-left-fff.svg") center center no-repeat;
-    background-size: 50%;
-
-    &:active {
-      background-color: darken(@bgColor-header,10%);
+    &-title {
+        font-size: floor(@fontSize-default*1.22);
+        color: rgba(255,255,255,1);
+        height: @height-header;
+        line-height: @height-header;
+        padding: 0 @height-header + 20px;
+        text-align: center;
+        .text-hide();
     }
-  }
+
+    &-btn {
+        .square(@height-header);
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: @height-header;
+        text-align: center;
+        background: url("@{images-url}svg-icon/chevron-thin-left-fff.svg") center center no-repeat;
+        background-size: 50%;
+
+        &:active {
+            background-color: darken(@bgColor-header,10%);
+        }
+    }
+
+    //首页头部只有网站 LOGO
+    &.index-header {
+        height: @height-header;
+
+        .header-title {
+            display: none;
+        }
+
+        .header-btn {
+            display: none;
+        }
+    }
 }
