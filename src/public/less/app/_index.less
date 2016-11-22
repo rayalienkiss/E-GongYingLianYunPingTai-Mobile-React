@@ -8,22 +8,12 @@
 .index-banner {
     position: relative;
     padding-top: 100%;
+    .image-onload();
 
     > img {
         position: absolute;
         top: 0;
         left: 0;
         .square(100%);
-        //background: url('') center center @bgColor-bitmap no-repeat;
-        color: @fontColor-bitmap;
-
-        &:after {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%,-50%);
-            content: '123123123131';
-            font-weight: bold;
-        }
     }
 }
