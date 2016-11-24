@@ -1,12 +1,12 @@
 /**
  * 弹框组件
- * 
+ *
  * by tommyshao
  */
 import React, { Component } from 'react'
 
 export default class Modal extends Component {
-    
+
     static propTypes = {
         show: React.PropTypes.bool.isRequired
     }

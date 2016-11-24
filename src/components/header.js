@@ -5,19 +5,11 @@
 
 import React, { Component } from 'react'
 
-import classNames from 'classnames'
-
 import { Link } from 'react-router'
 
 export default class Header extends Component {
 
     render() {
-
-        // const headerclass = classNames (
-        //     {
-        //         header: true
-        //     }
-        // )
 
         return (
             <div className={ this.props.headCls }>

@@ -1,0 +1,128 @@
+/*
+// 文章
+// --------------------------------------------------
+*/
+
+@charset "UTF-8";
+
+.gylpt-article-title {
+    height: 2px; /* no */
+    background-color: rgba(208,212,215,1);
+    position: relative;
+    margin: 0 @gapSize-public*2;
+    .animation-s( gylptArticleTitle,0.5s,ease,0.8s,1,normal,running,both );
+
+    > b {
+        position: absolute;
+        top: -((@fontSize-default*@lineHeight-base)/2)*1px;
+        left: 50%;
+        transform: translate(-50%,0);
+        font-size: @fontSize-default;
+        color: @fontColor-heading;
+        line-height: @lineHeight-base;
+        background-color: @bgColor-primary;
+        padding: 0 @gapSize-public*2;
+        .text-hide();
+    }
+}
+
+.gylpt-article {
+    padding: @gapSize-public;
+    padding-top: 88px;
+    text-align: justify;
+    .animation-s( gylptArticle,0.8s,ease,0.5s,1,normal,running,both );
+
+    > div {
+        padding-top: 90px;
+
+        p {
+            font-size: round(@fontSize-default*0.8);
+            padding-top: @gapSize-public;
+            color: @fontColor-default;
+
+            &:first-child:not(:last-child) {
+                padding-top: 0;
+            }
+        }
+
+        > h2,h3,h4,h5 {
+            padding-top: @gapSize-public*4;
+        }
+
+        > h2,h3 {
+            text-align: center;
+        }
+
+        .article-img {
+            width: 100%;
+            margin: @gapSize-public*2 auto 0 auto;
+            .image-onload();
+        }
+    }
+
+    &.img-title .gylpt-article-title > b {
+        top: -@height-img-title-gylypt-article/2;
+        font-size: 0;
+        line-height: 0;
+        height: @height-img-title-gylypt-article;
+
+        > img {
+            .size(auto,100%);
+            .image-onload();
+            margin: 0 auto;
+        }
+    }
+}
+
+.case-co {
+    .reset-list(left,0,0);
+    .clearfix();
+    background-color: rgba(244,244,246,1);
+    padding: @gapSize-public/2;
+    margin-top: @gapSize-public;
+
+    > li {
+        padding: @gapSize-public/2;
+        width: 33.33%;
+        height: @height-img-case-co-gylypt-article + @gapSize-public;
+
+        > img {
+            .square(100%);
+            display: block;
+            margin: 0 auto;
+            .image-onload();
+        }
+    }
+}
+
+/* --- 文章body出场动画 --- */
+& {
+    .keyframes( gylptArticle );
+
+    .-frames(@-...) {
+        0% {
+            opacity: 0;
+            @{-}transform: translate(0,5%);
+        }
+        100% {
+            opacity: 1;
+            @{-}transform: translate(0,0);
+        }
+    }
+}
+
+/* --- 文章Title出场动画 --- */
+& {
+    .keyframes( gylptArticleTitle );
+
+    .-frames(@-...) {
+        0% {
+            opacity: 0;
+            @{-}transform: scale(0.7);
+        }
+        100% {
+            opacity: 1;
+            @{-}transform: scale(1);
+        }
+    }
+}

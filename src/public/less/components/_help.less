@@ -1,0 +1,39 @@
+﻿@charset "utf-8";
+
+// ******************
+// 情景色调工具类
+// ******************
+.fontcolor-heading {
+  color: @fontColor-heading !important;
+}
+
+.fontcolor-default {
+  color: @fontColor-default !important;
+}
+
+.fontcolor-vice {
+  color: @fontColor-viceText !important;
+}
+
+.fontcolor-warning {
+  color: @fontColor-warning !important;
+}
+
+
+// ******************
+// 清除浮动
+// ******************
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}

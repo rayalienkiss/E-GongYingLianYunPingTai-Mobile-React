@@ -1,11 +1,9 @@
-@charset "UTF-8";
-
-
 /*
 // 样式参数
 // --------------------------------------------------
 */
 
+@charset "UTF-8";
 
 //图片所在目录
 @images-url: "../../images/";
@@ -40,9 +38,13 @@
     //标题色调
     @fontColor-heading: rgba(51,51,51,1);
     //默认文本色调
-    @fontColor-default: rgba(51,51,51,1);
+    @fontColor-default: rgba(102,102,102,1);
     //副文本色调
     @fontColor-viceText: @fontColor-base;
+    //警告提示文本色调
+    @fontColor-warning: @domColor1-mobile;
+    //成功提示文本色调
+    @fontColor-success: rgba(57,182,117,1);
 
 
 //行高
@@ -69,7 +71,8 @@
     @bgColor-base: rgba(255,255,255,1);
     //主要背景色
     @bgColor-primary: @bgColor-base;
-    //页面bitmap背景色
+    //次要背景色
+    @bgColor-secondary: rgba(234,238,242,1);
 
 
 //
@@ -103,6 +106,19 @@
     @bgColor-primary-gylypt-button: @domColor1-mobile;
     @borderColor-primary-gylypt-button: darken(@bgColor-primary-gylypt-button,15%);
     //尺寸
-    @padding-default-gylypt-button: 8px 16px;
+    @padding-default-gylypt-button: 0 @gapSize-public;
     @height-default-gylypt-button: 70px;
     @borderRadius-gylypt-button: @borderRadius-public;
+
+//文章
+    //色调
+    //尺寸
+    @height-img-title-gylypt-article: 64px;
+    @height-img-case-co-gylypt-article: 50px;
+
+//申请流程
+    //色调
+    @fontColor-success-flowResult: @fontColor-success;
+    //尺寸
+    @height-img-title-gylypt-article: 64px;
+    @height-img-case-co-gylypt-article: 50px;

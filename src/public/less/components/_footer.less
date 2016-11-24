@@ -1,49 +1,85 @@
+/*
+// 页脚
+// --------------------------------------------------
+*/
+
 @charset "utf-8";
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: @height-footer;
-  background-color: @bgColor-footer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: @height-footer;
+    background-color: @bgColor-footer;
+    .animation-s( footer,0.5s,ease,0,1,normal,running,both );
 
-  > ul {
-    .reset-list(none,@fontSize-default,@fontSize-default);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    padding: 30px 0;
+    > ul {
+        .reset-list(none,@fontSize-default,@fontSize-default);
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
 
-    > li {
-      overflow: hidden;
-      display: block;
-      order: 1;
-      flex: 1 1 auto;
-      border-right: 1px solid  @fontColor-content-footer;
+        > li {
+            overflow: hidden;
+            display: block;
+            order: 1;
+            flex: 1 1 auto;
 
-      > .footer-link {
-        .link-mobile(@fontColor-viceText);
-        display: block;
+            > .footer-link {
+                .link-mobile(@fontColor-viceText);
+                display: block;
+                height: 84px;
+                line-height: 84px;
+                text-align: center;
+                position: relative;
+
+                &:active {
+                    color: #fff;
+                }
+
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    width: 1px; /* no */
+                    height: 30%;
+                    transform: translate(0,-50%);
+                    background-color: @fontColor-content-footer;
+                }
+            }
+
+            &:first-child:not(:last-child) > .footer-link::before {
+                content: none;
+            }
+        }
+    }
+
+    > p {
+        color: @fontColor-content-footer;
+        font-size: floor(@fontSize-default*0.7);
+        line-height: @lineHeight-base;
         text-align: center;
-      }
 
-      &:last-child {
-        border-right: none;
-      }
+        &:last-child:not(:first-child) {
+            padding-top: 10px;
+            font-size: @fontSize-default;
+        }
     }
-  }
+}
 
-  > p {
-    color: @fontColor-content-footer;
-    font-size: floor(@fontSize-default*0.7);
-    line-height: @lineHeight-base;
-    text-align: center;
+/* --- 页脚出场动画 --- */
+& {
+    .keyframes( footer );
 
-    & + p {
-      padding-top: 10px;
-      font-size: @fontSize-default;
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate(0,100%);
+        }
+        100% {
+            @{-}transform: translate(0,0);
+        }
     }
-  }
 }

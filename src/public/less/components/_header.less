@@ -1,9 +1,19 @@
+/*
+// 页头导航
+// --------------------------------------------------
+*/
+
 @charset "utf-8";
 
 .header {
     background-color: @bgColor-header;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: @height-header;
     .clearfix();
+    .animation-s( header,0.5s,ease,0,1,normal,running,both );
 
     &-title {
         font-size: floor(@fontSize-default*1.22);
@@ -30,7 +40,7 @@
         }
     }
 
-    //首页头部只有网站 LOGO
+    //当需页面头部只有网站 LOGO
     &.index-header {
         height: @height-header;
         background: url('@{images-url}svg-icon/logo-fff.svg') @bgColor-header center center no-repeat;
@@ -42,6 +52,20 @@
 
         .header-btn {
             display: none;
+        }
+    }
+}
+
+/* --- 页头导航出场动画 --- */
+& {
+    .keyframes( header );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate(0,-100%);
+        }
+        100% {
+            @{-}transform: translate(0,0);
         }
     }
 }

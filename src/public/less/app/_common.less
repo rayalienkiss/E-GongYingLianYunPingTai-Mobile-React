@@ -5,7 +5,7 @@
 
 @charset "UTF-8";
 
-//图片未加载完成或加载失败的图片默认样式，需要在样式中定义图片尺寸
+/* --- 图片未加载完成或加载失败的图片默认样式，需要在样式中定义图片尺寸 --- */
 .image-onload( @bgSize-x:50%, @bgSize-y:50%, @bgsvg:url('@{images-url}svg-icon/logo-ddd.svg')) {
   background: @bgsvg center center @bgColor-bitmap no-repeat;
   background-size: @bgSize-x @bgSize-y;

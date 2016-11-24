@@ -1,5 +1,5 @@
 /*
-// header
+// footer
 // --------------------------------------------------
 */
 
@@ -14,13 +14,13 @@ export default class Footer extends Component {
             <footer className="footer">
                 <ul>
                     <li>
-                        <Link to="" className="footer-link">关于钱途</Link>
+                        <Link to="AboutUs" className="footer-link">关于钱途</Link>
                     </li>
                     <li>
-                        <Link to="" className="footer-link">关于平台</Link>
+                        <Link to="AboutWebsite" className="footer-link">关于平台</Link>
                     </li>
                     <li>
-                        <Link to="" className="footer-link">电脑版</Link>
+                        <a href="http://www.paywe.cn/" className="footer-link">电脑版</a>
                     </li>
                     <li>
                         <Link to="" className="footer-link">分享</Link>

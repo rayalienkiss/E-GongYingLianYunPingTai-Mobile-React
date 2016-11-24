@@ -5,15 +5,220 @@
 
 @charset "UTF-8";
 
+/* --- 焦点图 --- */
 .index-banner {
     position: relative;
     padding-top: 100%;
+    z-index: 2;
     .image-onload();
+    .animation-s( indexBanner,0.3s,ease-in,0.5s,1,normal,running,both );
 
     > img {
         position: absolute;
         top: 0;
         left: 0;
         .square(100%);
+    }
+
+    > .index-banner-btn {
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        width: 33.33%;
+        transform: translate(-50%,0);
+        margin: 0;
+    }
+}
+
+/* --- 广告数据统计 --- */
+div.index-statistics {
+    .animation-s( indexStatistics,0.2s,ease-in,0.8s,1,normal,running,both );
+}
+
+ul.index-statistics {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    height: 192px;
+    background-color: @bgColor-primary;
+    border-bottom: 1px solid @borderColor-primary; /* no */
+    .reset-list(none,floor(@fontSize-default*0.8),@lineHeight-base);
+
+    > li {
+        overflow: hidden;
+        display: block;
+        order: 1;
+        flex: 1 1 auto;
+        position: relative;
+        max-width: 33.33%;
+        border-left: 1px solid @borderColor-primary; /* no */
+        background: url('@{images-url}index-statistics-2.png') transparent center 16px no-repeat;
+        background-size: auto 45%;
+
+        &:first-child:not(:last-child) {
+            border-left: none;
+            background-image: url('@{images-url}index-statistics-1.png');
+        }
+
+        &:last-child:not(:first-child) {
+            background-image: url('@{images-url}index-statistics-3.png');
+        }
+
+        > p {
+            color: @domColor3-mobile;
+            margin-top: 110px;
+            text-align: center;
+
+            &:last-child:not(:first-child) {
+                margin-top: 5px;
+                color: @fontColor-default;
+
+                > span {
+                    color: @domColor1-mobile;
+                }
+            }
+        }
+    }
+}
+
+/* --- 每日实时统计 --- */
+.index-statistics-live {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: hidden;
+    background-color: @bgColor-secondary;
+    padding: @gapSize-public;
+    font-size: floor(@fontSize-default*0.86);
+    border-bottom: 1px solid @borderColor-primary; /* no */
+
+    > p {
+        order: 1;
+        flex: 1 1 auto;
+        position: relative;
+        line-height: @lineHeight-base;
+
+        color: @fontColor-default;
+
+        > span {
+            color: @domColor1-mobile;
+        }
+
+        &:last-child:not(:first-child) {
+            text-align: right;
+        }
+    }
+}
+
+/* --- 战略合作 --- */
+.index-post {
+    padding: @gapSize-public;
+    background-color: @bgColor-primary;
+    .animation-s( indexPost,0.7s,ease,0,1,normal,running,both );
+
+    > h1 {
+        font-size: round(@fontSize-default*1.2);
+        line-height: @lineHeight-base;
+        color: @fontColor-heading;
+        text-align: center;
+    }
+
+    &-box {
+        display: block;
+        border: 2px solid @borderColor-primary; /* no */
+        .reset-list(none,@fontSize-default,@lineHeight-base);
+        .rounded(@borderRadius-public);
+        position: relative;
+        margin-top: 48px;
+        padding: 26px 0;
+
+        > li {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: stretch;
+
+            > p {
+                order: 1;
+                flex: 1 1 auto;
+                width: 33.33%;
+
+                > img {
+                    .size(75%,auto);
+                    display: block;
+                    margin: 0 auto;
+                    .image-onload();
+                }
+            }
+        }
+
+        &::before {
+            content: '合作金融机构';
+            font-size: floor(@fontSize-default*0.86);
+            position: absolute;
+            top: -(floor(@fontSize-default*0.86))/1.4;
+            left: 50%;
+            transform: translate(-50%,0);
+            background-color: @bgColor-primary;
+            padding: 0 @gapSize-public;
+            color: @fontColor-default;
+        }
+
+        & + & {
+            margin-top: 64px;
+
+            &::before {
+                content: '合作核心企业';
+            }
+        }
+    }
+}
+
+/* --- 战略合作出场动画 --- */
+& {
+    .keyframes( indexPost );
+
+    .-frames(@-...) {
+        0% {
+            opacity: 0;
+            @{-}transform: translate(0,-100%);
+        }
+        100% {
+            opacity: 1;
+            @{-}transform: translate(0,0);
+        }
+    }
+}
+
+/* --- 广告数据统计出场动画 --- */
+& {
+    .keyframes( indexStatistics );
+
+    .-frames(@-...) {
+        0% {
+            opacity: 0;
+            @{-}transform: translate(0,-100%);
+        }
+        100% {
+            opacity: 1;
+            @{-}transform: translate(0,0);
+        }
+    }
+}
+
+/* --- 焦点图出场动画 --- */
+& {
+    .keyframes( indexBanner );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate(-100%,0);
+        }
+        100% {
+            @{-}transform: translate(0,0);
+        }
     }
 }

@@ -1,114 +1,38 @@
-// @charset "utf-8";
-//
-// .gylypt-button {
-//   .inline-block();
-//   .rounded(@borderRadius-gylypt-button);
-//   padding: @padding-default-gylypt-button;
-//   margin: 0;
-//   outline: none;
-//   border-bottom-width: 3px;
-//   border-bottom-style: solid;
-//   border-bottom-color: @borderColor-primary-gylypt-button;
-//   text-align: center;
-//   font-size: @fontSize-default;
-//   .link-custom(#fff, #fff, none);
-//   vertical-align: middle;
-//   line-height: @lineHeight-base;
-//   white-space: nowrap;
-//   overflow: visible;
-//   height: @height-default-gylypt-button;
-//
-//   &.default {
-//     background-color: @bgColor-primary-gylypt-button;
-//     border-color: @borderColor-primary-gylypt-button;
-//     color: #fff;
-//
-//     &:active,
-//     &.current {
-//       border-color: darken(@bgColor-default-btn, 50%);
-//     }
-//
-//     &:active,
-//     &.current {
-//       .inner-shadow(2px, 2px, 3px, 0.15);
-//       background-color: darken(@bgColor-default-btn, 5%);
-//     }
-//   }
-//
-//   &.primary {
-//     background-color: @bgColor-primary-btn;
-//     border-color: darken(@bgColor-primary-btn, 10%);
-//
-//     &:active,
-//     &.current {
-//       background-color: darken(@bgColor-primary-btn, 12%);
-//       border-color: darken(@bgColor-primary-btn, 20%);
-//     }
-//
-//     &:active,
-//     &.current {
-//       .inner-shadow(2px, 2px, 3px, 0.15);
-//     }
-//   }
-//
-//   &.secondary {
-//     background-color: @bgColor-secondary-btn;
-//     border-color: darken(@bgColor-secondary-btn, 10%);
-//
-//     &:active,
-//     &.current {
-//       background-color: darken(@bgColor-secondary-btn, 12%);
-//       border-color: darken(@bgColor-secondary-btn, 20%);
-//     }
-//
-//     &:active,
-//     &.current {
-//       .inner-shadow(2px, 2px, 3px, 0.15);
-//     }
-//   }
-//
-//   &.thirdly {
-//     background-color: @bgColor-thirdly-btn;
-//     border-color: darken(@bgColor-thirdly-btn, 10%);
-//
-//     &:active,
-//     &.current {
-//       background-color: darken(@bgColor-thirdly-btn, 7%);
-//       border-color: darken(@bgColor-thirdly-btn, 20%);
-//     }
-//
-//     &:active,
-//     &.current {
-//       .inner-shadow(2px, 2px, 3px, 0.15);
-//     }
-//   }
-//
-//   &.disabled,
-//   &[disabled] {
-//     .btn-disabled();
-//   }
-//
-//   &.links {
-//     padding: 0 10px;
-//     .link-standard();
-//     border: none;
-//     height: auto;
-//
-//     &.small-btn {
-//       border-color: transparent;
-//       padding: 0;
-//     }
-//
-//     &.disabled {
-//       background-color: transparent;
-//       border-color: none;
-//       color: lighten(@fontColor-viceText, 20%);
-//
-//       &:active,
-//       &.current {
-//         background-color: transparent;
-//         border-color: none;
-//       }
-//     }
-//   }
-// }
+/*
+// 按钮 - 云平台
+// --------------------------------------------------
+*/
+
+@charset "utf-8";
+
+.gylypt-button {
+    display: block;
+    padding: @padding-default-gylypt-button;
+    margin: 0 @gapSize-public;
+    outline: none;
+    border-bottom: 3px solid @borderColor-primary-gylypt-button;
+    text-align: center;
+    font-size: @fontSize-default;
+    line-height: @height-default-gylypt-button;
+    white-space: nowrap;
+    overflow: visible;
+    height: @height-default-gylypt-button;
+    .rounded(@borderRadius-gylypt-button);
+    .link-mobile(#fff);
+
+    &.primary {
+        background-color: @bgColor-primary-gylypt-button;
+        border-color: @borderColor-primary-gylypt-button;
+
+        &:active {
+            border-bottom: none;
+            border-top: 3px solid @borderColor-primary-gylypt-button;
+            background-color: darken(@bgColor-primary-gylypt-button,5%);
+        }
+    }
+
+    // &.disabled,
+    // &[disabled] {
+    //
+    // }
+}
