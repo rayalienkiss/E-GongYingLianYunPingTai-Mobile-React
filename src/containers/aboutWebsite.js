@@ -18,7 +18,7 @@ export default class AboutWebSite extends Component {
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="关于平台" linkTo="" headCls="header"></Header>
+                <Header title="关于平台" linkTo="" headCls="header"/>
                 <Article articleCls="gylpt-article" articleTitle={ articleTitle }>
                     <p>
                         E+供应链云平台，是由广东钱途互联商务服务有限公司（以下简称“钱途互联”）创新推出，在供应链基础上为核心企业和上下游企业提供便捷、快速、安全的金融信息服务平台。依托于钱途互联现有的E+互联网供应链、E+互联网供应链定制版及合作产品，将为上下游企业提供更符合其需求的融资解决方案，让企业以更便捷的操作流程，更短的时间，获得更低成本的融资，助企业赢得每一份商机。                     </p>
@@ -37,7 +37,7 @@ export default class AboutWebSite extends Component {
                     </h3>
                 </Article>
                 {/* 页脚 */}
-                <Footer></Footer>
+                <Footer/>
             </div>
         )
     }

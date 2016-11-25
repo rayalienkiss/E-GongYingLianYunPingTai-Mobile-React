@@ -18,7 +18,7 @@ export default class Home extends Component {
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="供应链云平台" linkTo="" headCls="header index-header"></Header>
+                <Header title="供应链云平台" linkTo="" headCls="header index-header"/>
                 {/* banner */}
                 <div className="index-banner">
                     <img src="../src/public/images/index-banner-1x1.jpg" alt=""/>
@@ -133,7 +133,7 @@ export default class Home extends Component {
                     </ul>
                 </div>
                 {/* 页脚 */}
-                <Footer></Footer>
+                <Footer/>
             </div>
         )
     }

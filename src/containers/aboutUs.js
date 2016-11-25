@@ -16,7 +16,7 @@ export default class AboutUs extends Component {
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="关于钱途" linkTo="" headCls="header"></Header>
+                <Header title="关于钱途" linkTo="" headCls="header"/>
                 <Article articleCls="gylpt-article img-title" articleTitle={ articleTitle }>
                     <p>
                         成立于2014年01月，公司全称“广东钱途互联商务服务有限公司”，总部位于广州天河CBD核心地段，在深圳设立办事处，目前公司拥有金融及互联网精英逾百人。钱途互联是国内首家专注于通过互联模式，基于企业交易过程电子登记系统，为中小企业提供增值、新型供应链融资及创新支付结算服务，为招商银行定制“E+账户”并提供运营服务的产业互联网金融服务商。
@@ -91,7 +91,7 @@ export default class AboutUs extends Component {
                     </ul>
                 </Article>
                 {/* 页脚 */}
-                <Footer></Footer>
+                <Footer/>
             </div>
         )
     }

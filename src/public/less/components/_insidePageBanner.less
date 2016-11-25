@@ -1,0 +1,36 @@
+/*
+// 内页 banner
+// --------------------------------------------------
+*/
+
+@charset "utf-8";
+
+.inside-page-banner {
+    height: @height-sub-banner;
+    overflow: hidden;
+    .image-onload();
+    .fadeInDown();
+    .animation-duration(0.5s);
+    .animation-delay(0.2s);
+
+    > img {
+        margin: 0 auto;
+        .size(100%,auto);
+        .animation-s( insidePageBannerImg,5s,linear,0.7s,1,normal,running,both );
+    }
+}
+
+/* --- 内页 banner 图片 缩放动画 --- */
+& {
+    .keyframes( insidePageBannerImg );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: scale(1.2);
+        }
+        100% {
+            opacity: 1;
+            @{-}transform: scale(1);
+        }
+    }
+}
