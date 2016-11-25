@@ -22,7 +22,7 @@ export default class Home extends Component {
                 {/* banner */}
                 <div className="index-banner">
                     <img src="../src/public/images/index-banner-1x1.jpg" alt=""/>
-                    <Link className="gylypt-button primary index-banner-btn" to="applicationCommitted">
+                    <Link className="gylypt-button primary index-banner-btn" to="application">
                         <b>立即登记</b>
                     </Link>
                 </div>

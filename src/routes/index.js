@@ -52,6 +52,15 @@ const routes = {
                     cb(null, require('../containers/applicationCommitted.js').default)
                 })
             }
+        },
+        {
+            //申请资料填写
+            path: 'Application',
+            getComponent(nextState, cb) {
+                require.ensure([], require => {
+                    cb(null, require('../containers/application.js').default)
+                })
+            }
         }
     ]
 }

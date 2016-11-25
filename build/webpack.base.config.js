@@ -1,6 +1,6 @@
 /**
  * 基础配置
- * 
+ *
  * by tommyshao
  */
 'use strict';
