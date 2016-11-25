@@ -286,7 +286,7 @@
 }
 
 // 动画定义简化
-.keyframes(@name) {
+.keyframes( @name ) {
   @-webkit-keyframes @name {
     .-frames(-webkit-);
   }
@@ -295,15 +295,21 @@
   }
 }
 
-// 单独属性定义
+// 自定义动画延迟播放时间
 .animation-delay( @delay ) {
   animation-delay: @delay;
-  //-webkit-animation-delay: @delay;
 }
 
+//自定义动画持续时间
 .animation-duration( @duration ) {
   animation-duration: @duration;
-  //-webkit-animation-duration: @duration;
+  animation-fill-mode: both;
+}
+
+//解决动画过程闪烁 hack
+.animation-backface() {
+    backface-visibility: hidden;
+    perspective: 1000;
 }
 
 & {

@@ -11,7 +11,9 @@
     padding-top: 100%;
     z-index: 2;
     .image-onload();
-    .animation-s( indexBanner,0.3s,ease-in,0.5s,1,normal,running,both );
+    .slideInLeft();
+    .animation-duration(0.3s);
+    .animation-delay(0.5s);
 
     > img {
         position: absolute;
@@ -32,7 +34,9 @@
 
 /* --- 广告数据统计 --- */
 div.index-statistics {
-    .animation-s( indexStatistics,0.2s,ease-in,0.8s,1,normal,running,both );
+    .bounceInDown();
+    .animation-duration(0.5s);
+    .animation-delay(0.8s);
 }
 
 ul.index-statistics {
@@ -117,7 +121,7 @@ ul.index-statistics {
 .index-post {
     padding: @gapSize-public;
     background-color: @bgColor-primary;
-    .animation-s( indexPost,0.7s,ease,0,1,normal,running,both );
+    .animation-s( indexPost,0.7s,ease-out,0,1,normal,running,both );
 
     > h1 {
         font-size: round(@fontSize-default*1.2);
@@ -184,41 +188,14 @@ ul.index-statistics {
     .-frames(@-...) {
         0% {
             opacity: 0;
-            @{-}transform: translate(0,-100%);
+            @{-}transform: translate3d(0,-100%,0) scale(0.3);
+        }
+        70% {
+            @{-}transform: translate3d(0,-100%,0) scale(1);
         }
         100% {
             opacity: 1;
-            @{-}transform: translate(0,0);
-        }
-    }
-}
-
-/* --- 广告数据统计出场动画 --- */
-& {
-    .keyframes( indexStatistics );
-
-    .-frames(@-...) {
-        0% {
-            opacity: 0;
-            @{-}transform: translate(0,-100%);
-        }
-        100% {
-            opacity: 1;
-            @{-}transform: translate(0,0);
-        }
-    }
-}
-
-/* --- 焦点图出场动画 --- */
-& {
-    .keyframes( indexBanner );
-
-    .-frames(@-...) {
-        0% {
-            @{-}transform: translate(-100%,0);
-        }
-        100% {
-            @{-}transform: translate(0,0);
+            @{-}transform: translate3d(0,0,0);
         }
     }
 }

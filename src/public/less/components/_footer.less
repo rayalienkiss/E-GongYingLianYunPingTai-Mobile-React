@@ -12,7 +12,8 @@
     right: 0;
     height: @height-footer;
     background-color: @bgColor-footer;
-    .animation-s( footer,0.5s,ease,0,1,normal,running,both );
+    .slideInUp();
+    .animation-duration(0.5s);
 
     > ul {
         .reset-list(none,@fontSize-default,@fontSize-default);
@@ -66,20 +67,6 @@
         &:last-child:not(:first-child) {
             padding-top: 10px;
             font-size: @fontSize-default;
-        }
-    }
-}
-
-/* --- 页脚出场动画 --- */
-& {
-    .keyframes( footer );
-
-    .-frames(@-...) {
-        0% {
-            @{-}transform: translate(0,100%);
-        }
-        100% {
-            @{-}transform: translate(0,0);
         }
     }
 }

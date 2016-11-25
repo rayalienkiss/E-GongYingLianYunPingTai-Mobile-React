@@ -8,6 +8,8 @@
 /* --- 流程结果样式 --- */
 .flow-result {
     padding: 265px @gapSize-public @gapSize-public;
+    .fadeInUp();
+    .animation-duration(0.5s);
 
     > h1 {
         text-align: center;
@@ -32,4 +34,10 @@
             color: @fontColor-success-flowResult;
         }
     }
+}
+
+.flow-result-btn {
+    .fadeInUp();
+    .animation-duration(0.5s);
+    .animation-delay(0.5s);
 }

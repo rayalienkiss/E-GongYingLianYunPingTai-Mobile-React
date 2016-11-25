@@ -13,7 +13,8 @@
     right: 0;
     height: @height-header;
     .clearfix();
-    .animation-s( header,0.5s,ease,0,1,normal,running,both );
+    .slideInDown();
+    .animation-duration(0.5s);
 
     &-title {
         font-size: floor(@fontSize-default*1.22);
@@ -52,20 +53,6 @@
 
         .header-btn {
             display: none;
-        }
-    }
-}
-
-/* --- 页头导航出场动画 --- */
-& {
-    .keyframes( header );
-
-    .-frames(@-...) {
-        0% {
-            @{-}transform: translate(0,-100%);
-        }
-        100% {
-            @{-}transform: translate(0,0);
         }
     }
 }

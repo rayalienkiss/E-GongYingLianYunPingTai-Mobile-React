@@ -20,7 +20,7 @@ export default class ApplicationCommitted extends Component {
                 <Header title="申请结果" linkTo="" headCls="header"></Header>
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"></FlowResult>
-                <a className="gylypt-button primary" href="#">立即分享</a>
+                <a className="gylypt-button primary flow-result-btn" href="#">立即分享</a>
                 {/* 页脚 */}
                 <Footer></Footer>
             </div>

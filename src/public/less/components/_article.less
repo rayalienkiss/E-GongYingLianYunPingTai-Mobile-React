@@ -10,7 +10,10 @@
     background-color: rgba(208,212,215,1);
     position: relative;
     margin: 0 @gapSize-public*2;
-    .animation-s( gylptArticleTitle,0.5s,ease,0.8s,1,normal,running,both );
+    .zoomIn();
+    .animation-duration(0.5s);
+    .animation-delay(0.8s);
+
 
     > b {
         position: absolute;
@@ -31,6 +34,8 @@
     padding-top: 88px;
     text-align: justify;
     .animation-s( gylptArticle,0.8s,ease,0.5s,1,normal,running,both );
+    // .fadeInUp();
+    // .animation-duration(0.8s);
 
     > div {
         padding-top: 90px;
@@ -102,27 +107,11 @@
     .-frames(@-...) {
         0% {
             opacity: 0;
-            @{-}transform: translate(0,5%);
+            @{-}transform: translate3d(0,5%,0);
         }
         100% {
             opacity: 1;
-            @{-}transform: translate(0,0);
-        }
-    }
-}
-
-/* --- 文章Title出场动画 --- */
-& {
-    .keyframes( gylptArticleTitle );
-
-    .-frames(@-...) {
-        0% {
-            opacity: 0;
-            @{-}transform: scale(0.7);
-        }
-        100% {
-            opacity: 1;
-            @{-}transform: scale(1);
+            @{-}transform: translate3d(0,0,0);
         }
     }
 }
