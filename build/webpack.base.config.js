@@ -18,6 +18,9 @@ var precss = require('precss')
 var autoprefixer = require('autoprefixer')
 var px2rem = require('postcss-px2rem')
 
+//antd-mobile 路径
+var antd_mobile_path = path.join(__dirname, '../node_modules/antd-mobile/dist')
+
 module.exports = {
     entry: {
         bundle: './src/entry.js'
@@ -31,9 +34,11 @@ module.exports = {
         alias: {
             constants: source_path+'/constants',
             helpers: source_path+'/helpers',
-            components: source_path+'/components'
+            components: source_path+'/components',
+            antdMobile: antd_mobile_path+'/antd-mobile'
         },
-        extensions: ['', '.js', '.jsx', '.css', '.less'],
+        //modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
+        extensions: ['', '.js', '.jsx', '.css', '.less','.web.js','.json'],
         root: [path.resolve('./src'), path.resolve('./node_modules')]
     },
     module: {
@@ -70,7 +75,7 @@ module.exports = {
                     cacheDirectory: true
                 }
             }
-        ]
+        ],
     },
     postcss: function() {
         return [precss, autoprefixer, px2rem({remUnit: 64})]
