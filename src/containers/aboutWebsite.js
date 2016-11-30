@@ -21,7 +21,8 @@ export default class AboutWebSite extends Component {
                 <Header title="关于平台" linkTo="" headCls="header"/>
                 <Article articleCls="gylpt-article" articleTitle={ articleTitle }>
                     <p>
-                        E+供应链云平台，是由广东钱途互联商务服务有限公司（以下简称“钱途互联”）创新推出，在供应链基础上为核心企业和上下游企业提供便捷、快速、安全的金融信息服务平台。依托于钱途互联现有的E+互联网供应链、E+互联网供应链定制版及合作产品，将为上下游企业提供更符合其需求的融资解决方案，让企业以更便捷的操作流程，更短的时间，获得更低成本的融资，助企业赢得每一份商机。                     </p>
+                        E+供应链云平台是钱途互联携手招商银行，发挥双方在供应链融资解决方案、IT专业技术、金融资源等领域的优势，创新推出在供应链的基础上，为核心企业和上下游企业提供便捷、快速、安全的供应链服务的金融服务平台，致力于协助核心企业与上下游建立可持续发展的贸易关系，盘活整条供应链。
+                    </p>
                     <p>
                         <span className="fontcolor-warning ">特点：</span>利率低至5%、最快T+0放款、全线上化操作
                     </p>
