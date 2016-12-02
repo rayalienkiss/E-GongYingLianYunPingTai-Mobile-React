@@ -18,9 +18,6 @@ var precss = require('precss')
 var autoprefixer = require('autoprefixer')
 var px2rem = require('postcss-px2rem')
 
-//antd-mobile 路径
-var antd_mobile_path = path.join(__dirname, '../node_modules/antd-mobile/dist')
-
 module.exports = {
     entry: {
         bundle: './src/entry.js'
@@ -35,9 +32,7 @@ module.exports = {
             constants: source_path+'/constants',
             helpers: source_path+'/helpers',
             components: source_path+'/components',
-            antdMobile: antd_mobile_path+'/antd-mobile'
         },
-        //modulesDirectories: ['node_modules', path.join(__dirname, '../node_modules')],
         extensions: ['', '.js', '.jsx', '.css', '.less','.web.js','.json'],
         root: [path.resolve('./src'), path.resolve('./node_modules')]
     },
@@ -72,6 +67,12 @@ module.exports = {
                 loader: 'babel',
                 query: {
                     presets: ['react', 'es2015', 'stage-2'],
+                    plugins: [
+                      ["import", { // 用于 antd 的按需加载 js/css
+                        "libraryName": "antd-mobile",
+                        "style": "css"
+                      }]
+                    ],
                     cacheDirectory: true
                 }
             }

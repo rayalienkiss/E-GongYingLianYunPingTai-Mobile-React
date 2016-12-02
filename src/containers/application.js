@@ -7,42 +7,44 @@ import React, { Component } from 'react'
 
 import { Header,Footer,InsidePageBanner } from 'components'
 
-import { Button,Card,WingBlank,WhiteSpace,List,Radio } from 'antdMobile';
+//import { Button,Card,WingBlank,WhiteSpace,List,Radio } from 'antd-mobile'
+
+import { Button } from 'antd-mobile'
 
 // ajax
 import axios from 'axios'
 
-const RadioItem = Radio.RadioItem;
+//const RadioItem = Radio.RadioItem;
 
 export default class Application extends Component {
 
-    getInitialState() {
-        return {value: 1};
-    }
-    onChange(value) {
-        this.setState({value});
-    }
+    // getInitialState() {
+    //     return {value: 1};
+    // }
+    // onChange(value) {
+    //     this.setState({value});
+    // }
 
     render() {
 
         const imgUrl = "../src/public/images/inside-page-banner-1.jpg";
 
-        const { value } = this.state;
-
-        const data = [
-            {
-                value: 0,
-                label: '博士'
-            },
-            {
-                value: 1,
-                label: '本科'
-            },
-            {
-                value: 2,
-                label: '高中'
-            }
-        ];
+        // const { value } = this.state;
+        //
+        // const data = [
+        //     {
+        //         value: 0,
+        //         label: '博士'
+        //     },
+        //     {
+        //         value: 1,
+        //         label: '本科'
+        //     },
+        //     {
+        //         value: 2,
+        //         label: '高中'
+        //     }
+        // ];
 
         return (
             <div className="container-inner">
@@ -53,7 +55,7 @@ export default class Application extends Component {
 
 
                 {/* test */}
-                <WingBlank size="lg">
+                {/* <WingBlank size="lg">
                     <WhiteSpace size="lg" />
                     <Card>
                         <Card.Header title="融资需求登记" />
@@ -70,7 +72,8 @@ export default class Application extends Component {
                         </Card.Body>
                     </Card>
                     <WhiteSpace size="lg" />
-                </WingBlank>
+                </WingBlank> */}
+                <Button className="btn" data-seed="logId" onClick={e => console.log(e)}>default 按钮</Button>
 
 
                 {/* 页脚 */}
