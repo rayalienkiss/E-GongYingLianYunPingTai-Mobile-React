@@ -33,7 +33,7 @@ module.exports = {
             helpers: source_path+'/helpers',
             components: source_path+'/components',
         },
-        extensions: ['', '.js', '.jsx', '.css', '.less','.web.js','.json'],
+        extensions: ['', '.web.js','.js', '.jsx', '.css', '.less','.json'],
         root: [path.resolve('./src'), path.resolve('./node_modules')]
     },
     module: {
