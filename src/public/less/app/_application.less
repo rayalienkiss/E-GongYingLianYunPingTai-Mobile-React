@@ -2,10 +2,37 @@
 // 申请流程样式
 // --------------------------------------------------
 */
-
 @charset "UTF-8";
+
+/* --- 表单进场动画 --- */
 .form-box-in {
     .bounceInDown();
     .animation-duration(0.5s);
     .animation-delay(0.8s);
+}
+
+/* --- 表单按钮盒子 --- */
+.appli-form-btn-box {
+    padding: @gapSize-public*2 @gapSize-public @gapSize-public @gapSize-public;
+}
+
+/* --- antd mobile 框架自定义样式补丁 --- */
+.customs-form-components {
+
+    .am-list-header {
+        padding-left: @gapSize-public;
+        padding-right: @gapSize-public;
+    }
+
+    &.no-border-bottom .am-list-body:after {
+        content: none;
+    }
+
+    .am-list-item {
+        padding-left: 0;
+
+        .am-list-line {
+            padding-left: @gapSize-public;
+        }
+    }
 }
