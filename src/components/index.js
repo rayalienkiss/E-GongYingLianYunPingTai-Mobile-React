@@ -9,7 +9,6 @@ import Footer from './footer'
 import Article from './article'
 import FlowResult from './flowResult'
 import InsidePageBanner from './insidePageBanner'
-import AppliForm from './appliForm'
 
 export {
     Modal,
@@ -17,6 +16,5 @@ export {
     Footer,
     Article,
     FlowResult,
-    InsidePageBanner,
-    AppliForm
+    InsidePageBanner
 }

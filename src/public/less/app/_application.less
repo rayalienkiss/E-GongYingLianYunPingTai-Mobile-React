@@ -17,11 +17,12 @@
 }
 
 /* --- antd mobile 框架自定义样式补丁 --- */
-.customs-form-components {
+.am-list.customs-form-components {
 
     .am-list-header {
         padding-left: @gapSize-public;
         padding-right: @gapSize-public;
+        background-color: @bgColor-secondary;
     }
 
     &.no-border-bottom .am-list-body:after {
@@ -33,6 +34,24 @@
 
         .am-list-line {
             padding-left: @gapSize-public;
+
+            &:after {
+                border-bottom-width: 1px; /* no */
+            }
+        }
+
+        .am-input-label {
+            color: @fontColor-viceText;
+        }
+
+        &.am-input-item {
+            padding-left: @gapSize-public;
+            padding-right: @gapSize-public;
+
+            &::after {
+                right: 0;
+                left: 0;
+            }
         }
     }
 }
