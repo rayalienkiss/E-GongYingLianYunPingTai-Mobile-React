@@ -7,7 +7,34 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router'
 
+import { Modal, Button } from 'antd-mobile'
+
 export default class Footer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: false
+        };
+    }
+
+    componentDidMount() {
+        var script = document.createElement('script');
+        script.src = "http://v3.jiathis.com/code/jia.js";
+        document.body.appendChild(script);
+    }
+
+    showModal() {
+        this.setState ({
+            visible: true
+        });
+    }
+
+    onClose() {
+        this.setState ({
+            visible: false
+        });
+    }
 
     render() {
         return (
@@ -23,7 +50,15 @@ export default class Footer extends Component {
                         <a href="http://www.paywe.cn/" className="footer-link">电脑版</a>
                     </li>
                     <li>
-                        <Link to="" className="footer-link">分享</Link>
+                        <Link to="#" className="footer-link" onClick={ this.showModal.bind(this) }>分享</Link>
+                        <Modal title="这是 title" closable maskClosable onClose={ this.onClose.bind(this) } visible={ this.state.visible }>
+                            <div className="jiathis_style_32x32">
+                              <a className="jiathis_button_tsina"></a>
+                              <a className="jiathis_button_tqq"></a>
+                              <a className="jiathis_button_weixin"></a>
+                              <a className="jiathis_button_linkedin"></a>
+                            </div>
+                        </Modal>
                     </li>
                 </ul>
                 <p>

@@ -5,10 +5,22 @@
 @charset "UTF-8";
 
 /* --- 表单进场动画 --- */
-.form-box-in {
-    .bounceInDown();
+.form-box-in-1 {
+    .fadeInUp();
     .animation-duration(0.5s);
-    .animation-delay(0.8s);
+    .animation-delay(1s);
+}
+
+.form-box-in-2 {
+    .fadeInUp();
+    .animation-duration(0.5s);
+    .animation-delay(1.1s);
+}
+
+.form-box-in-3 {
+    .fadeInUp();
+    .animation-duration(0.5s);
+    .animation-delay(1.2s);
 }
 
 /* --- 表单按钮盒子 --- */
@@ -52,6 +64,29 @@
                 right: 0;
                 left: 0;
             }
+        }
+
+        &.with-select {
+            padding-left: @gapSize-public;
+            padding-right: @gapSize-public;
+            border-bottom: 1px solid @borderColor-primary;
+
+            select {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                //padding: 0 @gapSize-public;
+                border: 0;
+                //font-size: @fontSize-default;
+                background-color: transparent;
+                -webkit-appearance: menu;
+                appearance: menu;
+            }
+        }
+
+        &.input-extra-for-btn .am-input-extra {
+            overflow: initial;
         }
     }
 }

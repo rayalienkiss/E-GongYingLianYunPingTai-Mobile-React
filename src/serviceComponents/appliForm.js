@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react'
 
-import { Button, List, Radio, InputItem, Pick } from 'antd-mobile'
+import { Button, List, Radio, InputItem, Icon } from 'antd-mobile'
 
 import { createForm } from 'rc-form'
 
@@ -48,7 +48,7 @@ class AppliForm extends React.Component {
         return (
             <form>
                 {/* 选择融资类型 */}
-                <List renderHeader={() => <h3>选择融资类型</h3>} className="customs-form-components no-border-bottom">
+                <List renderHeader={() => <h3>选择融资类型</h3>} className="customs-form-components no-border-bottom form-box-in-1">
                     {data.map(i => (
                         <RadioItem key={i.value} checked={value === i.value} onChange={() => this.onChange(i.value)}>
                             {i.label}
@@ -57,19 +57,42 @@ class AppliForm extends React.Component {
                 </List>
 
                 {/* 融资企业信息 */}
-                <List renderHeader={() => <h3>融资企业信息</h3>} className="customs-form-components no-border-bottom">
-                    <InputItem {...getFieldProps('yourCompany')} clear placeholder="请输入您的企业名称" labelNumber={6}>融资企业</InputItem>
+                <List renderHeader={() => <h3>融资企业信息</h3>} className="customs-form-components no-border-bottom form-box-in-2">
+                    <InputItem
+                        {...getFieldProps('identifying')}
+                        clear labelNumber={6}
+                        className="input-extra-for-btn"
+                        extra={<Button className="btn" data-seed="getCode" type="primary" inline size="small" onClick={e => console.log(e)}><Icon type="plus" /></Button>}>
+                        对应核心企业
+                    </InputItem>
+                    <InputItem {...getFieldProps('appliCompany')} clear placeholder="请输入您的企业名称" labelNumber={6}>融资企业</InputItem>
                     <InputItem {...getFieldProps('total')} clear extra="万元" labelNumber=''>{ totalLabel }</InputItem>
                     <InputItem {...getFieldProps('contacts')} clear labelNumber={6}>企业联系人</InputItem>
                     <InputItem {...getFieldProps('phone')} clear type="phone" labelNumber={6}>联系电话</InputItem>
                 </List>
 
                 {/* 推荐人信息 */}
-                <List renderHeader={() => <div><h3>推荐人信息</h3><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom">
-                    <select>
-                        <option></option>
-                    </select>
-                    <InputItem {...getFieldProps('yourCompany')} clear labelNumber={6}>真实姓名</InputItem>
+                <List renderHeader={() => <div><h3>推荐人信息</h3><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-3">
+                    <div className="am-list-item with-select">
+                        <select>
+                            <option disabled="">请选择您的身份</option>
+                            <option value="1">上下游企业经办人</option>
+                            <option value="2">银行客户经理</option>
+                            <option value="3">保险公司</option>
+                            <option value="4">会计事务所</option>
+                            <option value="5">产业/行业协会</option>
+                            <option value="6">其他</option>
+                        </select>
+                    </div>
+                    <InputItem {...getFieldProps('yourName')} clear labelNumber={6}>真实姓名</InputItem>
+                    <InputItem {...getFieldProps('yourPhone')} clear labelNumber={6}>手机号码</InputItem>
+                    <InputItem
+                        {...getFieldProps('identifying')}
+                        clear labelNumber={6}
+                        className="input-extra-for-btn"
+                        extra={<Button className="btn" data-seed="getCode" type="primary" inline size="small" onClick={e => console.log(e)}>获取验证码</Button>}>
+                        验证码
+                    </InputItem>
                 </List>
 
                 {/* 表单提交 */}
