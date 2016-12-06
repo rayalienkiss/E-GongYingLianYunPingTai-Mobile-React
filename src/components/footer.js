@@ -20,8 +20,6 @@ export default class Footer extends Component {
         };
     }
 
-
-
     onClick() {
         Popup.show (
             <SharePanel/>
@@ -34,31 +32,6 @@ export default class Footer extends Component {
         });
         Popup.hide();
     }
-
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         visible: false
-    //     };
-    // }
-    //
-    // componentDidMount() {
-    //     var script = document.createElement('script');
-    //     script.src = "http://v3.jiathis.com/code/jia.js";
-    //     document.body.appendChild(script);
-    // }
-    //
-    // showModal() {
-    //     this.setState ({
-    //         visible: true
-    //     });
-    // }
-    //
-    // onClose() {
-    //     this.setState ({
-    //         visible: false
-    //     });
-    // }
 
     render() {
         return (
@@ -74,15 +47,7 @@ export default class Footer extends Component {
                         <a href="http://www.paywe.cn/" className="footer-link">电脑版</a>
                     </li>
                     <li>
-                        <Link to="#" className="footer-link" onClick={ this.onClick }>分享</Link>
-                        {/* <Modal title="这是 title" closable maskClosable onClose={ this.onClose.bind(this) } visible={ this.state.visible }>
-                            <div className="jiathis_style_32x32">
-                              <a className="jiathis_button_tsina"></a>
-                              <a className="jiathis_button_tqq"></a>
-                              <a className="jiathis_button_weixin"></a>
-                              <a className="jiathis_button_linkedin"></a>
-                            </div>
-                        </Modal> */}
+                        <span className="footer-link" onClick={ this.onClick }>分享</span>
                     </li>
                 </ul>
                 <p>
