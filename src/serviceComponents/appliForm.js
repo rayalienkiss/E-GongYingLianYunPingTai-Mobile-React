@@ -14,6 +14,10 @@ const RadioItem = Radio.RadioItem;
 
 class AppliForm extends React.Component {
 
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +29,39 @@ class AppliForm extends React.Component {
             value,
         });
     }
+
+    // - 提交申请
+    handleSubmit = () => {
+
+        let { applyRefundOrder } = this.state
+
+        axios({
+            method: 'post',
+            url: '/API/supplyChain/apply',
+            data: {
+                firstName: 'Fred',
+                lastName: 'Flintstone'
+            }
+        });
+        // fetch('/FrontJsonRefundOrder/ApplyRefundShop', {
+        //     method: 'post',
+        //     body: {
+        //         applyRefundOrder: applyRefundOrder
+        //     }
+        // }).then(res => {
+        //     this.context.router.goBack()
+        // }, res => {
+        //     if(res.ResultCode == 998) {
+        //         this.setState({
+        //             validation: {
+        //                 show: true,
+        //                 content: res.Message
+        //             },
+        //             inValid: true
+        //         })
+        //     }
+        // })
+    };
 
     render() {
 
@@ -97,7 +134,7 @@ class AppliForm extends React.Component {
 
                 {/* 表单提交 */}
                 <div className="appli-form-btn-box">
-                    <Button className="btn" type="primary" htmlType="submit" onClick={e => console.log('点击')}>立即登记</Button>
+                    <Button className="btn" type="primary" htmlType="submit" onClick={ e => this.handleSubmit }>立即登记</Button>
                 </div>
             </form>
         )

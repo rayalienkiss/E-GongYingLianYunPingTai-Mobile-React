@@ -11,16 +11,24 @@
   background-size: @bgSize-x @bgSize-y;
 }
 
-.box {
-    width: 200px;
-    height: 500px;
-    background: red;
-    border-radius: 2px;
-    border: 1px solid #000; /* no */
+.share-panel {
+    position: relative;
+    padding: @gapSize-public;
+    text-align: center;
+    font-size: 0;
+    line-height: 0;
+    .clearfix();
 
-    transform: scale(1,1);
+    [class^="jiathis_style_"],
+    [class*=" jiathis_style_"] {
+        display: inline-block !important;
 
-    &.blue {
-        background: blue;
+        [class^="jiathis_button_"],
+        [class*=" jiathis_button_"] {
+
+            &:last-child:not(:first-child) > .jtico {
+                padding-left: 32px !important; /* no */
+            }
+        }
     }
 }

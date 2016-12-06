@@ -5,6 +5,9 @@
 
 import AppliForm from './appliForm'
 
+import SharePanel from './sharePanel'
+
 export {
-    AppliForm
+    AppliForm,
+    SharePanel
 }

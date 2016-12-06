@@ -16,24 +16,28 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             applyShowNum: 0,
             registerShowAmount: 0
-        };
+        }
     }
 
     statisticsLive() {
-        axios.get('/API/daliystatistics').then(function(response) {
-            //console.log(response);
-        });
-        this.setState((sl) => ({
-            applyShowNum: sl.applyShowNum,
-            registerShowAmount: sl.registerShowAmount
-        }));
+
+        let self = this;
+
+        axios.get('/API/daliystatistics').then(function(res) {
+
+            self.setState ({
+                applyShowNum: res.data.data.applyShowNum,
+                registerShowAmount: res.data.data.registerShowAmount
+            })
+        })
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.statisticsLive(), 1000);
+        this.statisticsLive();
     }
 
     render() {
