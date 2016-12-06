@@ -14,6 +14,28 @@ import axios from 'axios'
 
 export default class Home extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            applyShowNum: 0,
+            registerShowAmount: 0
+        };
+    }
+
+    statisticsLive() {
+        axios.get('/API/daliystatistics').then(function(response) {
+
+        });
+        this.setState((sl) => ({
+            applyShowNum: sl.applyShowNum + 1,
+            registerShowAmount: sl.registerShowAmount + 1
+        }));
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(() => this.statisticsLive(), 1000);
+    }
+
     render() {
         return (
             <div className="container-inner">
@@ -46,10 +68,10 @@ export default class Home extends Component {
                     {/* 实时统计 */}
                     <div className="index-statistics-live">
                         <p>
-                            今日登记：<span>888</span>&nbsp;笔
+                            今日登记：<span>{ this.state.applyShowNum }</span>&nbsp;笔
                         </p>
                         <p>
-                            登记金额：<span>88,888,888</span>&nbsp;元
+                            登记金额：<span>{ this.state.registerShowAmount }</span>&nbsp;元
                         </p>
                     </div>
                 </div>

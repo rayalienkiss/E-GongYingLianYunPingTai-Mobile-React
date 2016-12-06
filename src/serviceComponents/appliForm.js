@@ -60,7 +60,7 @@ class AppliForm extends React.Component {
                 <List renderHeader={() => <h3>融资企业信息</h3>} className="customs-form-components no-border-bottom form-box-in-2">
                     <InputItem
                         {...getFieldProps('identifying')}
-                        clear labelNumber={6}
+                        clear labelNumber={6.5}
                         className="input-extra-for-btn"
                         extra={<Button className="btn" data-seed="getCode" type="primary" inline size="small" onClick={e => console.log(e)}><Icon type="plus" /></Button>}>
                         对应核心企业
@@ -75,7 +75,7 @@ class AppliForm extends React.Component {
                 <List renderHeader={() => <div><h3>推荐人信息</h3><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-3">
                     <div className="am-list-item with-select">
                         <select>
-                            <option disabled="">请选择您的身份</option>
+                            <option disabled="">点击选择您的身份</option>
                             <option value="1">上下游企业经办人</option>
                             <option value="2">银行客户经理</option>
                             <option value="3">保险公司</option>
@@ -84,11 +84,11 @@ class AppliForm extends React.Component {
                             <option value="6">其他</option>
                         </select>
                     </div>
-                    <InputItem {...getFieldProps('yourName')} clear labelNumber={6}>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('yourPhone')} clear labelNumber={6}>手机号码</InputItem>
+                    <InputItem {...getFieldProps('yourName')} clear labelNumber={5}>真实姓名</InputItem>
+                    <InputItem {...getFieldProps('yourPhone')} clear labelNumber={5}>手机号码</InputItem>
                     <InputItem
                         {...getFieldProps('identifying')}
-                        clear labelNumber={6}
+                        clear labelNumber={5}
                         className="input-extra-for-btn"
                         extra={<Button className="btn" data-seed="getCode" type="primary" inline size="small" onClick={e => console.log(e)}>获取验证码</Button>}>
                         验证码

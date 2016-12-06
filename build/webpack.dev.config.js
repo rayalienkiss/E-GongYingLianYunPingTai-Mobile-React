@@ -13,6 +13,7 @@ var baseConf = require('./webpack.base.config')
 var host = require('./host')()
 var port = '8080'
 
+var projectId = 15
 
 module.exports = merge(baseConf, {
     cache: true,
@@ -29,18 +30,16 @@ module.exports = merge(baseConf, {
         })
     ],
     devServer: {
-        histroyApiFallback: true,
-        hot: true,
-        stats: 'erros-only',
         host: host,
         port: port,
-        // 代理到 mock 服务器
         proxy: {
             '/API/*': {
-                target: 'http://192.168.8.160:20160/',
-                rewrite: function(req) {
-                    req.url = req.url.replace(/^\/API/, '')
-                }
+                target: 'http://rap.monster/', // RAP mock服务器  需要配置host 192.168.8.164 rap.monster.dev
+                pathRewrite: {
+                    '^/API': `/mockjsdata/${projectId}`
+                },
+                secure: false,
+                changeOrigin: true,
             }
         }
     }
