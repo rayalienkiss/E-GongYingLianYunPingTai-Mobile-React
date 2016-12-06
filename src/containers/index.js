@@ -24,11 +24,11 @@ export default class Home extends Component {
 
     statisticsLive() {
         axios.get('/API/daliystatistics').then(function(response) {
-
+            //console.log(response);
         });
         this.setState((sl) => ({
-            applyShowNum: sl.applyShowNum + 1,
-            registerShowAmount: sl.registerShowAmount + 1
+            applyShowNum: sl.applyShowNum,
+            registerShowAmount: sl.registerShowAmount
         }));
     }
 
