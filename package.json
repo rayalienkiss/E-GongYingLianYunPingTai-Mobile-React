@@ -1,5 +1,5 @@
 {
-  "name": "react-webpack-boilerplate",
+  "name": "E-GongYingLianYunPingTai-Mobile-React",
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
@@ -22,9 +22,9 @@
   "license": "MIT",
   "homepage": "http://www.frontpay.cn",
   "webConfig": {
-    "title": "react-webpack-boilerplate",
-    "description": "a demo for react-webpack-boilerplate",
-    "keywords": "react,webpack,boilerplate",
+    "title": "E+供应链云平台",
+    "description": "由钱途互联创新推出，在供应链基础上为核心企业和上下游企业提供便捷、快速、安全的金融信息服务平台。",
+    "keywords": "钱途互联、E+账户、E+供应链云平台、供应链金融、供应链融资、供应链融资服务、产业链金融、融资解决方案、金融信息服务、应收账款融资、订单融资、供应商融资、企业融资",
     "tongji": ""
   },
   "dependencies": {

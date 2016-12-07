@@ -36,7 +36,7 @@ module.exports = merge(baseConf, {
             '/API/*': {
                 target: 'http://rap.monster/', // RAP mock服务器  需要配置host 192.168.8.164 rap.monster.dev
                 pathRewrite: {
-                    '^/API': `/mockjsdata/${projectId}`
+                    '^/API': `/mockjsdata/${projectId}/api`
                 },
                 secure: false,
                 changeOrigin: true,

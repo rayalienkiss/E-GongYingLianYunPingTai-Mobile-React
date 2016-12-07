@@ -11,6 +11,7 @@
   background-size: @bgSize-x @bgSize-y;
 }
 
+/* --- 包装 jiathis 外部分享插件的容器 --- */
 .share-panel {
     position: relative;
     padding: @gapSize-public;
@@ -29,6 +30,30 @@
             &:last-child:not(:first-child) > .jtico {
                 padding-left: 32px !important; /* no */
             }
+        }
+    }
+}
+
+/* --- 重写 jiathis 外部分享插件的微信二维码弹窗样式 --- */
+#jiathis_weixin_share .jiathis_weixin_modal {
+    margin: 0 !important;
+    transform: translate3d(-50%,-50%,0);
+    width: 280px !important; /* no */
+    height: 280px !important; /* no */
+
+    #jiathis_modal_body {
+        height: 176px !important; /* no */
+        line-height: 176px !important; /* no */
+    }
+
+    p#jiathis_webchat {
+        display: inline-block !important;
+        vertical-align: middle !important;
+
+        > img {
+            width: 100% !important; /* no */
+            height: auto !important; /* no */
+            margin: 0 !important;
         }
     }
 }

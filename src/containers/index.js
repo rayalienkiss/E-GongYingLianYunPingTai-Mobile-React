@@ -17,26 +17,59 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
 
+        //初始化首页展示数据
         this.state = {
             applyShowNum: 0,
-            registerShowAmount: 0
+            registerShowAmount: 0,
+            coreEnterpriseNum: 0,
+            UDEnterpriseNum: 0,
+            loanAmount: 0
         }
     }
 
+    //定义获取首页数据接口的方法
     statisticsLive() {
 
+        // 拿到组件 Home 的 this 赋值给当前域
         let self = this;
 
-        axios.get('/API/daliystatistics').then(function(res) {
+        //设置当日融资记录接口
+        function getDaliyStatistics() {
+            return axios.get('/API/daliystatistics');
+        }
 
-            self.setState ({
-                applyShowNum: res.data.data.applyShowNum,
-                registerShowAmount: res.data.data.registerShowAmount
-            })
-        })
+        //设置页面配置信息接口
+        function getAssistConfig() {
+            return axios.get('/API/assistconfig');
+        }
+
+        //同时调用 页面配置信息 和 当日融资记录 两个接口
+        //axios 用法 https://github.com/mzabriskie/axios
+        axios.all(
+            [
+                getDaliyStatistics(),
+                getAssistConfig()
+            ]
+        )
+        .then(
+            axios.spread(
+                function(daliystatistics, assistconfig) {
+                    //渲染新的首页数据
+                    self.setState ({
+                        applyShowNum: daliystatistics.data.data.applyShowNum,
+                        registerShowAmount: daliystatistics.data.data.registerShowAmount,
+                        coreEnterpriseNum: assistconfig.data.data.coreEnterpriseNum,
+                        UDEnterpriseNum: assistconfig.data.data.UDEnterpriseNum,
+                        loanAmount: assistconfig.data.data.loanAmount
+                    });
+                }
+            )
+        );
     }
 
     componentDidMount() {
+
+        //组件 Home 执行获取数据任务
         this.statisticsLive();
     }
 
@@ -58,15 +91,15 @@ export default class Home extends Component {
                     <ul className="index-statistics">
                         <li>
                             <p>核心企业</p>
-                            <p><span>200+</span>家</p>
+                            <p><span>{ this.state.coreEnterpriseNum }+</span>家</p>
                         </li>
                         <li>
                             <p>上下游企业</p>
-                            <p><span>20,000+</span>家</p>
+                            <p><span>{ this.state.UDEnterpriseNum }+</span>家</p>
                         </li>
                         <li>
                             <p>已放款金额</p>
-                            <p><span>300,000+</span>万元</p>
+                            <p><span>{ this.state.loanAmount }+</span>万元</p>
                         </li>
                     </ul>
                     {/* 实时统计 */}
