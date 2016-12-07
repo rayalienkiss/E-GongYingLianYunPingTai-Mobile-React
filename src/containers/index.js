@@ -5,7 +5,7 @@
 
 import React, { Component } from 'react'
 
-import { Header,Footer } from 'components'
+import { Header,Footer,IndexPostBox,IndexPostBoxItem } from 'components'
 
 import { Link } from 'react-router'
 
@@ -118,78 +118,36 @@ export default class Home extends Component {
                         <b>战略合作</b>
                     </h1>
                     {/* 合作金融机构 */}
-                    <ul className="index-post-box">
-                        <li>
-                            <p>
-                                <img src="../src/public/images/index-logo/ZhaoShangYinHang.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/QianDuan.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/ZhaoShangJiJin.jpg" alt=""/>
-                            </p>
-                        </li>
-                    </ul>
+                    <IndexPostBox>
+                        <IndexPostBoxItem>
+                            <img src="../src/public/images/index-logo/ZhaoShangYinHang.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/QianDuan.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/ZhaoShangJiJin.jpg" alt=""/>
+                        </IndexPostBoxItem>
+                    </IndexPostBox>
                     {/* 合作核心企业 */}
-                    <ul className="index-post-box">
-                        <li>
-                            <p>
-                                <img src="../src/public/images/index-logo/Wanke.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/ZhongHaiDiChan.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/HuaRunZhiDi.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/AnBangBaoXian.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/ZhongGuoRenBao.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/JiuZhouTong.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/PuTianYaoXieJiaoYiWang.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/MeiLuoYaoYe.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/JinHaiMaJiaJu.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/YunShengKeJi.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/CrownePlaza.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/GongSuDa.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/HaiTian.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/HongDouJiaFang.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/JingBoWuLiu.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/MengNiu.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/ShanDongGaoSu.jpg" alt=""/>
-                            </p>
-                            <p>
-                                <img src="../src/public/images/index-logo/ShengMuGaoKe.jpg" alt=""/>
-                            </p>
-                        </li>
-                    </ul>
+                    <IndexPostBox>
+                        <IndexPostBoxItem>
+                            <img src="../src/public/images/index-logo/Wanke.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/ZhongHaiDiChan.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/HuaRunZhiDi.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/AnBangBaoXian.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/ZhongGuoRenBao.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/JiuZhouTong.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/PuTianYaoXieJiaoYiWang.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/MeiLuoYaoYe.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/JinHaiMaJiaJu.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/YunShengKeJi.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/CrownePlaza.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/GongSuDa.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/HaiTian.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/HongDouJiaFang.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/JingBoWuLiu.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/MengNiu.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/ShanDongGaoSu.jpg" alt=""/>
+                            <img src="../src/public/images/index-logo/ShengMuGaoKe.jpg" alt=""/>
+                        </IndexPostBoxItem>
+                    </IndexPostBox>
                 </div>
                 {/* 页脚 */}
                 <Footer/>

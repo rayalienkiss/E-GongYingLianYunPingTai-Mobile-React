@@ -1,14 +1,18 @@
 /*
 // 组件
+// publicComponents 里面是共用组件
+// serviceComponents 里面是特定页面的组件
 // --------------------------------------------------
 */
 
-import Modal from './modal'
-import Header from './header'
-import Footer from './footer'
-import Article from './article'
-import FlowResult from './flowResult'
-import InsidePageBanner from './insidePageBanner'
+import Modal from './publicComponents/modal'
+import Header from './publicComponents/header'
+import Footer from './publicComponents/footer'
+import Article from './publicComponents/article'
+import FlowResult from './serviceComponents/flowResult'
+import InsidePageBanner from './publicComponents/insidePageBanner'
+import IndexPostBox from './serviceComponents/indexPostBox/indexPostBox'
+import IndexPostBoxItem from './serviceComponents/indexPostBox/IndexPostBoxItem'
 
 export {
     Modal,
@@ -16,5 +20,7 @@ export {
     Footer,
     Article,
     FlowResult,
-    InsidePageBanner
+    InsidePageBanner,
+    IndexPostBox,
+    IndexPostBoxItem
 }

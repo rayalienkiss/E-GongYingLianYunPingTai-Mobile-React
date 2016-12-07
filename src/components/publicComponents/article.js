@@ -1,5 +1,5 @@
 /*
-// header
+// 文章盒子
 // --------------------------------------------------
 */
 
@@ -18,7 +18,7 @@ export default class Article extends Component {
                 </h1>
                 <div>
                     {
-                        this.props.children
+                        this.props.children && React.cloneElement(this.props.children, { parent: this })
                     }
                 </div>
             </article>
