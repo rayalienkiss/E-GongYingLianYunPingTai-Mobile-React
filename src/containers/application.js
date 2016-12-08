@@ -1,5 +1,5 @@
 /*
-// 申请表单
+// 融资申请
 // --------------------------------------------------
 */
 
@@ -7,10 +7,7 @@
 import React, { Component } from 'react'
 
 // 公用组件
-import { Header, Footer, InsidePageBanner } from 'components'
-
-// 业务组件
-import { AppliForm } from 'serviceComponents'
+import { Header, Footer, InsidePageBanner, AppliForm } from 'components'
 
 // ajax
 import axios from 'axios'

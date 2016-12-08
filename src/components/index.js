@@ -13,6 +13,8 @@ import FlowResult from './serviceComponents/flowResult'
 import InsidePageBanner from './publicComponents/insidePageBanner'
 import IndexPostBox from './serviceComponents/indexPostBox/indexPostBox'
 import IndexPostBoxItem from './serviceComponents/indexPostBox/IndexPostBoxItem'
+import AppliForm from './serviceComponents/appliForm'
+import SharePanel from './publicComponents/sharePanel'
 
 export {
     Modal,
@@ -22,5 +24,7 @@ export {
     FlowResult,
     InsidePageBanner,
     IndexPostBox,
-    IndexPostBoxItem
+    IndexPostBoxItem,
+    AppliForm,
+    SharePanel
 }

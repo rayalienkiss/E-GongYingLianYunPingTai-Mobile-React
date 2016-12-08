@@ -9,7 +9,7 @@ import { Link } from 'react-router'
 
 import { Button, Popup } from 'antd-mobile'
 
-import { SharePanel } from 'serviceComponents'
+import { SharePanel } from 'components'
 
 export default class Footer extends Component {
 

@@ -74,6 +74,78 @@ export default class Home extends Component {
     }
 
     render() {
+
+        //IndexPostBox 里面装的图片数据
+        //合作金融机构 LOGO 图片
+        const imagesGroup1 = [
+            {
+                image: '../src/public/images/index-logo/ZhaoShangYinHang.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/QianDuan.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/ZhaoShangJiJin.jpg'
+            }
+        ];
+        //合作核心企业 LOGO 图片
+        const imagesGroup2 = [
+            {
+                image: '../src/public/images/index-logo/Wanke.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/ZhongHaiDiChan.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/HuaRunZhiDi.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/AnBangBaoXian.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/ZhongGuoRenBao.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/JiuZhouTong.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/PuTianYaoXieJiaoYiWang.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/MeiLuoYaoYe.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/JinHaiMaJiaJu.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/YunShengKeJi.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/CrownePlaza.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/GongSuDa.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/HaiTian.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/HongDouJiaFang.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/JingBoWuLiu.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/MengNiu.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/ShanDongGaoSu.jpg'
+            },
+            {
+                image: '../src/public/images/index-logo/ShengMuGaoKe.jpg'
+            }
+        ];
+
         return (
             <div className="container-inner">
                 {/* nav */}
@@ -120,32 +192,17 @@ export default class Home extends Component {
                     {/* 合作金融机构 */}
                     <IndexPostBox>
                         <IndexPostBoxItem>
-                            <img src="../src/public/images/index-logo/ZhaoShangYinHang.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/QianDuan.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/ZhaoShangJiJin.jpg" alt=""/>
+                            {imagesGroup1.map(i => (
+                                <img src={i.image} key={i.image}/>
+                            ))}
                         </IndexPostBoxItem>
                     </IndexPostBox>
                     {/* 合作核心企业 */}
                     <IndexPostBox>
                         <IndexPostBoxItem>
-                            <img src="../src/public/images/index-logo/Wanke.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/ZhongHaiDiChan.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/HuaRunZhiDi.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/AnBangBaoXian.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/ZhongGuoRenBao.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/JiuZhouTong.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/PuTianYaoXieJiaoYiWang.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/MeiLuoYaoYe.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/JinHaiMaJiaJu.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/YunShengKeJi.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/CrownePlaza.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/GongSuDa.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/HaiTian.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/HongDouJiaFang.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/JingBoWuLiu.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/MengNiu.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/ShanDongGaoSu.jpg" alt=""/>
-                            <img src="../src/public/images/index-logo/ShengMuGaoKe.jpg" alt=""/>
+                            {imagesGroup2.map(i => (
+                                <img src={i.image} key={i.image}/>
+                            ))}
                         </IndexPostBoxItem>
                     </IndexPostBox>
                 </div>

@@ -31,8 +31,7 @@ module.exports = {
         alias: {
             constants: source_path+'/constants',
             helpers: source_path+'/helpers',
-            components: source_path+'/components',
-            serviceComponents: source_path+'/serviceComponents'
+            components: source_path+'/components'
         },
         extensions: ['', '.web.js','.js', '.jsx', '.css', '.less','.json'],
         root: [path.resolve('./src'), path.resolve('./node_modules')]
