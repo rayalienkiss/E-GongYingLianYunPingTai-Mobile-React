@@ -192,17 +192,25 @@ export default class Home extends Component {
                     {/* 合作金融机构 */}
                     <IndexPostBox>
                         <IndexPostBoxItem>
-                            {imagesGroup1.map(i => (
-                                <img src={i.image} key={i.image}/>
-                            ))}
+                            {
+                                imagesGroup1.map(i => {
+                                    return (
+                                        <img src={i.image} key={i.image}/>
+                                    );
+                                })
+                            }
                         </IndexPostBoxItem>
                     </IndexPostBox>
                     {/* 合作核心企业 */}
                     <IndexPostBox>
                         <IndexPostBoxItem>
-                            {imagesGroup2.map(i => (
-                                <img src={i.image} key={i.image}/>
-                            ))}
+                            {
+                                imagesGroup2.map(i => {
+                                    return (
+                                        <img src={i.image} key={i.image}/>
+                                    );
+                                })
+                            }
                         </IndexPostBoxItem>
                     </IndexPostBox>
                 </div>
