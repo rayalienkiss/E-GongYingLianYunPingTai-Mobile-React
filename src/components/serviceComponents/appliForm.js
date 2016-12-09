@@ -293,7 +293,7 @@ class AppliForm extends React.Component {
             console.log("passed");
             // 推荐人手机验证通过TODO
             console.log(data);
-            let url = tools.urlAddParam('/API/sms/send', {
+            const url = tools.urlAddParam('/API/sms/send', {
                 phone: data.userPhone,
                 type: 1
             });
