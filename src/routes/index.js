@@ -61,6 +61,15 @@ const routes = {
                     cb(null, require('../containers/application.js').default)
                 })
             }
+        },
+        {
+            //申请资料填写
+            path: 'UserRight',
+            getComponent(nextState, cb) {
+                require.ensure([], require => {
+                    cb(null, require('../containers/userRight.js').default)
+                })
+            }
         }
     ]
 }
