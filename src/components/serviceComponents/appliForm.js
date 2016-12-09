@@ -74,7 +74,7 @@ class AppliForm extends React.Component {
         }
     }
 
-    //  判断是否登录
+    // 判断是否登录
     getIsLogin() {
         let me = this;
 
@@ -92,7 +92,7 @@ class AppliForm extends React.Component {
         });
     }
 
-    //  如果已经登录获取用户信息
+    // 如果已经登录获取用户信息
     getUserInfo() {
         let me = this;
 
@@ -566,7 +566,7 @@ class AppliForm extends React.Component {
                 <Flex>
                     <Flex.Item>
                       <AgreeItem data-seed="logId" {...getFieldProps('agree',fieldProps['agree'])}>
-                        已阅读并同意<a href="javaScript:void(0);">《用户须知》</a>
+                        已阅读并同意《<a href="#/UserRight" target="_blank">用户须知</a>》
                       </AgreeItem>
                     </Flex.Item>
                 </Flex>
