@@ -5,9 +5,11 @@
  */
 
 import fetch from './fetch';
-import ruleType from './ruleType'
+import ruleType from './ruleType';
+import tools from './tools'
 
 export {
 	fetch,
-	ruleType
+	ruleType,
+	tools
 }

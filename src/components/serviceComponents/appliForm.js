@@ -32,7 +32,8 @@ const AgreeItem = Checkbox.AgreeItem;
 
 //helpers
 import {
-    ruleType
+    ruleType,
+    tools
 } from 'helpers';
 
 class AppliForm extends React.Component {
@@ -63,6 +64,7 @@ class AppliForm extends React.Component {
 
     componentDidMount() {
         this.loadData();
+        this.getIsLogin();
     }
 
     componentWillUnmount() {
@@ -70,6 +72,40 @@ class AppliForm extends React.Component {
         if (me.timer) {
             clearInterval(me.timer);
         }
+    }
+
+    //  判断是否登录
+    getIsLogin() {
+        let me = this;
+
+        axios.get('/API/token').then(res => {
+            // console.log(res);
+            if (res.data.code == 200) {
+                //  已登录
+                let data = me.state.data;
+                data.isLogin = true;
+                me.getUserInfo();
+                me.setState({
+                    data
+                });
+            }
+        });
+    }
+
+    //  如果已经登录获取用户信息
+    getUserInfo() {
+        let me = this;
+
+        axios.get('/API/user/info').then(res => {
+            if (res.data.code == 200) {
+                let fieldsValues = {
+                    userName: res.data.data.name,
+                    userPhone: res.data.data.phone
+                }
+                me.props.form.setFieldsValue(fieldsValues);
+            }
+        });
+
     }
 
     loadData() {
@@ -104,41 +140,6 @@ class AppliForm extends React.Component {
 
         return transArr;
     }
-
-    // - 提交申请
-    handleSubmit = () => {
-
-        let {
-            applyRefundOrder
-        } = this.state
-
-        axios({
-            method: 'post',
-            url: '/API/supplyChain/apply',
-            data: {
-                firstName: 'Fred',
-                lastName: 'Flintstone'
-            }
-        });
-        // fetch('/FrontJsonRefundOrder/ApplyRefundShop', {
-        //     method: 'post',
-        //     body: {
-        //         applyRefundOrder: applyRefundOrder
-        //     }
-        // }).then(res => {
-        //     this.context.router.goBack()
-        // }, res => {
-        //     if(res.ResultCode == 998) {
-        //         this.setState({
-        //             validation: {
-        //                 show: true,
-        //                 content: res.Message
-        //             },
-        //             inValid: true
-        //         })
-        //     }
-        // })
-    };
 
     onFinanceTypeChange(value) {
         let me = this;
@@ -292,10 +293,11 @@ class AppliForm extends React.Component {
             console.log("passed");
             // 推荐人手机验证通过TODO
             console.log(data);
-            axios.post('/API/sms/send', {
+            let url = tools.urlAddParam('/API/sms/send', {
                 phone: data.userPhone,
                 type: 1
-            }).then(res => {
+            });
+            axios.post(url).then(res => {
                 if (res.data && res.data.code == 200) {
                     //  短信发送成功TODO
                     me.smsCodeTimerStart();
