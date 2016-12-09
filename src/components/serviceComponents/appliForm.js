@@ -370,6 +370,8 @@ class AppliForm extends React.Component {
                 if (res.data && res.data.code == 200) {
                     //  立即登记成功TODO
                     console.log('立即登记成功TODO');
+                    //  缺少结果页
+                    // me.props.history.push();
                 }
             });
         });
