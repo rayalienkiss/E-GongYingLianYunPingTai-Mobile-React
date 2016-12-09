@@ -323,9 +323,9 @@ class AppliForm extends React.Component {
 
         let time = 60000;
         const SEC = 1000;
-
+        const SUFFIX = '秒后可重新发送';
         data.smsDisabled = true;
-        data.smsContext = time / SEC + '秒后可以重新发送';
+        data.smsContext = time / SEC + SUFFIX;
         me.setState({
             data
         });
@@ -334,7 +334,7 @@ class AppliForm extends React.Component {
             time -= SEC;
             let seconds = time / SEC;
             data.smsDisabled = seconds == 0 ? false : true;
-            data.smsContext = seconds == 0 ? '获取验证码' : seconds + '秒后可以重新发送';
+            data.smsContext = seconds == 0 ? '获取验证码' : seconds + SUFFIX;
             if (seconds == 0) {
                 clearInterval(me.timer);
             }
