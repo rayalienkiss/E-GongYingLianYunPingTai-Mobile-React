@@ -1,5 +1,5 @@
 /**
- * dev
+ * rap
  *
  * by limit
  */
@@ -12,6 +12,7 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin')
 var baseConf = require('./webpack.base.config')
 var host = require('./host')()
 var port = '8080';
+const projectId = 15; //RAP上的projectId
 
 module.exports = merge(baseConf, {
     cache: true,
@@ -32,9 +33,9 @@ module.exports = merge(baseConf, {
         port: port,
         proxy: {
             '/API/*': {
-                target: 'http://api.m.paywe.cn/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
+                target: 'http://rap.monster/', // RAP mock服务器  需要配置host 192.168.8.164 rap.monster.dev
                 pathRewrite: {
-                    '^/API': "/api"
+                    '^/API': `/mockjsdata/${projectId}/api`
                 },
                 secure: false,
                 changeOrigin: true,

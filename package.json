@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config build/webpack.dev.config.js --inline",
+    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config build/webpack.rap.config.js --inline",
+    "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server --config build/webpack.dev.config.js --inline",
     "build": "node node_modules/webpack/bin/webpack --config build/webpack.prod.config.js --progress --profile --colors",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
