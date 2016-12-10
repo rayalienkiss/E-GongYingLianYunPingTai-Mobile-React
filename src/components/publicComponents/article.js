@@ -18,7 +18,7 @@ export default class Article extends Component {
                 </h1>
                 <div>
                     {
-                        this.props.children && React.cloneElement(this.props.children, { parent: this })
+                        this.props.children
                     }
                 </div>
             </article>

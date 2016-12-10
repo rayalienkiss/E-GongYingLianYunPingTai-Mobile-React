@@ -498,7 +498,7 @@ class AppliForm extends React.Component {
             return (
                 <InputItem
                     clear
-                    labelNumber={6}
+                    labelNumber={6.5}
                     className="input-extra-for-btn"
                     key={index}
                     value={ value }
@@ -515,7 +515,7 @@ class AppliForm extends React.Component {
                 return false;
             }
             return (
-                <a href="javeScript:void(0)" key={ index } style={ { marginRight : 5 } } onClick={ () => { me.selectCompany.bind(me)(index) } }>{ item.name }</a>
+                <a key={ index } style={ { marginRight : 5 } } onClick={ () => { me.selectCompany.bind(me)(index) } }>{ item.name }</a>
             );
         });
 
@@ -538,8 +538,8 @@ class AppliForm extends React.Component {
                         <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
                     </List.Item>
                     <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" labelNumber={6}>融资企业</InputItem>
-                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear extra="万元" labelNumber={6}>{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</InputItem>
-                    <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear labelNumber={6} placeholder="联系人姓名">企业联系人</InputItem>
+                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear extra="万元" labelNumber={7}>{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</InputItem>
+                    <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear labelNumber={6.5} placeholder="联系人姓名">企业联系人</InputItem>
                     <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear labelNumber={6}  placeholder="手机号码">联系电话</InputItem>
                 </List>
 
