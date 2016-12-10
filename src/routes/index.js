@@ -18,7 +18,7 @@ const routes = {
             }
         },
         {
-            //跳转首页
+            //首页
             path: 'Home',
             getComponent(nextState, cb) {
                 require.ensure([], require => {
@@ -27,7 +27,7 @@ const routes = {
             }
         },
         {
-            //跳转关于钱途
+            //关于钱途
             path: 'AboutUs',
             getComponent(nextState, cb) {
                 require.ensure([], require => {
@@ -36,20 +36,11 @@ const routes = {
             }
         },
         {
-            //跳转关于平台
+            //关于平台
             path: 'AboutWebsite',
             getComponent(nextState, cb) {
                 require.ensure([], require => {
                     cb(null, require('../containers/aboutWebsite.js').default)
-                })
-            }
-        },
-        {
-            //跳转申请已提交
-            path: 'ApplicationCommitted',
-            getComponent(nextState, cb) {
-                require.ensure([], require => {
-                    cb(null, require('../containers/applicationCommitted.js').default)
                 })
             }
         },
@@ -63,7 +54,16 @@ const routes = {
             }
         },
         {
-            //申请资料填写
+            //申请已提交
+            path: 'ApplicationCommitted',
+            getComponent(nextState, cb) {
+                require.ensure([], require => {
+                    cb(null, require('../containers/applicationCommitted.js').default)
+                })
+            }
+        },
+        {
+            //用户须知
             path: 'UserRight',
             getComponent(nextState, cb) {
                 require.ensure([], require => {

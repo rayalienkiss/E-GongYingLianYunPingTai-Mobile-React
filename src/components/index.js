@@ -12,7 +12,7 @@ import Article from './publicComponents/article'
 import FlowResult from './serviceComponents/flowResult'
 import InsidePageBanner from './publicComponents/insidePageBanner'
 import IndexPostBox from './serviceComponents/indexPostBox/indexPostBox'
-import IndexPostBoxItem from './serviceComponents/indexPostBox/IndexPostBoxItem'
+import IndexPostBoxItem from './serviceComponents/indexPostBox/indexPostBoxItem'
 import AppliForm from './serviceComponents/appliForm'
 import SharePanel from './publicComponents/sharePanel'
 

@@ -371,7 +371,7 @@ class AppliForm extends React.Component {
                     //  立即登记成功TODO
                     console.log('立即登记成功TODO');
                     //  缺少结果页
-                    // me.props.history.push();
+                    me.props.history.push(ApplicationCommitted);
                 }
             });
         });
@@ -538,9 +538,9 @@ class AppliForm extends React.Component {
                         <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
                     </List.Item>
                     <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" labelNumber={6}>融资企业</InputItem>
-                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear extra="万元" labelNumber={7}>{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</InputItem>
+                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear extra="万元" labelNumber={7} type="number">{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</InputItem>
                     <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear labelNumber={6.5} placeholder="联系人姓名">企业联系人</InputItem>
-                    <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear labelNumber={6}  placeholder="手机号码">联系电话</InputItem>
+                    <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear labelNumber={6}  placeholder="手机号码" type="number">联系电话</InputItem>
                 </List>
 
                 {/* 推荐人信息 */}
@@ -549,13 +549,14 @@ class AppliForm extends React.Component {
                       <List.Item arrow="horizontal">推荐人身份</List.Item>
                     </Picker>
                     <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
+                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear labelNumber={5} placeholder="推荐人手机号码" type="number" disabled={ data.isLogin }>手机号码</InputItem>
                     {
                         data.isLogin ? "" :
                         <InputItem
                             {...getFieldProps('SMScode',fieldProps['SMScode'])}
                             clear labelNumber={5}
                             className="input-extra-for-btn"
+                            type="number"
                             extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
                             验证码
                         </InputItem>
