@@ -5,7 +5,9 @@
  */
 
 import React from 'react'
-import { Router, hashHistory } from 'react-router'
+import { Router, browserHistory } from 'react-router'
+// import createBrowserHistory from 'history/lib/createBrowserHistory'
+
 
 const routes = {
     component: require('../containers/common/layout').default,
@@ -74,4 +76,4 @@ const routes = {
     ]
 }
 
-export default <Router history={ hashHistory } routes={ routes } />
+export default <Router history={ browserHistory } routes={ routes } />
