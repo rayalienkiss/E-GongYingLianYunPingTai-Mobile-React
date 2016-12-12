@@ -23,6 +23,7 @@ import {
     createForm
 } from 'rc-form'
 
+import store from 'store';
 // ajax
 import axios from 'axios'
 
@@ -50,7 +51,6 @@ class AppliForm extends React.Component {
             data: {
                 smsDisabled: false,
                 smsContext: '获取验证码',
-                isLogin: false,
                 agreeChecked: false,
                 financeType: [1],
                 identity: [1],
@@ -58,6 +58,7 @@ class AppliForm extends React.Component {
                 coreEnterprisesArr: [],
                 financeTypesArr: [],
                 companyContext: [], //  对应核心企业的文案
+                isLogin: !!store.get('payWeIsLogin') ? 1 : 0
             }
         };
     }
@@ -83,7 +84,7 @@ class AppliForm extends React.Component {
             if (res.data.code == 200) {
                 //  已登录
                 let data = me.state.data;
-                data.isLogin = true;
+                data.isLogin = 1;
                 me.getUserInfo();
                 me.setState({
                     data
@@ -297,7 +298,7 @@ class AppliForm extends React.Component {
                 phone: data.userPhone,
                 type: 1
             });
-            axios.post(url).then(res => {
+            axios.get(url).then(res => {
                 if (res.data && res.data.code == 200) {
                     //  短信发送成功TODO
                     me.smsCodeTimerStart();
@@ -371,10 +372,16 @@ class AppliForm extends React.Component {
                     case 200:
                         //  立即登记成功TODO
                         // console.log('立即登记成功TODO');
+                        store.set('payWeIsLogin', true);
+                        me.context.router.push(`ApplicationCommitted`);
+                        break;
+
+                    case 300:
+                        Toast.fail(res.data.message);
                         break;
 
                     case 304:
-                        Toast.fail(res.data[0].errorMsg);
+                        Toast.fail(res.data.data[0].errorMsg);
                         break;
 
                     case 500:
@@ -388,7 +395,8 @@ class AppliForm extends React.Component {
     }
 
     _getSubmitData(data) {
-        let companyContext = this.state.data.companyContext;
+        let me = this;
+        let companyContext = me.state.data.companyContext;
         let submitData = Object.assign({}, data);
         //  数据处理TODO
         //  对应核心企业数据处理
@@ -415,10 +423,37 @@ class AppliForm extends React.Component {
             submitData["coreEnterprises"] = coreEnterprises;
         }
 
+        //  是否登录处理
+        submitData['isLogin'] = me.state.data.isLogin;
+
         // console.log(coreEnterprises);
         delete submitData['num'];
         delete submitData['agree'];
         return submitData;
+    }
+
+    loginOut() {
+        let me = this;
+        axios.get('/API/login/logout').then(res => {
+            switch (res.data.code) {
+                case 200:
+                    //  退出登录成功TODO
+                    console.log('退出登录成功TODO');
+                    store.set('payWeIsLogin', false);
+                    me.context.router.push(`Home`);
+                    break;
+
+                case 300:
+                    Toast.fail(res.data.message);
+                    break;
+
+                case 500:
+                    Toast.fail('服务器正在开小差')
+                    break;
+
+                default:
+            }
+        });
     }
 
     render() {
@@ -430,18 +465,28 @@ class AppliForm extends React.Component {
             getFieldValue,
             getFieldError,
         } = me.props.form; //表单属性
-
+        // console.log(getFieldError);
         //fieldProps
         const fieldProps = {
             financeType: {
                 initialValue: data.financeType,
                 onChange: me.onFinanceTypeChange.bind(this)
             },
-            coreEnterprises: {},
+            coreEnterprises: {
+                rules: [{
+                    min: 2,
+                    max: 50,
+                    message: '长度必须为2-50个字符'
+                }]
+            },
             financeEnterprise: {
                 rules: [{
                     required: true,
                     message: '融资企业名称不能为空'
+                }, {
+                    min: 2,
+                    max: 50,
+                    message: '长度必须为2-50个字符'
                 }]
             },
             amount: {
@@ -449,13 +494,20 @@ class AppliForm extends React.Component {
                         required: true,
                         message: '金额不能为空'
                     },
-                    ruleType('number')
+                    ruleType('number'), {
+                        max: 13,
+                        message: '最长为13个字符'
+                    }
                 ]
             },
             contactsName: {
                 rules: [{
                     required: true,
                     message: '联系人姓名不能为空'
+                }, {
+                    min: 1,
+                    max: 15,
+                    message: '长度必须为1-15个字符'
                 }]
             },
             contactsPhone: {
@@ -474,6 +526,10 @@ class AppliForm extends React.Component {
                 rules: [{
                     required: true,
                     message: '推荐人名称不能为空'
+                }, {
+                    min: 1,
+                    max: 15,
+                    message: '长度必须为1-15个字符'
                 }]
             },
             userPhone: {
@@ -559,12 +615,13 @@ class AppliForm extends React.Component {
                     <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
                       <List.Item arrow="horizontal">推荐人身份</List.Item>
                     </Picker>
-                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
+                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ !!data.isLogin }>真实姓名</InputItem>
+                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ !!data.isLogin }>手机号码</InputItem>
                     {
-                        data.isLogin ? "" :
+                        !!data.isLogin ? "" :
                         <InputItem
                             {...getFieldProps('SMScode',fieldProps['SMScode'])}
+                            error={!!getFieldError('SMScode')}
                             clear labelNumber={5}
                             className="input-extra-for-btn"
                             extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
@@ -577,7 +634,7 @@ class AppliForm extends React.Component {
                 <Flex>
                     <Flex.Item>
                       <AgreeItem data-seed="logId" {...getFieldProps('agree',fieldProps['agree'])}>
-                        已阅读并同意《<a href="#/UserRight" target="_blank">用户须知</a>》
+                        已阅读并同意《<a href="/UserRight" target="_blank">用户须知</a>》
                       </AgreeItem>
                     </Flex.Item>
                 </Flex>
@@ -586,6 +643,16 @@ class AppliForm extends React.Component {
                 <div className="appli-form-btn-box">
                     <Button className="btn" type="primary" disabled={ !data.agreeChecked } onClick={ me.submit.bind(this) }>立即登记</Button>
                 </div>
+
+                {/* 切换推荐人 */}
+                {
+                    !!data.isLogin ?
+                    <div style={ { textAlign : "center", textDecoration : "underline", paddingBottom : "0.3125rem" } }>
+                        <a href="javaScript:void(0);" onClick={ me.loginOut.bind(me) }>切换推荐人</a>
+                    </div>
+                    :
+                    ""
+                }
             </form>
         )
     }
