@@ -15,16 +15,9 @@ import {
 const routes = {
     component: require('../containers/common/layout').default,
     childRoutes: [{
-        //默认返回首页
         path: '/',
-        indexRoute: {
-            onEnter: (nextState, replace) => replace('Home')
-        }
-    }, {
-        //跳转首页
-        path: 'Home',
         getComponent(nextState, cb) {
-            require.ensure([], require => {
+            require.ensure([], (require) => {
                 cb(null, require('../containers/index').default)
             })
         }
