@@ -58,14 +58,14 @@ class AppliForm extends React.Component {
                 coreEnterprisesArr: [],
                 financeTypesArr: [],
                 companyContext: [], //  对应核心企业的文案
-                isLogin: !!store.get('payWeIsLogin') ? 1 : 0
+                isLogin: false
             }
         };
     }
 
     componentDidMount() {
         this.loadData();
-        this.getIsLogin();
+        this.loginInfoInit();
     }
 
     componentWillUnmount() {
@@ -75,38 +75,25 @@ class AppliForm extends React.Component {
         }
     }
 
-    // 判断是否登录
-    getIsLogin() {
+    //  页面登录信息初始化
+    loginInfoInit() {
         let me = this;
+        let data = me.state.data;
 
-        axios.get('/API/token').then(res => {
-            // console.log(res);
-            if (res.data.code == 200) {
-                //  已登录
-                let data = me.state.data;
-                data.isLogin = 1;
-                me.getUserInfo();
-                me.setState({
-                    data
-                });
-            }
-        });
-    }
-
-    // 如果已经登录获取用户信息
-    getUserInfo() {
-        let me = this;
-
-        axios.get('/API/user/info').then(res => {
-            if (res.data.code == 200) {
-                let fieldsValues = {
-                    userName: res.data.data.name,
-                    userPhone: res.data.data.phone
-                }
-                me.props.form.setFieldsValue(fieldsValues);
-            }
-        });
-
+        let payWeLoginData = store.get('payWeLoginData');
+        if (!payWeLoginData) {
+            return false;
+        }
+        data.isLogin = true;
+        me.setState({
+            data
+        })
+        console.log(payWeLoginData);
+        let fieldsValues = {
+            userName: payWeLoginData.user.name,
+            userPhone: payWeLoginData.user.phone
+        }
+        me.props.form.setFieldsValue(fieldsValues);
     }
 
     loadData() {
@@ -423,8 +410,13 @@ class AppliForm extends React.Component {
             submitData["coreEnterprises"] = coreEnterprises;
         }
 
+        //  邀请码处理
+        if (me.props.location.query.linkCode) {
+            submitData["linkCode"] = me.props.location.query.linkCode;
+        }
+
         //  是否登录处理
-        submitData['isLogin'] = me.state.data.isLogin;
+        submitData['isLogin'] = me.state.data.isLogin ? 1 : 0;
 
         // console.log(coreEnterprises);
         delete submitData['num'];
@@ -439,7 +431,7 @@ class AppliForm extends React.Component {
                 case 200:
                     //  退出登录成功TODO
                     console.log('退出登录成功TODO');
-                    store.set('payWeIsLogin', false);
+                    store.remove("payWeLoginData");
                     me.context.router.push(`Home`);
                     break;
 
@@ -615,10 +607,10 @@ class AppliForm extends React.Component {
                     <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
                       <List.Item arrow="horizontal">推荐人身份</List.Item>
                     </Picker>
-                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ !!data.isLogin }>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ !!data.isLogin }>手机号码</InputItem>
+                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
+                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
                     {
-                        !!data.isLogin ? "" :
+                        data.isLogin ? "" :
                         <InputItem
                             {...getFieldProps('SMScode',fieldProps['SMScode'])}
                             error={!!getFieldError('SMScode')}
@@ -646,7 +638,7 @@ class AppliForm extends React.Component {
 
                 {/* 切换推荐人 */}
                 {
-                    !!data.isLogin ?
+                    data.isLogin ?
                     <div style={ { textAlign : "center", textDecoration : "underline", paddingBottom : "0.3125rem" } }>
                         <a href="javaScript:void(0);" onClick={ me.loginOut.bind(me) }>切换推荐人</a>
                     </div>

@@ -33,7 +33,7 @@ export default class Application extends Component {
                 {/* 内页banner */}
                 <InsidePageBanner imgUrl={ imgUrl } alt=""/>
                 {/* 表单 */}
-                <AppliForm/>
+                <AppliForm location={ this.props.location }/>
                 {/* 页脚 */}
                 <Footer/>
             </div>
