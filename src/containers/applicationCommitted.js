@@ -13,12 +13,36 @@ import {
     FlowResult
 } from 'components'
 
+import { Popup } from 'antd-mobile'
+
+import { SharePanel } from 'components'
+
 // ajax
 import axios from 'axios'
 
 import store from 'store';
 
 export default class ApplicationCommitted extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            sel: ''
+        };
+    }
+
+    onClick() {
+        Popup.show (
+            <SharePanel/>
+        );
+    }
+
+    onClose(sel) {
+        this.setState ({
+            sel
+        });
+        Popup.hide();
+    }
 
     componentDidMount() {
         this.setLogin();
@@ -44,7 +68,7 @@ export default class ApplicationCommitted extends Component {
                 <Header title="申请结果" linkTo="" headCls="header"/>
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"/>
-                <a className="gylypt-button primary flow-result-btn" href="#">立即分享</a>
+                <a className="gylypt-button primary flow-result-btn" href="###" onClick={ this.onClick }>立即分享</a>
                 {/* 页脚 */}
                 <Footer/>
             </div>
