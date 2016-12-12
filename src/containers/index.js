@@ -110,41 +110,41 @@ export default class Home extends Component {
         }];
         //合作核心企业 LOGO 图片
         const imagesGroup2 = [{
-            image: '../src/public/images/index-logo/Wanke.jpg'
+            image: require('img/index-logo/WanKe.jpg')
         }, {
-            image: '../src/public/images/index-logo/ZhongHaiDiChan.jpg'
+            image: require('img/index-logo/ZhongHaiDiChan.jpg')
         }, {
-            image: '../src/public/images/index-logo/HuaRunZhiDi.jpg'
+            image: require('img/index-logo/HuaRunZhiDi.jpg')
         }, {
-            image: '../src/public/images/index-logo/AnBangBaoXian.jpg'
+            image: require('img/index-logo/AnBangBaoXian.jpg')
         }, {
-            image: '../src/public/images/index-logo/ZhongGuoRenBao.jpg'
+            image: require('img/index-logo/ZhongGuoRenBao.jpg')
         }, {
-            image: '../src/public/images/index-logo/JiuZhouTong.jpg'
+            image: require('img/index-logo/JiuZhouTong.jpg')
         }, {
-            image: '../src/public/images/index-logo/PuTianYaoXieJiaoYiWang.jpg'
+            image: require('img/index-logo/PuTianYaoXieJiaoYiWang.jpg')
         }, {
-            image: '../src/public/images/index-logo/MeiLuoYaoYe.jpg'
+            image: require('img/index-logo/MeiLuoYaoYe.jpg')
         }, {
-            image: '../src/public/images/index-logo/JinHaiMaJiaJu.jpg'
+            image: require('img/index-logo/JinHaiMaJiaJu.jpg')
         }, {
-            image: '../src/public/images/index-logo/YunShengKeJi.jpg'
+            image: require('img/index-logo/YunShengKeJi.jpg')
         }, {
-            image: '../src/public/images/index-logo/CrownePlaza.jpg'
+            image: require('img/index-logo/CrownePlaza.jpg')
         }, {
-            image: '../src/public/images/index-logo/GongSuDa.jpg'
+            image: require('img/index-logo/GongSuDa.jpg')
         }, {
-            image: '../src/public/images/index-logo/HaiTian.jpg'
+            image: require('img/index-logo/HaiTian.jpg')
         }, {
-            image: '../src/public/images/index-logo/HongDouJiaFang.jpg'
+            image: require('img/index-logo/HongDouJiaFang.jpg')
         }, {
-            image: '../src/public/images/index-logo/JingBoWuLiu.jpg'
+            image: require('img/index-logo/JingBoWuLiu.jpg')
         }, {
-            image: '../src/public/images/index-logo/MengNiu.jpg'
+            image: require('img/index-logo/MengNiu.jpg')
         }, {
-            image: '../src/public/images/index-logo/ShanDongGaoSu.jpg'
+            image: require('img/index-logo/ShanDongGaoSu.jpg')
         }, {
-            image: '../src/public/images/index-logo/ShengMuGaoKe.jpg'
+            image: require('img/index-logo/ShengMuGaoKe.jpg')
         }];
 
         return (
@@ -153,7 +153,7 @@ export default class Home extends Component {
                 <Header title="供应链云平台" linkTo="" headCls="header index-header"/>
                 {/* banner */}
                 <div className="index-banner">
-                    <img src="../src/public/images/index-banner-1x1.jpg" alt=""/>
+                    <img src={ require('img/index-banner-1x1.jpg') } alt=""/>
                     <Link className="gylypt-button primary index-banner-btn" to="application">
                         <b>立即登记</b>
                     </Link>
