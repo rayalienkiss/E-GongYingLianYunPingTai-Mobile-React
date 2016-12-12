@@ -4,10 +4,17 @@
 */
 
 // 依赖框架
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 
 // 公用组件
-import { Header, Footer, InsidePageBanner, AppliForm } from 'components'
+import {
+    Header,
+    Footer,
+    InsidePageBanner,
+    AppliForm
+} from 'components'
 
 // ajax
 import axios from 'axios'
@@ -26,7 +33,7 @@ export default class Application extends Component {
                 {/* 内页banner */}
                 <InsidePageBanner imgUrl={ imgUrl } alt=""/>
                 {/* 表单 */}
-                <AppliForm/>
+                <AppliForm location={ this.props.location }/>
                 {/* 页脚 */}
                 <Footer/>
             </div>
