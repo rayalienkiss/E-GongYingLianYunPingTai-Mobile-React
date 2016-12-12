@@ -216,7 +216,8 @@ class AppliForm extends React.Component {
     }
 
     //  点可选的核身企业交互
-    selectCompany(index) {
+    selectCompany(e, index) {
+        e.preventDefault();
         let me = this;
         let data = me.state.data;
         let coreEnterprisesArr = data.coreEnterprisesArr;
@@ -574,7 +575,7 @@ class AppliForm extends React.Component {
                 return false;
             }
             return (
-                <a key={ index } style={ { marginRight : 5 } } onClick={ () => { me.selectCompany.bind(me)(index) } }>{ item.name }</a>
+                <a key={ index } style={ { marginRight : 5 } } onClick={ (e) => { me.selectCompany.bind(me)(e,index) } }>{ item.name }</a>
             );
         });
 

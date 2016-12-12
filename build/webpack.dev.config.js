@@ -34,7 +34,7 @@ module.exports = merge(baseConf, {
         proxy: {
             '/api/*': {
                 // target: 'http://api.m.paywe.cn/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
-                target: 'http://m.paywe.dev/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
+                target: 'http://dm.paywe.cn/', //开发服务器  需要配置host 10.1.21.9 dm.paywe.cn
                 secure: false,
                 changeOrigin: true,
             }
