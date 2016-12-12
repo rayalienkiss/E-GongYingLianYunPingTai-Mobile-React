@@ -19,7 +19,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], (require) => {
                 cb(null, require('../containers/index').default)
-            })
+            }, 'home')
         }
     }, {
         //跳转关于钱途
@@ -27,7 +27,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/aboutUs.js').default)
-            })
+            }, 'AboutUs')
         }
     }, {
         //跳转关于平台
@@ -35,7 +35,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/aboutWebsite.js').default)
-            })
+            }, 'AboutWebsite')
         }
     }, {
         //跳转申请已提交
@@ -43,7 +43,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/applicationCommitted.js').default)
-            })
+            }, 'ApplicationCommitted')
         }
     }, {
         //申请资料填写
@@ -51,7 +51,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/application.js').default)
-            })
+            }, 'Application')
         }
     }, {
         //用户须知
@@ -59,7 +59,7 @@ const routes = {
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/userRight.js').default)
-            })
+            }, 'UserRight')
         }
     }]
 }

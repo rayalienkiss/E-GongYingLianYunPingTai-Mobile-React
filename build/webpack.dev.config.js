@@ -32,12 +32,9 @@ module.exports = merge(baseConf, {
         port: port,
         historyApiFallback: true,
         proxy: {
-            '/API/*': {
+            '/api/*': {
                 // target: 'http://api.m.paywe.cn/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
                 target: 'http://m.paywe.dev/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
-                pathRewrite: {
-                    '^/API': "api"
-                },
                 secure: false,
                 changeOrigin: true,
             }

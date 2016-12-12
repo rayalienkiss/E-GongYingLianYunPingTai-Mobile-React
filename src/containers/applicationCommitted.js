@@ -29,7 +29,7 @@ export default class ApplicationCommitted extends Component {
         if (payWeLoginData) {
             return false;
         }
-        axios.get('/API/user/info').then(res => {
+        axios.get('/api/user/info').then(res => {
             store.set("payWeLoginData", {
                 user: res.data.data
             });

@@ -100,9 +100,9 @@ class AppliForm extends React.Component {
         let me = this;
         let data = me.state.data;
         let urlArr = [
-            axios.get('/API/supplyChain/identities'), //推荐人身份列表
-            axios.get('/API/supplyChain/coreEnterprises'), //核心企业列表
-            axios.get('/API/supplyChain/financeTypes') //融资类型列表
+            axios.get('/api/supplyChain/identities'), //推荐人身份列表
+            axios.get('/api/supplyChain/coreEnterprises'), //核心企业列表
+            axios.get('/api/supplyChain/financeTypes') //融资类型列表
         ];
         axios.all(urlArr).then(axios.spread(function(identities, coreEnterprises, financeTypes) {
             // console.log(identities, coreEnterprises, financeTypes);
@@ -281,7 +281,7 @@ class AppliForm extends React.Component {
             console.log("passed");
             // 推荐人手机验证通过TODO
             console.log(data);
-            const url = tools.urlAddParam('/API/sms/send', {
+            const url = tools.urlAddParam('/api/sms/send', {
                 phone: data.userPhone,
                 type: 1
             });
@@ -354,7 +354,7 @@ class AppliForm extends React.Component {
                 return false;
             }
 
-            axios.post('/API/supplyChain/apply', submitData).then(res => {
+            axios.post('/api/supplyChain/apply', submitData).then(res => {
                 switch (res.data.code) {
                     case 200:
                         //  立即登记成功TODO
@@ -426,7 +426,7 @@ class AppliForm extends React.Component {
 
     loginOut() {
         let me = this;
-        axios.get('/API/login/logout').then(res => {
+        axios.get('/api/login/logout').then(res => {
             switch (res.data.code) {
                 case 200:
                     //  退出登录成功TODO

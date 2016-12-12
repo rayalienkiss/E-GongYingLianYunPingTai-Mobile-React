@@ -48,12 +48,12 @@ export default class Home extends Component {
 
         //设置当日融资记录接口
         function getDaliyStatistics() {
-            return axios.get('/API/daliystatistics');
+            return axios.get('/api/daliystatistics');
         }
 
         //设置页面配置信息接口
         function getAssistConfig() {
-            return axios.get('/API/assistconfig');
+            return axios.get('/api/assistconfig');
         }
 
         //同时调用 页面配置信息 和 当日融资记录 两个接口
