@@ -11,7 +11,7 @@ export default class AboutUs extends Component {
 
     render() {
 
-        const articleTitle = <img src="../src/public/images/frontpay.jpg"/>;
+        const articleTitle = <img src={ require('img/frontpay.jpg') } alt=""/>
 
         return (
             <div className="container-inner">
@@ -24,7 +24,7 @@ export default class AboutUs extends Component {
                     <p>
                         目前，钱途互联业务已辐射金融、地产、餐饮、医药等多个行业，并与允升工业、山东高速、万科地产、九州通等数百家知名企业建立紧密的合作关系，根据合作伙伴的实际需求定制产品，在实现E+账户功能的基础上，帮助合作伙伴对接优质金融资源，安全高效地解决了增值、融资和结算需求，以及产业金融领域的业务拓展和场景搭建。钱途互联的创新能力和专业服务获得众多合作伙伴和行业机构的高度认可，并于2015年获得国际顶级风投机构IDG资本的投资。
                     </p>
-                    <img className="article-img" src="../src/public/images/article-img-1.jpg"/>
+                    <img className="article-img" src={ require('img/article-img-1.jpg') } alt=""/>
                     <h3>
                         <b>E+互联网供应链</b>
                     </h3>
@@ -36,40 +36,40 @@ export default class AboutUs extends Component {
                     </h4>
                     <ul className="case-co">
                         <li>
-                            <img src="../src/public/images/article-logo/j_72.jpg"/>
+                            <img src={ require('img/article-logo/j_72.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/ZhongGuoRenBao.jpg"/>
+                            <img src={ require('img/article-logo/ZhongGuoRenBao.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_23.jpg"/>
+                            <img src={ require('img/article-logo/j_23.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_12.jpg"/>
+                            <img src={ require('img/article-logo/j_12.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/XXX.jpg"/>
+                            <img src={ require('img/article-logo/XXX.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/JinHaiMaJiTuan.jpg"/>
+                            <img src={ require('img/article-logo/JinHaiMaJiTuan.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/HaiTianJiTuan.jpg"/>
+                            <img src={ require('img/article-logo/HaiTianJiTuan.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_45.jpg"/>
+                            <img src={ require('img/article-logo/j_45.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_58.jpg"/>
+                            <img src={ require('img/article-logo/j_58.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/LaoBaiXing.jpg"/>
+                            <img src={ require('img/article-logo/LaoBaiXing.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/DaJi.jpg"/>
+                            <img src={ require('img/article-logo/DaJi.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_16.jpg"/>
+                            <img src={ require('img/article-logo/j_16.jpg') }/>
                         </li>
                     </ul>
                     <h3>
@@ -83,10 +83,10 @@ export default class AboutUs extends Component {
                     </h4>
                     <ul className="case-co">
                         <li>
-                            <img src="../src/public/images/article-logo/j_19.jpg"/>
+                            <img src={ require('img/article-logo/j_19.jpg') }/>
                         </li>
                         <li>
-                            <img src="../src/public/images/article-logo/j_06.jpg"/>
+                            <img src={ require('img/article-logo/j_06.jpg') }/>
                         </li>
                     </ul>
                 </Article>

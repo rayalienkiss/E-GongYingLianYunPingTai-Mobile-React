@@ -616,6 +616,7 @@ class AppliForm extends React.Component {
                             error={!!getFieldError('SMScode')}
                             clear labelNumber={5}
                             className="input-extra-for-btn"
+                            type="number"
                             extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
                             验证码
                         </InputItem>
