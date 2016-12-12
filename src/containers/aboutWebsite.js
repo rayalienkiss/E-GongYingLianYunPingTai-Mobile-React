@@ -32,7 +32,7 @@ export default class AboutWebSite extends Component {
                     <p>
                         <span className="fontcolor-warning ">融资业务：</span>应收账款融资、订单融资
                     </p>
-                    <img className="article-img" src="../src/public/images/article-img-2.jpg"/>
+                    <img className="article-img" src={ require('img/article-img-2.jpg') }/>
                     <h3>
                         上下游企业轻松融资流程
                     </h3>
