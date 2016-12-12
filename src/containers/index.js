@@ -91,7 +91,7 @@ export default class Home extends Component {
         //合作核心企业 LOGO 图片
         const imagesGroup2 = [
             {
-                image: require('img/index-logo/Wanke.jpg')
+                image: require('img/index-logo/WanKe.jpg')
             },
             {
                 image: require('img/index-logo/ZhongHaiDiChan.jpg')
