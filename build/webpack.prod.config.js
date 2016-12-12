@@ -34,12 +34,14 @@ module.exports = merge(baseConf, {
                 except: ['$super', '$', 'exports', 'require', 'module', '_']
             },
             compress: {
-                warnings: false
+                warnings: false,
+                drop_debugger: true,
+                drop_console: true
             }
         }),
         new webpack.NoErrorsPlugin(),
         new FaviconsWebpackPlugin({
-            logo: source_path+'/public/images/logo.png',
+            logo: source_path + '/public/images/logo.png',
             icons: {
                 android: false,
                 appleIcon: false,
@@ -47,7 +49,9 @@ module.exports = merge(baseConf, {
                 favicons: true
             }
         }),
-        new webpack.BannerPlugin(banner, { raw: true }),
+        new webpack.BannerPlugin(banner, {
+            raw: true
+        }),
         new webpack.optimize.CommonsChunkPlugin('common.js')
     ]
 })
