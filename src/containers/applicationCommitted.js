@@ -7,6 +7,8 @@ import React, {
     Component
 } from 'react'
 
+import { Link } from 'react-router'
+
 import {
     Header,
     Footer,
@@ -65,10 +67,11 @@ export default class ApplicationCommitted extends Component {
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="申请结果" linkTo="" headCls="header"/>
+                <Header title="申请结果" linkTo="/" headCls="header"/>
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"/>
-                <a className="gylypt-button primary flow-result-btn" href="###" onClick={ this.onClick }>立即分享</a>
+                <Link to="/Application" className="gylypt-button primary flow-result-btn">继续登记</Link>
+                <a className="gylypt-button primary flow-result-btn" href="javascript:void(0)" onClick={ this.onClick }>立即分享</a>
                 {/* 页脚 */}
                 <Footer/>
             </div>

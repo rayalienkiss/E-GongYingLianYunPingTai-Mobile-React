@@ -433,7 +433,16 @@ class AppliForm extends React.Component {
                     //  退出登录成功TODO
                     console.log('退出登录成功TODO');
                     store.remove("payWeLoginData");
-                    me.context.router.push(`Home`);
+                    let data = me.state.data
+                    data.isLogin = false
+                    me.setState(data)
+                    let fieldsValues = {
+                        userName: '',
+                        userPhone: '',
+                    }
+                    me.props.form.setFieldsValue(fieldsValues);
+                    // location.reload();
+                    // me.context.router.push(`Home`);
                     break;
 
                 case 300:
