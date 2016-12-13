@@ -7,9 +7,11 @@
 import React from 'react'
 import {
     Router,
-    browserHistory
+    browserHistory,
+    useRouterHistory
 } from 'react-router'
-// import createBrowserHistory from 'history/lib/createBrowserHistory'
+import createBrowserHistory from 'history/lib/createBrowserHistory';
+import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 
 const routes = {
@@ -64,8 +66,10 @@ const routes = {
     }]
 }
 
+const appHistory = useScroll(useRouterHistory(createBrowserHistory))();
+
 export default < Router history = {
-    browserHistory
+    appHistory
 }
 routes = {
     routes
