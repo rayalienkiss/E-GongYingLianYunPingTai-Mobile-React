@@ -9,7 +9,7 @@ git clone http://git-frontpay.cn/react-webpack-boilerplate.git myproject && cd m
 ## start
 
 ```
-npm start 
+npm start
 ```
 
 ## build
