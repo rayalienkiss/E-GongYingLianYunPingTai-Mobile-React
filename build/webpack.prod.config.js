@@ -11,7 +11,7 @@ var CleanWebpackPlugin = require('clean-webpack-plugin')
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 var baseConf = require('./webpack.base.config')
-baseConf.output.publicPath = '/resources/'
+baseConf.output.publicPath = '/'
 var banner = require('./banner')
 var assertPath = path.resolve(__dirname, '../assets')
 var source_path = path.resolve('./src')
