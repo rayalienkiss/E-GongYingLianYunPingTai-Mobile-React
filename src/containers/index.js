@@ -102,11 +102,11 @@ export default class Home extends Component {
         //IndexPostBox 里面装的图片数据
         //合作金融机构 LOGO 图片
         const imagesGroup1 = [{
-            image: '../src/public/images/index-logo/ZhaoShangYinHang.jpg'
+            image: require('img/index-logo/ZhaoShangYinHang.jpg')
         }, {
-            image: '../src/public/images/index-logo/QianDuan.jpg'
+            image: require('img/index-logo/QianDuan.jpg')
         }, {
-            image: '../src/public/images/index-logo/ZhaoShangJiJin.jpg'
+            image: require('img/index-logo/ZhaoShangJiJin.jpg')
         }];
         //合作核心企业 LOGO 图片
         const imagesGroup2 = [{
