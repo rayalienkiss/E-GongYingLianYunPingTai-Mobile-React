@@ -24,7 +24,7 @@ export default class Application extends Component {
 
     render() {
 
-        const imgUrl = "../src/public/images/inside-page-banner-1.jpg" //页面 banner 图片地址
+        const imgUrl = require('img/inside-page-banner-1.jpg') //页面 banner 图片地址
 
         return (
             <div className="container-inner">
