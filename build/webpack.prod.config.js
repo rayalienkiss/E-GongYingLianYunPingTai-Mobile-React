@@ -9,12 +9,15 @@ var webpack = require('webpack')
 var merge = require('webpack-merge')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 var baseConf = require('./webpack.base.config')
 baseConf.output.publicPath = '/'
 var banner = require('./banner')
 var assertPath = path.resolve(__dirname, '../assets')
 var source_path = path.resolve('./src')
+var pkg = require('../package.json')
+var webConf = pkg.webConfig
 
 module.exports = merge(baseConf, {
     plugins: [
@@ -52,6 +55,25 @@ module.exports = merge(baseConf, {
         new webpack.BannerPlugin(banner, {
             raw: true
         }),
-        new webpack.optimize.CommonsChunkPlugin('common', 'common-[hash].js')
+        new webpack.optimize.CommonsChunkPlugin('common', 'common-[hash].js'),
+        new HtmlWebpackPlugin({
+            title: webConf.title,
+            keywords: webConf.keywords,
+            description: webConf.description,
+            tongji: webConf.tongji,
+            template: source_path+'/index.html',
+            filename: 'index.html',
+            inject: 'body',
+            js: [
+             '/src/public/js/jquery.min.js',
+            ],
+        }),
+        // 复制文件到dist目录
+        new CopyWebpackPlugin([
+            {
+                from: path.join(source_path, 'public/js'),
+                to: path.join(assertPath, 'js')
+            },
+        ])
     ]
 })

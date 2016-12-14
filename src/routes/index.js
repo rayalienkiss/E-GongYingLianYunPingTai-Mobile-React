@@ -56,6 +56,18 @@ const routes = {
             }, 'Application')
         }
     }, {
+        // 专题页
+        path: 'a',
+        onEnter: (nextState, replace) => replace('', 'activity-1')
+    }, {
+        // 专题页
+        path: 'activity-1',
+        getComponent(nextState, cb) {
+            require.ensure([], require => {
+                cb(null, require('../containers/activity_1.js').default)
+            }, 'activity1')
+        }
+    }, {
         //用户须知
         path: 'UserRight',
         getComponent(nextState, cb) {

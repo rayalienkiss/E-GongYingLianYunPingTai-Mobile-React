@@ -7,12 +7,17 @@
 var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 var OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 var baseConf = require('./webpack.base.config')
 var host = require('./host')()
 var port = '8080';
 const projectId = 15; //RAP上的projectId
+
+var pkg = require('../package.json')
+var webConf = pkg.webConfig
+var source_path = path.resolve('./src')
 
 module.exports = merge(baseConf, {
     cache: true,
@@ -26,7 +31,19 @@ module.exports = merge(baseConf, {
         }),
         new OpenBrowserPlugin({
             url: ['http://', host, ':', port, '/'].join('')
-        })
+        }),
+        new HtmlWebpackPlugin({
+            title: webConf.title,
+            keywords: webConf.keywords,
+            description: webConf.description,
+            tongji: webConf.tongji,
+            template: source_path+'/index.html',
+            filename: 'index.html',
+            inject: 'body',
+            js: [
+             '/js/jquery.min.js',
+            ],
+        }),
     ],
     devServer: {
         host: host,
