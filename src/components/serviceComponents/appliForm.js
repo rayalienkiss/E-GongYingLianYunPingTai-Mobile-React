@@ -603,7 +603,7 @@ class AppliForm extends React.Component {
                     </Picker>
                     { inputItems }
                     <List.Item wrap={true} multipleLine={ true }>
-                        可选企业
+                        可选择的核心企业
                         <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
                     </List.Item>
                     <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={6}>融资企业</InputItem>
