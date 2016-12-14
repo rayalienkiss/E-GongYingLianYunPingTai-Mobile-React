@@ -47,7 +47,7 @@ class AppliForm extends React.Component {
         super(props);
         this.state = {
             addDisabled: false,
-            isMore: false, //  可选择的核身企业是否点击了更多
+            isMore: false, //  可选择的核心企业是否点击了更多
             data: {
                 smsDisabled: false,
                 smsContext: '获取验证码',
@@ -253,7 +253,7 @@ class AppliForm extends React.Component {
         }
     }
 
-    //  更多可选择的核身企业
+    //  更多可选择的核心企业
     more() {
         let me = this;
         let isMore = !me.state.isMore;
