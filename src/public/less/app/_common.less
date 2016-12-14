@@ -28,7 +28,7 @@
         [class*=" jiathis_button_"] {
 
             &:last-child:not(:first-child) > .jtico {
-                padding-left: 32px !important; /* no */
+                //padding-left: 32px !important; /* no */
             }
         }
     }
@@ -38,12 +38,13 @@
 #jiathis_weixin_share .jiathis_weixin_modal {
     margin: 0 !important;
     transform: translate3d(-50%,-50%,0);
-    width: 280px !important; /* no */
-    height: 280px !important; /* no */
+    width: 90% !important; /* no */
+    height: auto !important; /* no */
 
     #jiathis_modal_body {
-        height: 176px !important; /* no */
-        line-height: 176px !important; /* no */
+        height: 90% !important; /* no */
+        line-height: inherit !important; /* no */
+        margin: @gapSize-public 0;
     }
 
     p#jiathis_webchat {

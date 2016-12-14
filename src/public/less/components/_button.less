@@ -31,6 +31,17 @@
         }
     }
 
+    &.secondary {
+        background-color: @bgColor-secondary-gylypt-button;
+        border-color: @borderColor-secondary-gylypt-button;
+
+        &:active {
+            border-bottom: none;
+            border-top: 3px solid @borderColor-secondary-gylypt-button;
+            background-color: darken(@bgColor-secondary-gylypt-button,5%);
+        }
+    }
+
     // &.disabled,
     // &[disabled] {
     //

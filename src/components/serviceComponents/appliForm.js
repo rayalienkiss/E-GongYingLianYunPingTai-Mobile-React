@@ -446,7 +446,7 @@ class AppliForm extends React.Component {
                     break;
 
                 case 300:
-                    Toast.fail(res.data.message);
+                    Toast.fail(res.data.data.message);
                     break;
 
                 case 500:

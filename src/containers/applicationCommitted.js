@@ -70,7 +70,7 @@ export default class ApplicationCommitted extends Component {
                 <Header title="申请结果" linkTo="/" headCls="header"/>
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"/>
-                <Link to="/Application" className="gylypt-button primary flow-result-btn">继续登记</Link>
+                <Link to="/Application" className="gylypt-button secondary flow-result-btn2">继续登记</Link>
                 <a className="gylypt-button primary flow-result-btn" href="javascript:void(0)" onClick={ this.onClick }>立即分享</a>
                 {/* 页脚 */}
                 <Footer/>
