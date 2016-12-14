@@ -52,6 +52,6 @@ module.exports = merge(baseConf, {
         new webpack.BannerPlugin(banner, {
             raw: true
         }),
-        new webpack.optimize.CommonsChunkPlugin('common.js')
+        new webpack.optimize.CommonsChunkPlugin('common', 'common-[hash].js')
     ]
 })
