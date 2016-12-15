@@ -105,12 +105,11 @@ img {
     padding-bottom: @gapSize-public*2;
 
     .am-list-header {
-        padding-left: @gapSize-public;
-        padding-right: @gapSize-public;
-        background-color: @bgColor-secondary;
+        padding: @gapSize-public;
+        background-color: @bgColor-primary;
 
-        > h3 {
-            font-size: @fontSize-default;
+        > div > p {
+            font-size: floor(@fontSize-default*0.8);
         }
     }
 
@@ -170,12 +169,24 @@ img {
     }
 }
 
+.custom-form-wrap {
+    border: 1px solid @borderColor-primary; /* no */
+    margin: @gapSize-public;
+    //padding: @gapSize-public;
+    .rounded(@borderRadius-public);
+}
+
 .custom-form {
 
     .label-fake {
         padding: @gapSize-public*2 @gapSize-public 0 @gapSize-public;
         //font-size: floor(@fontSize-default*1.2);
         font-size: @fontSize-default;
+        color: @fontColor-viceText;
+    }
+
+    .am-button-small {
+
     }
 
     .am-list-item {
@@ -189,14 +200,34 @@ img {
         }
 
         .am-list-line {
+            min-height: 68px;
 
             .am-list-extra {
                 text-align: left;
+                font-size: @fontSize-default;
             }
 
             .am-list-arrow {
                 transform: rotate(90deg);
             }
+        }
+    }
+
+    .am-list .am-list-item .am-input-extra {
+        max-height: none;
+        margin-right: -@gapSize-public/2;
+    }
+
+    .am-list .am-list-item.am-input-item {
+        height: 68px;
+    }
+
+    .am-list .am-list-item .am-input-control input {
+        font-size: @fontSize-default;
+
+        &::-webkit-input-placeholder {
+            font-size: @fontSize-default;
+            line-height: 1.2;
         }
     }
 }
