@@ -477,6 +477,7 @@ class AppliForm extends React.Component {
                 onChange: me.onFinanceTypeChange.bind(this)
             },
             coreEnterprises: {
+                validateTrigger: 'onBlur',
                 rules: [{
                     min: 2,
                     max: 50,
@@ -484,6 +485,7 @@ class AppliForm extends React.Component {
                 }]
             },
             financeEnterprise: {
+                validateTrigger: 'onBlur',
                 rules: [{
                     required: true,
                     message: '融资企业名称不能为空'
@@ -494,6 +496,7 @@ class AppliForm extends React.Component {
                 }]
             },
             amount: {
+                validateTrigger: 'onBlur',
                 rules: [{
                         required: true,
                         message: '金额不能为空'
@@ -505,6 +508,7 @@ class AppliForm extends React.Component {
                 ]
             },
             contactsName: {
+                validateTrigger: 'onBlur',
                 rules: [{
                     required: true,
                     message: '联系人姓名不能为空'
@@ -515,6 +519,7 @@ class AppliForm extends React.Component {
                 }]
             },
             contactsPhone: {
+                validateTrigger: 'onBlur',
                 rules: [{
                         required: true,
                         message: '联系电话不能为空'
@@ -527,6 +532,7 @@ class AppliForm extends React.Component {
                 onChange: me.onIdentityChange.bind(me)
             },
             userName: {
+                validateTrigger: 'onBlur',
                 rules: [{
                     required: true,
                     message: '推荐人名称不能为空'
@@ -537,6 +543,7 @@ class AppliForm extends React.Component {
                 }]
             },
             userPhone: {
+                validateTrigger: 'onBlur',
                 rules: [{
                         required: true,
                         message: '推荐人手机号码不能为空'
@@ -549,6 +556,7 @@ class AppliForm extends React.Component {
                 onChange: me.onAgreeChange.bind(me)
             },
             SMScode: {
+                validateTrigger: 'onBlur',
                 rules: [{
                     required: true,
                     message: '验证码不能为空'
