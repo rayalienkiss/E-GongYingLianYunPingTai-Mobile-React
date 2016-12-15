@@ -179,7 +179,6 @@ class AppliForm extends React.Component {
     remove(k) {
         let me = this;
         let data = me.state.data;
-        let companyContext = data.companyContext;
         const {
             form
         } = this.props;
@@ -188,12 +187,14 @@ class AppliForm extends React.Component {
 
         let addDisabled = false;
 
-        companyContext.splice(k, 1);
-        // console.log(companyContext);
-        me.setState({
-            addDisabled,
-            data
-        });
+        for (let i = 0; i < num.length; i++) {
+            if (i >= k) {
+                let value = (i < num.length - 1) ? form.getFieldValue(`coreEnterprises${i + 1}`) : undefined;
+                form.setFieldsValue({
+                    [`coreEnterprises${i}`]: value
+                });
+            }
+        }
 
         num = num.filter((val, key) => {
             return key !== k;
@@ -201,6 +202,9 @@ class AppliForm extends React.Component {
         // can use data-binding to set
         form.setFieldsValue({
             num,
+        });
+        me.setState({
+            addDisabled
         });
     }
 
@@ -218,10 +222,10 @@ class AppliForm extends React.Component {
     //  点可选的核身企业交互
     selectCompany(e, index) {
         e.preventDefault();
+        // console.log(index);
         let me = this;
         let data = me.state.data;
         let coreEnterprisesArr = data.coreEnterprisesArr;
-        let companyContext = data.companyContext;
         const {
             form
         } = this.props;
@@ -229,26 +233,21 @@ class AppliForm extends React.Component {
 
         let isHasEmpty = false;
         let emptyIndex = null;
-        companyContext.map((item, index) => {
-            if (!item.trim()) {
+        for (let i = 0; i < num.length; i++) {
+            let formValue = form.getFieldValue(`coreEnterprises${i}`);
+            if (!formValue || !formValue.trim()) {
                 isHasEmpty = true;
-                emptyIndex = index;
-                return false;
+                emptyIndex = i;
+                break;
             }
-        });
-        if (companyContext.length == num.length && !isHasEmpty) {
+        }
+        if (!isHasEmpty) {
             // console.log("==");
             return false;
         } else {
             let value = coreEnterprisesArr[index].fullName;
-            if (isHasEmpty) {
-                companyContext[emptyIndex] = value;
-            } else {
-                companyContext.push(value);
-            }
-
-            me.setState({
-                data
+            form.setFieldsValue({
+                [`coreEnterprises${emptyIndex}`]: value
             });
         }
     }
@@ -384,32 +383,21 @@ class AppliForm extends React.Component {
 
     _getSubmitData(data) {
         let me = this;
-        let companyContext = me.state.data.companyContext;
         let submitData = Object.assign({}, data);
+        // console.log(submitData);
         //  数据处理TODO
         //  对应核心企业数据处理
-        let coreEnterprises = companyContext.filter((val, key) => {
-            return !!val.trim() != false;
-        });
-        let isIllegal = true;
-        coreEnterprises.map((val, key) => {
-            if (!!val) {
-                isIllegal = false;
-                return false;
+        let num = submitData['num'];
+        let coreEnterprises = [];
+        for (let i = 0; i < num.length; i++) {
+            let coreEnterpriseVal = submitData[`coreEnterprises${i}`];
+            if (!!coreEnterpriseVal || (typeof coreEnterpriseVal == 'string' && !!coreEnterpriseVal.trim())) {
+                coreEnterprises.push(coreEnterpriseVal);
             }
-        });
-
-        //  融资类型和推荐人身份处理
-        submitData.financeType = submitData.financeType[0];
-        submitData.identity = submitData.identity[0];
-
-        if (isIllegal) {
-            //  对应核心企业没有填写TODO
-            submitData["coreEnterprises"] = false;
-        } else {
-            //  对应核心企业已填写TODO
-            submitData["coreEnterprises"] = coreEnterprises;
+            delete submitData[`coreEnterprises${i}`];
         }
+
+        submitData["coreEnterprises"] = !!coreEnterprises.length ? coreEnterprises : false;
 
         //  邀请码处理
         if (me.props.location.query.linkCode) {
@@ -478,7 +466,7 @@ class AppliForm extends React.Component {
                 rules: [{
                     min: 2,
                     max: 50,
-                    message: '长度必须为2-50个字符'
+                    message: '对应核心企业长度必须为2-50个字符'
                 }]
             },
             financeEnterprise: {
@@ -488,7 +476,7 @@ class AppliForm extends React.Component {
                 }, {
                     min: 2,
                     max: 50,
-                    message: '长度必须为2-50个字符'
+                    message: '融资企业名称长度必须为2-50个字符'
                 }]
             },
             amount: {
@@ -498,7 +486,7 @@ class AppliForm extends React.Component {
                     },
                     ruleType('number'), {
                         max: 13,
-                        message: '最长为13个字符'
+                        message: '金额最长为13个字符'
                     }
                 ]
             },
@@ -509,7 +497,7 @@ class AppliForm extends React.Component {
                 }, {
                     min: 1,
                     max: 15,
-                    message: '长度必须为1-15个字符'
+                    message: '联系人姓名长度必须为1-15个字符'
                 }]
             },
             contactsPhone: {
@@ -531,7 +519,7 @@ class AppliForm extends React.Component {
                 }, {
                     min: 1,
                     max: 15,
-                    message: '长度必须为1-15个字符'
+                    message: '推荐人名称长度必须为1-15个字符'
                 }]
             },
             userPhone: {
@@ -563,15 +551,14 @@ class AppliForm extends React.Component {
             const type = index == 0 ? "primary" : "ghost";
             const onClick = index == 0 ? me.add.bind(me) : me.remove.bind(me);
             const disabled = index == 0 && me.state.addDisabled ? true : false;
-            const value = me.state.data.companyContext[index] ? me.state.data.companyContext[index] : "";
             return (
                 <InputItem
                     clear
                     labelNumber={6.5}
                     className="input-extra-for-btn"
                     key={index}
-                    value={ value }
-                    onChange={ (e) => { me.onCompanyChange.bind(this)(e,index) } }
+                    {...getFieldProps(`coreEnterprises${index}`,fieldProps['coreEnterprises'])}
+                    error={!!getFieldError(`coreEnterprises${index}`)}
                     extra={<Button icon={icon} type={ type } inline size="small" onClick={() => {onClick(index)}} disabled={disabled}></Button>}
                 >
                     对应核心企业
