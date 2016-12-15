@@ -604,8 +604,8 @@ class AppliForm extends React.Component {
                     </Picker>
                     <div className="label-fake">对应核心企业</div>
                     { inputItems }
-                    <List.Item wrap={true} multipleLine={ true }>
-                        可选择的核心企业
+                    <List.Item wrap={true} multipleLine={ true } style={{ border: 'none' }}>
+                        <div className="lit-label">可选择的核心企业</div>
                         <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
                     </List.Item>
                     <div className="label-fake">融资企业</div>

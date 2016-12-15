@@ -108,6 +108,10 @@ img {
         padding-left: @gapSize-public;
         padding-right: @gapSize-public;
         background-color: @bgColor-secondary;
+
+        > h3 {
+            font-size: @fontSize-default;
+        }
     }
 
     &.no-border-bottom .am-list-body:after {
@@ -144,7 +148,7 @@ img {
         &.with-select {
             padding-left: @gapSize-public;
             padding-right: @gapSize-public;
-            border-bottom: 1px solid @borderColor-primary;
+            border-bottom: 1px solid @borderColor-primary; /* no */
 
             select {
                 position: relative;
@@ -169,14 +173,20 @@ img {
 .custom-form {
 
     .label-fake {
-        padding: @gapSize-public*3 @gapSize-public 0 @gapSize-public;
-        font-size: floor(@fontSize-default*1.2);
+        padding: @gapSize-public*2 @gapSize-public 0 @gapSize-public;
+        //font-size: floor(@fontSize-default*1.2);
+        font-size: @fontSize-default;
     }
 
     .am-list-item {
-        border: 1px solid @borderColor-primary;
+        min-height: 32px;
+        border: 1px solid darken(@borderColor-primary,5%); /* no */
         margin: @gapSize-public @gapSize-public 0 @gapSize-public;
         .rounded(@borderRadius-public);
+
+        .am-list-line-multiple {
+            padding: 0 !important;
+        }
 
         .am-list-line {
 
@@ -189,4 +199,8 @@ img {
             }
         }
     }
+}
+
+.lit-label {
+    font-size: @fontSize-default;
 }
