@@ -289,6 +289,8 @@ class AppliForm extends React.Component {
                 if (res.data && res.data.code == 200) {
                     //  短信发送成功TODO
                     me.smsCodeTimerStart();
+                } else {
+                    Toast.fail(res.data.message, 1.5);
                 }
             })
         });
@@ -312,6 +314,7 @@ class AppliForm extends React.Component {
         let data = me.state.data;
 
         let time = 60000;
+        // let time = 5000;
         const SEC = 1000;
         const SUFFIX = '秒后可重新发送';
         data.smsDisabled = true;
@@ -359,7 +362,7 @@ class AppliForm extends React.Component {
                     case 200:
                         //  立即登记成功TODO
                         // console.log('立即登记成功TODO');
-                        store.set('payWeIsLogin', true);
+                        // store.set('payWeIsLogin', true);
                         me.context.router.push(`ApplicationCommitted`);
                         break;
 
@@ -399,6 +402,10 @@ class AppliForm extends React.Component {
 
         submitData["coreEnterprises"] = !!coreEnterprises.length ? coreEnterprises : false;
 
+        //融资类型和推荐人身份处理
+        submitData['financeType'] = submitData['financeType'][0];
+        submitData['identity'] = submitData['identity'][0];
+
         //  邀请码处理
         if (me.props.location.query.linkCode) {
             submitData["linkCode"] = me.props.location.query.linkCode;
@@ -423,7 +430,9 @@ class AppliForm extends React.Component {
                     store.remove("payWeLoginData");
                     let data = me.state.data
                     data.isLogin = false
-                    me.setState(data)
+                    me.setState({
+                        data
+                    })
                     let fieldsValues = {
                         userName: '',
                         userPhone: '',
