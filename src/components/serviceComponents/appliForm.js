@@ -27,6 +27,8 @@ import store from 'store';
 // ajax
 import axios from 'axios'
 
+import './appli-fill.less';
+
 const RadioItem = Radio.RadioItem;
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
@@ -81,19 +83,22 @@ class AppliForm extends React.Component {
         let data = me.state.data;
 
         let payWeLoginData = store.get('payWeLoginData');
+
         if (!payWeLoginData) {
             return false;
         }
-        data.isLogin = true;
-        me.setState({
-            data
-        })
-        console.log(payWeLoginData);
+
         let fieldsValues = {
             userName: payWeLoginData.user.name,
             userPhone: payWeLoginData.user.phone
         }
+
         me.props.form.setFieldsValue(fieldsValues);
+
+        data.isLogin = true;
+        me.setState({
+            data
+        })
     }
 
     loadData() {
@@ -613,8 +618,10 @@ class AppliForm extends React.Component {
                     <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
                       <List.Item arrow="horizontal">推荐人身份</List.Item>
                     </Picker>
-                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
+                    <div className="iosDisabled">
+                        <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
+                        <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
+                    </div>
                     {
                         data.isLogin ? "" :
                         <InputItem
