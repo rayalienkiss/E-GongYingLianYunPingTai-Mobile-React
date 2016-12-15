@@ -62,19 +62,18 @@ module.exports = merge(baseConf, {
             keywords: webConf.keywords,
             description: webConf.description,
             tongji: webConf.tongji,
-            template: source_path+'/index.html',
+            template: source_path + '/index.html',
             filename: 'index.html',
             inject: 'body',
             js: [
-             '/js/jquery.min.js',
+                '/js/polyfill.min.js',
+                '/js/jquery.min.js',
             ],
         }),
         // 复制文件到dist目录
-        new CopyWebpackPlugin([
-            {
-                from: path.join(source_path, 'public/js'),
-                to: path.join(assertPath, 'js')
-            },
-        ])
+        new CopyWebpackPlugin([{
+            from: path.join(source_path, 'public/js'),
+            to: path.join(assertPath, 'js')
+        }, ])
     ]
 })
