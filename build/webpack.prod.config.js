@@ -66,7 +66,7 @@ module.exports = merge(baseConf, {
             filename: 'index.html',
             inject: 'body',
             js: [
-             '/src/public/js/jquery.min.js',
+             '/js/jquery.min.js',
             ],
         }),
         // 复制文件到dist目录
