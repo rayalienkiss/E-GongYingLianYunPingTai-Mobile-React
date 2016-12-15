@@ -560,9 +560,8 @@ class AppliForm extends React.Component {
                     {...getFieldProps(`coreEnterprises${index}`,fieldProps['coreEnterprises'])}
                     error={!!getFieldError(`coreEnterprises${index}`)}
                     extra={<Button icon={icon} type={ type } inline size="small" onClick={() => {onClick(index)}} disabled={disabled}></Button>}
-                >
-                    对应核心企业
-                </InputItem>
+                    placeholder="请输入核心企业名称"
+                />
             );
         });
 
@@ -580,32 +579,41 @@ class AppliForm extends React.Component {
         const moreBtn = data.coreEnterprisesArr.length > 3 ? <Button type="primary" onClick={ me.more.bind(this) } inline size="small" >{ moreText }</Button> : "";
 
         return (
-            <form>
+            <form className="custom-form">
                 {/* 选择融资类型 */}
 
                 {/* 融资企业信息 */}
                 <List renderHeader={() => <h3>融资企业信息</h3>} className="customs-form-components no-border-bottom form-box-in-1">
+                    <div className="label-fake">选择融资类型</div>
                     <Picker {...getFieldProps('financeType',fieldProps['financeType'])} data={data.financeTypesArr} cols={1} className="forss">
-                      <List.Item arrow="horizontal">选择融资类型</List.Item>
+                      <List.Item arrow="horizontal"/>
                     </Picker>
+                    <div className="label-fake">对应核心企业</div>
                     { inputItems }
                     <List.Item wrap={true} multipleLine={ true }>
                         可选择的核心企业
                         <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
                     </List.Item>
-                    <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={6}>融资企业</InputItem>
-                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear error={!!getFieldError('amount')} extra="万元" labelNumber={7}>{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</InputItem>
-                    <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear error={!!getFieldError('contactsName')} labelNumber={6.5} placeholder="联系人姓名">企业联系人</InputItem>
-                    <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear error={!!getFieldError('contactsPhone')} labelNumber={6}  placeholder="手机号码">联系电话</InputItem>
+                    <div className="label-fake">融资企业</div>
+                    <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={1}/>
+                    <div className="label-fake">{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</div>
+                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear error={!!getFieldError('amount')} extra="万元" labelNumber={1}/>
+                    <div className="label-fake">企业联系人</div>
+                    <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear error={!!getFieldError('contactsName')} labelNumber={1} placeholder="联系人姓名"/>
+                    <div className="label-fake">联系电话</div>
+                    <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear error={!!getFieldError('contactsPhone')} labelNumber={1}  placeholder="手机号码"/>
                 </List>
 
                 {/* 推荐人信息 */}
                 <List renderHeader={() => <div><h3>推荐人信息</h3><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-2">
+                    <div className="label-fake">推荐人身份</div>
                     <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
-                      <List.Item arrow="horizontal">推荐人身份</List.Item>
+                      <List.Item arrow="horizontal"/>
                     </Picker>
-                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }>真实姓名</InputItem>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }>手机号码</InputItem>
+                    <div className="label-fake">真实姓名</div>
+                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
+                    <div className="label-fake">手机号码</div>
+                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
                     {
                         data.isLogin ? "" :
                         <InputItem
@@ -632,17 +640,15 @@ class AppliForm extends React.Component {
                 {/* 表单提交 */}
                 <div className="appli-form-btn-box">
                     <Button className="btn" type="primary" disabled={ !data.agreeChecked } onClick={ me.submit.bind(this) }>立即登记</Button>
-                </div>
 
-                {/* 切换推荐人 */}
-                {
-                    data.isLogin ?
-                    <div style={ { textAlign : "center", textDecoration : "underline", paddingBottom : "0.3125rem" } }>
-                        <a href="javaScript:void(0);" onClick={ me.loginOut.bind(me) }>切换推荐人</a>
-                    </div>
-                    :
-                    ""
-                }
+                    {/* 切换推荐人 */}
+                    {
+                        data.isLogin ?
+                            <Button className="btn" onClick={ me.loginOut.bind(me) } type="default" style={{ marginTop: 10 }}>切换推荐人</Button>
+                        :
+                        ""
+                    }
+                </div>
             </form>
         )
     }

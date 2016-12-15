@@ -98,3 +98,95 @@ img {
         overflow: hidden;
     }
 }
+
+/* --- 覆盖 antd 表单样式 --- */
+/* --- antd mobile 框架自定义样式补丁 --- */
+.am-list.customs-form-components {
+    padding-bottom: @gapSize-public*2;
+
+    .am-list-header {
+        padding-left: @gapSize-public;
+        padding-right: @gapSize-public;
+        background-color: @bgColor-secondary;
+    }
+
+    &.no-border-bottom .am-list-body:after {
+        content: none;
+    }
+
+    .am-list-item {
+        padding-left: 0;
+
+        .am-list-line {
+            padding-left: @gapSize-public;
+
+            &:after {
+                border-bottom-width: 0; /* no */
+                //border-bottom-width: 1px; /* no */
+            }
+        }
+
+        .am-input-label {
+            color: @fontColor-viceText;
+        }
+
+        &.am-input-item {
+            padding-left: @gapSize-public;
+            padding-right: @gapSize-public;
+
+            &::after {
+                // right: 0;
+                // left: 0;
+                content: none;
+            }
+        }
+
+        &.with-select {
+            padding-left: @gapSize-public;
+            padding-right: @gapSize-public;
+            border-bottom: 1px solid @borderColor-primary;
+
+            select {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 100%;
+                //padding: 0 @gapSize-public;
+                border: 0;
+                //font-size: @fontSize-default;
+                background-color: transparent;
+                -webkit-appearance: menu;
+                appearance: menu;
+            }
+        }
+
+        &.input-extra-for-btn .am-input-extra {
+            overflow: initial;
+        }
+    }
+}
+
+.custom-form {
+
+    .label-fake {
+        padding: @gapSize-public*3 @gapSize-public 0 @gapSize-public;
+        font-size: floor(@fontSize-default*1.2);
+    }
+
+    .am-list-item {
+        border: 1px solid @borderColor-primary;
+        margin: @gapSize-public @gapSize-public 0 @gapSize-public;
+        .rounded(@borderRadius-public);
+
+        .am-list-line {
+
+            .am-list-extra {
+                text-align: left;
+            }
+
+            .am-list-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    }
+}
