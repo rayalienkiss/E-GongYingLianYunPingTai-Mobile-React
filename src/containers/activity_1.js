@@ -63,6 +63,10 @@ export default class Activity extends Component {
         }
     }
 
+    componentWillUnmount () {
+        $(window).unbind('scroll');
+    }
+
     render() {
 
         const articleTitle = <img src={ require('img/frontpay.jpg') } alt=""/>
