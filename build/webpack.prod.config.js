@@ -8,6 +8,7 @@ var path = require('path')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var CleanWebpackPlugin = require('clean-webpack-plugin')
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
