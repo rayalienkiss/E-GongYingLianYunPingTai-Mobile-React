@@ -17,3 +17,13 @@ render(
     routes,
     document.getElementById('app')
 )
+
+// 百度统计
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2acaebc1ef0d040c6f8117602345064b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+

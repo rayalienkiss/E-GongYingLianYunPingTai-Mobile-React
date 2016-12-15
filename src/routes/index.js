@@ -15,6 +15,13 @@ import useScroll from 'scroll-behavior/lib/useStandardScroll';
 
 
 const routes = {
+    onChange: (prevState, nextState) => {
+        // console.log(prevState)
+        // console.log(nextState)
+        if (window._hmt) {
+          _hmt.push(['_trackPageview', nextState.location.pathname]);
+        }
+    },
     component: require('../containers/common/layout').default,
     childRoutes: [{
         path: '/',
