@@ -627,90 +627,94 @@ class AppliForm extends React.Component {
                 return false;
             }
             return (
-                <a key={ index } style={ { marginRight : 5 } } onClick={ (e) => { me.selectCompany.bind(me)(e,index) } }>{ item.name }</a>
+                <a key={ index } style={ { marginRight : 5, color: "rgb(68,146,212)" } } onClick={ (e) => { me.selectCompany.bind(me)(e,index) } }>{ item.name }</a>
             );
         });
 
         const moreText = me.state.isMore ? "收起<<" : "更多>>";
 
-        const moreBtn = data.coreEnterprisesArr.length > 3 ? <Button type="primary" onClick={ me.more.bind(this) } inline size="small" >{ moreText }</Button> : "";
+        const moreBtn = data.coreEnterprisesArr.length > 3 ? <span style={{ color: "#333" }} onClick={ me.more.bind(this) }>{ moreText }</span> : "";
 
         return (
-            <form className="custom-form">
-                {/* 选择融资类型 */}
+            <div className="custom-form-wrap form-box-in-1">
+                <form className="custom-form">
+                    {/* 选择融资类型 */}
 
-                {/* 融资企业信息 */}
-                <List renderHeader={() => <h3>融资企业信息</h3>} className="customs-form-components no-border-bottom form-box-in-1">
-                    <div className="label-fake">选择融资类型</div>
-                    <Picker {...getFieldProps('financeType',fieldProps['financeType'])} data={data.financeTypesArr} cols={1} className="forss">
-                      <List.Item arrow="horizontal"/>
-                    </Picker>
-                    <div className="label-fake">对应核心企业</div>
-                    { inputItems }
-                    <List.Item wrap={true} multipleLine={ true } style={{ border: 'none' }}>
-                        <div className="lit-label">可选择的核心企业</div>
-                        <List.Item.Brief style={ { whiteSpace : 'normal' } }>{ companyItems }{ moreBtn }</List.Item.Brief>
-                    </List.Item>
-                    <div className="label-fake">融资企业</div>
-                    <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={1}/>
-                    <div className="label-fake">{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</div>
-                    <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear error={!!getFieldError('amount')} extra="万元" labelNumber={1}/>
-                    <div className="label-fake">企业联系人</div>
-                    <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear error={!!getFieldError('contactsName')} labelNumber={1} placeholder="联系人姓名"/>
-                    <div className="label-fake">联系电话</div>
-                    <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear error={!!getFieldError('contactsPhone')} labelNumber={1}  placeholder="手机号码"/>
-                </List>
+                    {/* 融资企业信息 */}
+                    <List renderHeader={() => <h3><Icon type="edit"/>&nbsp;&nbsp;融资企业信息</h3>} className="customs-form-components no-border-bottom">
+                        <div className="label-fake">选择融资类型</div>
+                        <Picker {...getFieldProps('financeType',fieldProps['financeType'])} data={data.financeTypesArr} cols={1} className="forss">
+                          <List.Item arrow="horizontal"/>
+                        </Picker>
+                        <div className="label-fake">对应核心企业</div>
+                        { inputItems }
+                        <List.Item wrap={true} multipleLine={ true } style={{ border: 'none', marginTop: 0 }}>
+                            <List.Item.Brief style={ { whiteSpace : 'normal', lineHeight: 1.6 } }>
+                                <span>可选择的核心企业：&nbsp;</span>
+                                { companyItems }{ moreBtn }
+                            </List.Item.Brief>
+                        </List.Item>
+                        <div className="label-fake">融资企业</div>
+                        <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={1}/>
+                        <div className="label-fake">{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</div>
+                        <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear error={!!getFieldError('amount')} extra="万元" labelNumber={1}/>
+                        <div className="label-fake">企业联系人</div>
+                        <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear error={!!getFieldError('contactsName')} labelNumber={1} placeholder="联系人姓名"/>
+                        <div className="label-fake">联系电话</div>
+                        <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear error={!!getFieldError('contactsPhone')} labelNumber={1}  placeholder="手机号码"/>
+                    </List>
 
-                {/* 推荐人信息 */}
-                <List renderHeader={() => <div><h3>推荐人信息</h3><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-2">
-                    <div className="label-fake">推荐人身份</div>
-                    <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
-                      <List.Item arrow="horizontal"/>
-                    </Picker>
-                    <div className="iosDisabled">
-                        <div className="label-fake">真实姓名</div>
-                        <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
-                        <div className="label-fake">手机号码</div>
-                        <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
-                    </div>
-                    {
-                        data.isLogin ? "" :
-                        <div>
-                            <div className="label-fake">验证码</div>
-                            <InputItem
-                                {...getFieldProps('SMScode',fieldProps['SMScode'])}
-                                error={!!getFieldError('SMScode')}
-                                clear labelNumber={5}
-                                className="input-extra-for-btn"
-                                type="number"
-                                extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
-                            </InputItem>
+                    {/* 推荐人信息 */}
+                    <List renderHeader={() => <div><h4 style={{ color: '#e15b2c' }}>推荐人信息</h4><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-2">
+                        <div className="label-fake">推荐人身份</div>
+                        <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
+                          <List.Item arrow="horizontal"/>
+                        </Picker>
+                        <div className="iosDisabled">
+                            <div className="label-fake">真实姓名</div>
+                            <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
+                            <div className="label-fake">手机号码</div>
+                            <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
                         </div>
-                    }
-                </List>
+                        {
+                            data.isLogin ? "" :
+                            <div>
+                                <div className="label-fake">验证码</div>
+                                <InputItem
+                                    {...getFieldProps('SMScode',fieldProps['SMScode'])}
+                                    error={!!getFieldError('SMScode')}
+                                    clear labelNumber={5}
+                                    className="input-extra-for-btn"
+                                    type="number"
+                                    placeholder="请输入验证码"
+                                    extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}/>
+                            </div>
+                        }
+                    </List>
 
-                {/* 协议信息 */}
-                <Flex>
-                    <Flex.Item>
-                      <AgreeItem data-seed="logId" {...getFieldProps('agree',fieldProps['agree'])}>
-                        已阅读并同意《<a href="/UserRight" target="_blank">用户须知</a>》
-                      </AgreeItem>
-                    </Flex.Item>
-                </Flex>
+                    {/* 协议信息 */}
+                    <Flex>
+                        <Flex.Item>
+                          <AgreeItem data-seed="logId" {...getFieldProps('agree',fieldProps['agree'])}>
+                            已阅读并同意《<a href="/UserRight" target="_blank">用户须知</a>》
+                          </AgreeItem>
+                        </Flex.Item>
+                    </Flex>
 
-                {/* 表单提交 */}
-                <div className="appli-form-btn-box">
-                    <Button className="btn" type="primary" disabled={ !data.agreeChecked } onClick={ me.submit.bind(this) }>立即登记</Button>
+                    {/* 表单提交 */}
+                    <div className="appli-form-btn-box">
+                        <Button className="btn" type="primary" disabled={ !data.agreeChecked } onClick={ me.submit.bind(this) }>立即登记</Button>
 
-                    {/* 切换推荐人 */}
-                    {
-                        data.isLogin ?
-                            <Button className="btn" onClick={ me.loginOut.bind(me) } type="default" style={{ marginTop: 10 }}>切换推荐人</Button>
-                        :
-                        ""
-                    }
-                </div>
-            </form>
+                        {/* 切换推荐人 */}
+                        {
+                            data.isLogin ?
+                                <Button className="btn" onClick={ me.loginOut.bind(me) } type="default" style={{ marginTop: 10 }}>切换推荐人</Button>
+                            :
+                            ""
+                        }
+                    </div>
+                </form>
+            </div>
         )
     }
 }
