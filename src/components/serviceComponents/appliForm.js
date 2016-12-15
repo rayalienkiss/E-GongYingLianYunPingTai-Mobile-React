@@ -482,6 +482,9 @@ class AppliForm extends React.Component {
                     min: 2,
                     max: 50,
                     message: '对应核心企业长度必须为2-50个字符'
+                }, {
+                    whitespace: true,
+                    message: '对应核心企业不支持输入空格',
                 }]
             },
             financeEnterprise: {
@@ -489,6 +492,9 @@ class AppliForm extends React.Component {
                 rules: [{
                     required: true,
                     message: '融资企业名称不能为空'
+                }, {
+                    whitespace: true,
+                    message: '融资企业名称不支持输入空格',
                 }, {
                     min: 2,
                     max: 50,
@@ -500,6 +506,20 @@ class AppliForm extends React.Component {
                 rules: [{
                         required: true,
                         message: '金额不能为空'
+                    },
+                    {
+                        whitespace: true,
+                        message: '金额不支持输入空格',
+                    },
+                    {
+                        validator: (rule, value, callback) => {
+                            // console.log(value)
+                            if (value * 1 <= 0) {
+                                callback('输入金额必须大于0');
+                            } else {
+                                callback();
+                            }
+                        }
                     },
                     ruleType('number'), {
                         max: 13,
@@ -513,6 +533,9 @@ class AppliForm extends React.Component {
                     required: true,
                     message: '联系人姓名不能为空'
                 }, {
+                    whitespace: true,
+                    message: '联系人姓名不支持输入空格',
+                }, {
                     min: 1,
                     max: 15,
                     message: '联系人姓名长度必须为1-15个字符'
@@ -523,6 +546,9 @@ class AppliForm extends React.Component {
                 rules: [{
                         required: true,
                         message: '联系电话不能为空'
+                    }, {
+                        whitespace: true,
+                        message: '联系电话不支持输入空格',
                     },
                     ruleType('mobile+fixedLine')
                 ]
@@ -537,6 +563,9 @@ class AppliForm extends React.Component {
                     required: true,
                     message: '推荐人名称不能为空'
                 }, {
+                    whitespace: true,
+                    message: '推荐人名称不支持输入空格',
+                }, {
                     min: 1,
                     max: 15,
                     message: '推荐人名称长度必须为1-15个字符'
@@ -547,6 +576,9 @@ class AppliForm extends React.Component {
                 rules: [{
                         required: true,
                         message: '推荐人手机号码不能为空'
+                    }, {
+                        whitespace: true,
+                        message: '推荐人手机号码不支持输入空格',
                     },
                     ruleType('mobile')
                 ]
@@ -560,6 +592,9 @@ class AppliForm extends React.Component {
                 rules: [{
                     required: true,
                     message: '验证码不能为空'
+                }, {
+                    whitespace: true,
+                    message: '验证码不支持输入空格',
                 }]
             }
         }
@@ -640,15 +675,17 @@ class AppliForm extends React.Component {
                     </div>
                     {
                         data.isLogin ? "" :
-                        <InputItem
-                            {...getFieldProps('SMScode',fieldProps['SMScode'])}
-                            error={!!getFieldError('SMScode')}
-                            clear labelNumber={5}
-                            className="input-extra-for-btn"
-                            type="number"
-                            extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
-                            验证码
-                        </InputItem>
+                        <div>
+                            <div className="label-fake">验证码</div>
+                            <InputItem
+                                {...getFieldProps('SMScode',fieldProps['SMScode'])}
+                                error={!!getFieldError('SMScode')}
+                                clear labelNumber={5}
+                                className="input-extra-for-btn"
+                                type="number"
+                                extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}>
+                            </InputItem>
+                        </div>
                     }
                 </List>
 
