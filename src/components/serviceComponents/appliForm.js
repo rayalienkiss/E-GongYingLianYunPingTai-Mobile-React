@@ -27,6 +27,8 @@ import store from 'store';
 // ajax
 import axios from 'axios'
 
+import './appli-fill.less';
+
 const RadioItem = Radio.RadioItem;
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
@@ -81,19 +83,22 @@ class AppliForm extends React.Component {
         let data = me.state.data;
 
         let payWeLoginData = store.get('payWeLoginData');
+
         if (!payWeLoginData) {
             return false;
         }
-        data.isLogin = true;
-        me.setState({
-            data
-        })
-        console.log(payWeLoginData);
+
         let fieldsValues = {
             userName: payWeLoginData.user.name,
             userPhone: payWeLoginData.user.phone
         }
+
         me.props.form.setFieldsValue(fieldsValues);
+
+        data.isLogin = true;
+        me.setState({
+            data
+        })
     }
 
     loadData() {
@@ -289,6 +294,8 @@ class AppliForm extends React.Component {
                 if (res.data && res.data.code == 200) {
                     //  短信发送成功TODO
                     me.smsCodeTimerStart();
+                } else {
+                    Toast.fail(res.data.message, 1.5);
                 }
             })
         });
@@ -312,6 +319,7 @@ class AppliForm extends React.Component {
         let data = me.state.data;
 
         let time = 60000;
+        // let time = 5000;
         const SEC = 1000;
         const SUFFIX = '秒后可重新发送';
         data.smsDisabled = true;
@@ -359,7 +367,7 @@ class AppliForm extends React.Component {
                     case 200:
                         //  立即登记成功TODO
                         // console.log('立即登记成功TODO');
-                        store.set('payWeIsLogin', true);
+                        // store.set('payWeIsLogin', true);
                         me.context.router.push(`ApplicationCommitted`);
                         break;
 
@@ -399,6 +407,10 @@ class AppliForm extends React.Component {
 
         submitData["coreEnterprises"] = !!coreEnterprises.length ? coreEnterprises : false;
 
+        //融资类型和推荐人身份处理
+        submitData['financeType'] = submitData['financeType'][0];
+        submitData['identity'] = submitData['identity'][0];
+
         //  邀请码处理
         if (me.props.location.query.linkCode) {
             submitData["linkCode"] = me.props.location.query.linkCode;
@@ -423,7 +435,9 @@ class AppliForm extends React.Component {
                     store.remove("payWeLoginData");
                     let data = me.state.data
                     data.isLogin = false
-                    me.setState(data)
+                    me.setState({
+                        data
+                    })
                     let fieldsValues = {
                         userName: '',
                         userPhone: '',
@@ -610,10 +624,12 @@ class AppliForm extends React.Component {
                     <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
                       <List.Item arrow="horizontal"/>
                     </Picker>
-                    <div className="label-fake">真实姓名</div>
-                    <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
-                    <div className="label-fake">手机号码</div>
-                    <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
+                    <div className="iosDisabled">
+                        <div className="label-fake">真实姓名</div>
+                        <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
+                        <div className="label-fake">手机号码</div>
+                        <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
+                    </div>
                     {
                         data.isLogin ? "" :
                         <InputItem
