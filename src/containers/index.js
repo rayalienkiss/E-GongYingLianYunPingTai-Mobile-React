@@ -70,7 +70,7 @@ export default class Home extends Component {
                         //渲染新的首页数据
                         self.setState({
                             applyShowNum: daliystatistics.data.data.applyShowNum,
-                            registerShowAmount: daliystatistics.data.data.registerShowAmount,
+                            registerShowAmount: daliystatistics.data.data.registerShowAmount || 0,
                             coreEnterpriseNum: assistconfig.data.data.coreEnterpriseNum,
                             UDEnterpriseNum: assistconfig.data.data.UDEnterpriseNum,
                             loanAmount: assistconfig.data.data.loanAmount
