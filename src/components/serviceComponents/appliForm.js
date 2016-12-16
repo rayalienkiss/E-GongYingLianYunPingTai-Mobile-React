@@ -326,8 +326,8 @@ class AppliForm extends React.Component {
             let me = this;
             let data = me.state.data;
 
-            // let time = 60000;
-            let time = 3000;
+            let time = 60000;
+            // let time = 3000;
             const SEC = 1000;
             const SUFFIX = '秒后可重新发送';
             data.smsDisabled = true;
