@@ -34,6 +34,15 @@
     }
 }
 
+/* --- 解决 jiathis 外部分享插件显示页面二维码的时候的，没有遮罩层，背景页面可以乱点的问题 --- */
+#jiathis_weixin_share {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.2);
+}
+
 /* --- 重写 jiathis 外部分享插件的微信二维码弹窗样式 --- */
 #jiathis_weixin_share .jiathis_weixin_modal {
     margin: 0 !important;
