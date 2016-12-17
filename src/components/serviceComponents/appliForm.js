@@ -491,7 +491,7 @@ class AppliForm extends React.Component {
                             max: 50,
                             message: '对应核心企业长度必须为2-50个字符'
                         }, {
-                            whitespace: true,
+                            pattern: /^\S*$/,
                             message: '对应核心企业不支持输入空格',
                         }]
                     },
@@ -501,7 +501,7 @@ class AppliForm extends React.Component {
                             required: true,
                             message: '融资企业名称不能为空'
                         }, {
-                            whitespace: true,
+                            pattern: /^\S*$/,
                             message: '融资企业名称不支持输入空格',
                         }, {
                             min: 2,
@@ -515,7 +515,7 @@ class AppliForm extends React.Component {
                                 required: true,
                                 message: '金额不能为空'
                             }, {
-                                whitespace: true,
+                                pattern: /^\S*$/,
                                 message: '金额不支持输入空格',
                             }, {
                                 validator: (rule, value, callback) => {
@@ -526,8 +526,10 @@ class AppliForm extends React.Component {
                                         callback();
                                     }
                                 }
-                            },
-                            ruleType('number'), {
+                            }, {
+                                pattern: /^\d+$/,
+                                message: '输入金额只能是整数',
+                            }, {
                                 max: 13,
                                 message: '金额最长为13个字符'
                             }
@@ -539,7 +541,7 @@ class AppliForm extends React.Component {
                             required: true,
                             message: '联系人姓名不能为空'
                         }, {
-                            whitespace: true,
+                            pattern: /^\S*$/,
                             message: '联系人姓名不支持输入空格',
                         }, {
                             min: 1,
@@ -553,7 +555,7 @@ class AppliForm extends React.Component {
                                 required: true,
                                 message: '联系电话不能为空'
                             }, {
-                                whitespace: true,
+                                pattern: /^\S*$/,
                                 message: '联系电话不支持输入空格',
                             },
                             ruleType('mobile+fixedLine')
@@ -569,7 +571,7 @@ class AppliForm extends React.Component {
                             required: true,
                             message: '推荐人名称不能为空'
                         }, {
-                            whitespace: true,
+                            pattern: /^\S*$/,
                             message: '推荐人名称不支持输入空格',
                         }, {
                             min: 1,
@@ -583,7 +585,7 @@ class AppliForm extends React.Component {
                                 required: true,
                                 message: '推荐人手机号码不能为空'
                             }, {
-                                whitespace: true,
+                                pattern: /^\S*$/,
                                 message: '推荐人手机号码不支持输入空格',
                             },
                             ruleType('mobile')
@@ -599,7 +601,7 @@ class AppliForm extends React.Component {
                             required: true,
                             message: '验证码不能为空'
                         }, {
-                            whitespace: true,
+                            pattern: /^\S*$/,
                             message: '验证码不支持输入空格',
                         }]
                     }
