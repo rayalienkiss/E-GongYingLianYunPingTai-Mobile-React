@@ -32,7 +32,7 @@ const routes = {
         }
     }, {
         //跳转关于钱途
-        path: 'AboutUs',
+        path: 'about-frontpay',
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/aboutUs.js').default)
@@ -40,7 +40,7 @@ const routes = {
         }
     }, {
         //跳转关于平台
-        path: 'AboutWebsite',
+        path: 'about',
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/aboutWebsite.js').default)
@@ -82,6 +82,10 @@ const routes = {
                 cb(null, require('../containers/userRight.js').default)
             }, 'UserRight')
         }
+    }, {
+      // 404
+      path: '*',
+      onEnter: (nextState, replace) => replace('', '/')
     }]
 }
 
