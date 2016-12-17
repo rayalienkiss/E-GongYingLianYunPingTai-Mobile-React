@@ -42,6 +42,7 @@ module.exports = merge(baseConf, {
             js: [
                 '/src/public/js/polyfill.min.js',
                 '/src/public/js/jquery.min.js',
+                'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
             ],
         }),
     ],
@@ -52,6 +53,7 @@ module.exports = merge(baseConf, {
         proxy: {
             '/api/*': {
                 target: 'http://m.paywe.dev/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
+                // target: 'http://m.paywe.test/', //开发服务器  需要配置host 10.1.21.9 api.m.paywe.cn
                 // target: 'http://dm.paywe.cn/', //开发服务器  需要配置host 10.1.21.9 dm.paywe.cn
                 secure: false,
                 changeOrigin: true,

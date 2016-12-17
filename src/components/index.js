@@ -15,6 +15,7 @@ import IndexPostBox from './serviceComponents/indexPostBox/indexPostBox'
 import IndexPostBoxItem from './serviceComponents/indexPostBox/indexPostBoxItem'
 import AppliForm from './serviceComponents/appliForm'
 import SharePanel from './publicComponents/sharePanel'
+import './serviceComponents/wechat'
 
 export {
     Modal,
