@@ -43,6 +43,7 @@ module.exports = merge(baseConf, {
             js: [
                 '/src/public/js/polyfill.min.js',
                 '/src/public/js/jquery.min.js',
+                'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
             ],
         }),
     ],

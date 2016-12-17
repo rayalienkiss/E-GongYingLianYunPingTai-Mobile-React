@@ -68,6 +68,7 @@ module.exports = merge(baseConf, {
             js: [
                 '/js/polyfill.min.js',
                 '/js/jquery.min.js',
+                'http://res.wx.qq.com/open/js/jweixin-1.0.0.js',
             ],
         }),
         // 复制文件到dist目录
