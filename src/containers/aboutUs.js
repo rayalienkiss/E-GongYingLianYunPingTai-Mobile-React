@@ -71,22 +71,14 @@ export default class AboutUs extends Component {
                         <li>
                             <img src={ require('img/article-logo/j_16.jpg') }/>
                         </li>
-                    </ul>
-                    <h3>
-                        <b>E+互联网供应链-定制版</b>
-                    </h3>
-                    <p>
-                        “E+互联网供应链-定制版”是根据核心企业及其上下游中小企业之间特定交易模式而提供的符合该链条实际需求的定制化的融资平台。
-                    </p>
-                    <h4>
-                        <b>案例</b>
-                    </h4>
-                    <ul className="case-co">
                         <li>
                             <img src={ require('img/article-logo/j_19.jpg') }/>
                         </li>
                         <li>
                             <img src={ require('img/article-logo/j_06.jpg') }/>
+                        </li>
+                        <li>
+                            <img src={ require('img/article-logo/j_00.jpg') }/>
                         </li>
                     </ul>
                 </Article>
