@@ -487,6 +487,9 @@ class AppliForm extends React.Component {
                     coreEnterprises: {
                         validateTrigger: 'onBlur',
                         rules: [{
+                            required: true,
+                            message: '核心企业名称不能为空'
+                        }, {
                             min: 2,
                             max: 50,
                             message: '对应核心企业长度必须为2-50个字符'
