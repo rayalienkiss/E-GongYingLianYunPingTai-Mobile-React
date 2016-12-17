@@ -11,6 +11,15 @@ import { Button, Popup } from 'antd-mobile'
 
 import { SharePanel } from 'components'
 
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+let wrapProps;
+if (isIPhone) {
+  // Note: the popup content will not scroll.
+  wrapProps = {
+    // onTouchStart: e => e.preventDefault(),
+  };
+}
+
 export default class Footer extends Component {
 
     constructor(props) {
@@ -22,7 +31,7 @@ export default class Footer extends Component {
 
     onClick() {
         Popup.show (
-            <SharePanel/>
+            <SharePanel/>, { animationType: 'slide-up', wrapProps, maskClosable: true }
         );
     }
 

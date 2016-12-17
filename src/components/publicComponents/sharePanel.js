@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 export default class SharePanel extends Component {
 
     componentDidMount() {
-        
+
         var script = document.createElement('script');
         //var sharePanel = document.getElementById('id')
         script.src = "http://v3.jiathis.com/code/jia.js";
