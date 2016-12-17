@@ -24,6 +24,15 @@ import axios from 'axios'
 
 import store from 'store';
 
+const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
+let wrapProps;
+if (isIPhone) {
+  // Note: the popup content will not scroll.
+  wrapProps = {
+    // onTouchStart: e => e.preventDefault(),
+  };
+}
+
 export default class ApplicationCommitted extends Component {
 
     constructor(props) {
@@ -35,7 +44,7 @@ export default class ApplicationCommitted extends Component {
 
     onClick() {
         Popup.show (
-            <SharePanel/>
+            <SharePanel/>, { animationType: 'slide-up', wrapProps, maskClosable: true }
         );
     }
 
