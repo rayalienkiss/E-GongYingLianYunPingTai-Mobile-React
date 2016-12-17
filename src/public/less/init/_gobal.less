@@ -14,7 +14,7 @@ html {
 
 body {
     color: @fontColor-default;
-    background-color: @bgColor-footer;
+    background-color: @bgColor-primary;
     line-height: @lineHeight-base;
     font-size: @fontSize-default;
     -webkit-font-smoothing: antialiased;
@@ -27,20 +27,32 @@ body {
     }
 
     &::before {
-        content: 'Powered By FrontUI';
-        font-size: round(@fontSize-default*0.8);
-        line-height: round(@fontSize-default*3);
-        font-weight: bold;
-        color: darken(@bgColor-header,14%);
+        content: '';
         position: fixed;
-        height: 50%;
-        width: 100%;
-        top: 0;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%,0);
-        text-align: center;
-        background-color: @bgColor-header;
+        .rounded(50%);
+        .square(80px);
+        margin-top: -40px;
+        margin-left: -40px;
+        border: 10px solid lighten(@bgColor-header,30%);
+        border-left-color: @bgColor-primary;
+        border-right-color: @bgColor-primary;
+        .animation-s(bodySpinner,0.45s,linear,0,infinite,normal,running,both);
     }
+}
+
+& {
+  .keyframes( bodySpinner );
+
+  .-frames(@-...) {
+    0% {
+      @{-}transform: rotate(0deg);
+    }
+    100% {
+      @{-}transform: rotate(359deg);
+    }
+  }
 }
 
 /* --- 取消移动端浏览器下渲染以下元素点击区域的默认有色遮罩 --- */
