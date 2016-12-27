@@ -55,9 +55,10 @@ export default class Footer extends Component {
                     <li>
                         <a href="http://www.paywe.cn/" className="footer-link">电脑版</a>
                     </li>
-                    <li>
+                    {/* 和产品沟通后，决定T了这个鸡肋分享 */}
+                    {/* <li>
                         <span className="footer-link" onClick={ this.onClick }>分享</span>
-                    </li>
+                    </li> */}
                 </ul>
                 <p>
                     版权所有&copy;广东钱途互联商务服务有限公司&nbsp;粤ICP备&nbsp;14098252号-1

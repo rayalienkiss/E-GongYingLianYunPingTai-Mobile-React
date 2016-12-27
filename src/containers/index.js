@@ -3,20 +3,13 @@
 // --------------------------------------------------
 */
 
-import React, {
-    Component
-} from 'react'
+import React, { Component } from 'react'
 
-import {
-    Header,
-    Footer,
-    IndexPostBox,
-    IndexPostBoxItem
-} from 'components'
+import { Header, Footer, IndexPostBox, IndexPostBoxItem } from 'components'
 
-import {
-    Link
-} from 'react-router'
+import { Link } from 'react-router'
+
+import { Carousel, NavBar, Icon } from 'antd-mobile';
 
 // ajax
 import axios from 'axios'
@@ -30,13 +23,19 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
 
-        //初始化首页展示数据
         this.state = {
-            applyShowNum: 0,
-            registerShowAmount: 0,
-            coreEnterpriseNum: 0,
-            UDEnterpriseNum: 0,
-            loanAmount: 0
+            //初始化首页当日融资记录接口拿到得数据
+            daliystatistics: {
+                applyShowNum: 0,
+                registerShowAmount: 0,
+            },
+            //初始化首页配置信息接口拿到得数据
+            assistconfig: {
+                coreEnterpriseNum: 0,
+                UDEnterpriseNum: 0,
+                loanAmount: 0,
+            },
+            isLogin: <Icon type="user" />
         }
     }
 
@@ -51,7 +50,7 @@ export default class Home extends Component {
             return axios.get('/api/daliystatistics');
         }
 
-        //设置页面配置信息接口
+        //设置首页配置信息接口
         function getAssistConfig() {
             return axios.get('/api/assistconfig');
         }
@@ -69,11 +68,17 @@ export default class Home extends Component {
                     function(daliystatistics, assistconfig) {
                         //渲染新的首页数据
                         self.setState({
-                            applyShowNum: daliystatistics.data.data.applyShowNum,
-                            registerShowAmount: daliystatistics.data.data.registerShowAmount || 0,
-                            coreEnterpriseNum: assistconfig.data.data.coreEnterpriseNum,
-                            UDEnterpriseNum: assistconfig.data.data.UDEnterpriseNum,
-                            loanAmount: assistconfig.data.data.loanAmount
+                            //重新渲染首页当日融资记录接口拿到得数据
+                            daliystatistics: {
+                                applyShowNum: daliystatistics.data.data.applyShowNum || 0,
+                                registerShowAmount: daliystatistics.data.data.registerShowAmount || 0,
+                            },
+                            //重新渲染首页配置信息接口拿到得数据
+                            assistconfig: {
+                                coreEnterpriseNum: assistconfig.data.data.coreEnterpriseNum || 0,
+                                UDEnterpriseNum: assistconfig.data.data.UDEnterpriseNum || 0,
+                                loanAmount: assistconfig.data.data.loanAmount || 0,
+                            }
                         });
                     }
                 )
@@ -99,6 +104,18 @@ export default class Home extends Component {
 
     render() {
 
+        //把组件的 this 带到这里
+        let me = this,
+            //把状态机里面的数据层路径缩写
+            source = me.state,
+            statistics = source.daliystatistics,
+            config = source.assistconfig;
+
+        //找回路径缩写里面的需要用的数据
+        const { applyShowNum, registerShowAmount } = statistics,
+              { coreEnterpriseNum, UDEnterpriseNum, loanAmount } = config,
+              { isLogin } = source;
+
         //IndexPostBox 里面装的图片数据
         //合作金融机构 LOGO 图片
         const imagesGroup1 = [{
@@ -108,8 +125,47 @@ export default class Home extends Component {
         }, {
             image: require('img/index-logo/ZhaoShangJiJin.jpg')
         }];
-        //合作核心企业 LOGO 图片
-        const imagesGroup2 = [{
+        // 合作核心企业 LOGO 图片（v1.3版本不用这组图片）
+        // const imagesGroup2 = [{
+        //     image: require('img/index-logo/WanKe.jpg')
+        // }, {
+        //     image: require('img/index-logo/ZhongHaiDiChan.jpg')
+        // }, {
+        //     image: require('img/index-logo/HuaRunZhiDi.jpg')
+        // }, {
+        //     image: require('img/index-logo/AnBangBaoXian.jpg')
+        // }, {
+        //     image: require('img/index-logo/ZhongGuoRenBao.jpg')
+        // }, {
+        //     image: require('img/index-logo/JiuZhouTong.jpg')
+        // }, {
+        //     image: require('img/index-logo/PuTianYaoXieJiaoYiWang.jpg')
+        // }, {
+        //     image: require('img/index-logo/MeiLuoYaoYe.jpg')
+        // }, {
+        //     image: require('img/index-logo/JinHaiMaJiaJu.jpg')
+        // }, {
+        //     image: require('img/index-logo/YunShengKeJi.jpg')
+        // }, {
+        //     image: require('img/index-logo/CrownePlaza.jpg')
+        // }, {
+        //     image: require('img/index-logo/GongSuDa.jpg')
+        // }, {
+        //     image: require('img/index-logo/HaiTian.jpg')
+        // }, {
+        //     image: require('img/index-logo/HongDouJiaFang.jpg')
+        // }, {
+        //     image: require('img/index-logo/JingBoWuLiu.jpg')
+        // }, {
+        //     image: require('img/index-logo/MengNiu.jpg')
+        // }, {
+        //     image: require('img/index-logo/ShanDongGaoSu.jpg')
+        // }, {
+        //     image: require('img/index-logo/ShengMuGaoKe.jpg')
+        // }];
+
+        // v1.3版本 合作核心企业 LOGO 组别（一）
+        const theCentralImg1 = [{
             image: require('img/index-logo/WanKe.jpg')
         }, {
             image: require('img/index-logo/ZhongHaiDiChan.jpg')
@@ -121,7 +177,10 @@ export default class Home extends Component {
             image: require('img/index-logo/ZhongGuoRenBao.jpg')
         }, {
             image: require('img/index-logo/JiuZhouTong.jpg')
-        }, {
+        }];
+
+        // v1.3版本 合作核心企业 LOGO 组别（二）
+        const theCentralImg2 = [{
             image: require('img/index-logo/PuTianYaoXieJiaoYiWang.jpg')
         }, {
             image: require('img/index-logo/MeiLuoYaoYe.jpg')
@@ -133,7 +192,10 @@ export default class Home extends Component {
             image: require('img/index-logo/CrownePlaza.jpg')
         }, {
             image: require('img/index-logo/GongSuDa.jpg')
-        }, {
+        }];
+
+        // v1.3版本 合作核心企业 LOGO 组别（三）
+        const theCentralImg3 = [{
             image: require('img/index-logo/HaiTian.jpg')
         }, {
             image: require('img/index-logo/HongDouJiaFang.jpg')
@@ -149,8 +211,18 @@ export default class Home extends Component {
 
         return (
             <div className="container-inner">
+                <NavBar
+                    //leftContent="返回" onLeftClick={() => console.log('onLeftClick')}
+                    iconName = { false }
+                    rightContent={ isLogin }
+                    className = "header-v1_3"
+                >
+                    <span>
+
+                    </span>
+                </NavBar>
                 {/* nav */}
-                <Header title="供应链云平台" linkTo="" headCls="header index-header"/>
+                {/* <Header title="供应链云平台" linkTo="" headCls="header index-header"/> */}
                 {/* banner */}
                 <div className="index-banner">
                     <img src={ require('img/index-banner-1x1.jpg') } alt=""/>
@@ -158,38 +230,73 @@ export default class Home extends Component {
                         <b>立即登记</b>
                     </Link>
                 </div>
+                {/* 实时统计滚动 */}
+                <Carousel className="index-statistics-live-v1_3" dots={ false } dragging={ false } autoplay infinite vertical>
+                    <div className="isl-item">
+                        今日登记：
+                        <span className="fontcolor-warning">
+                            { applyShowNum }
+                        </span>
+                        &nbsp;笔
+                    </div>
+                    <div className="isl-item">
+                        登记金额：
+                        <span className="fontcolor-warning">
+                            { registerShowAmount }
+                        </span>
+                        &nbsp;元
+                    </div>
+                </Carousel>
                 {/* 统计广告 */}
                 <div className="index-statistics">
                     {/* 静态统计 */}
                     <ul className="index-statistics">
                         <li>
-                            <p>核心企业</p>
-                            <p><span>{ this.state.coreEnterpriseNum }+</span>家</p>
+                            <p>
+                                核心企业
+                            </p>
+                            <p>
+                                <span>{ coreEnterpriseNum }+</span>
+                                家
+                            </p>
                         </li>
                         <li>
-                            <p>上下游企业</p>
-                            <p><span>{ this.state.UDEnterpriseNum }+</span>家</p>
+                            <p>
+                                上下游企业
+                            </p>
+                            <p>
+                                <span>{ UDEnterpriseNum }+</span>
+                                家
+                            </p>
                         </li>
                         <li>
-                            <p>已放款金额</p>
-                            <p><span>{ this.state.loanAmount }+</span>万元</p>
+                            <p>
+                                已放款金额
+                            </p>
+                            <p>
+                                <span>{ loanAmount }+</span>
+                                万元
+                            </p>
                         </li>
                     </ul>
-                    {/* 实时统计 */}
-                    <div className="index-statistics-live">
+
+                    {/* 实时统计 (这种结构在 v1.3 版本去除)*/}
+                    {/* <div className="index-statistics-live">
                         <p>
                             今日登记：<span>{ this.state.applyShowNum }</span>&nbsp;笔
                         </p>
                         <p>
                             登记金额：<span>{ this.state.registerShowAmount }</span>&nbsp;元
                         </p>
-                    </div>
+                    </div> */}
+
                 </div>
                 {/* 战略合作 */}
                 <div className="index-post">
                     <h1>
                         <b>战略合作</b>
                     </h1>
+
                     {/* 合作金融机构 */}
                     <IndexPostBox>
                         <IndexPostBoxItem>
@@ -202,8 +309,9 @@ export default class Home extends Component {
                             }
                         </IndexPostBoxItem>
                     </IndexPostBox>
-                    {/* 合作核心企业 */}
-                    <IndexPostBox>
+
+                    {/* 合作核心企业 (这种结构在 v1.3 版本去除)*/}
+                    {/* <IndexPostBox>
                         <IndexPostBoxItem>
                             {
                                 imagesGroup2.map(i => {
@@ -213,7 +321,47 @@ export default class Home extends Component {
                                 })
                             }
                         </IndexPostBoxItem>
-                    </IndexPostBox>
+                    </IndexPostBox> */}
+
+                    {/* 合作核心企业 */}
+                    <div className="the-central">
+                        <Carousel className="the-central-items" dots={ false } autoplay infinite>
+                            <div className="the-central-item">
+                                {
+                                    theCentralImg1.map((i,index) => {
+                                        return (
+                                            <p key={ index }>
+                                                <img src={i.image}/>
+                                            </p>
+                                        );
+                                    })
+                                }
+                            </div>
+                            <div className="the-central-item">
+                                {
+                                    theCentralImg2.map((i,index) => {
+                                        return (
+                                            <p key={ index }>
+                                                <img src={i.image}/>
+                                            </p>
+                                        );
+                                    })
+                                }
+                            </div>
+                            <div className="the-central-item">
+                                {
+                                    theCentralImg3.map((i,index) => {
+                                        return (
+                                            <p key={ index }>
+                                                <img src={i.image}/>
+                                            </p>
+                                        );
+                                    })
+                                }
+                            </div>
+                        </Carousel>
+                    </div>
+
                 </div>
                 {/* 页脚 */}
                 <Footer/>

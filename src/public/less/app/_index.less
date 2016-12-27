@@ -32,16 +32,16 @@
     }
 }
 
+/* --- 广告数据统计 --- */
 .index-statistics {
     background-color: @bgColor-primary;
     .clearfix();
 }
 
-/* --- 广告数据统计 --- */
 div.index-statistics {
-    .bounceInDown();
-    .animation-duration(0.5s);
-    .animation-delay(0.8s);
+    .slideInDown();
+    .animation-duration(0.65s);
+    .animation-delay(1s);
 }
 
 ul.index-statistics {
@@ -122,7 +122,59 @@ ul.index-statistics {
     }
 }
 
+/* --- 每日实时统计 云平台v1.3 版本展示样式--- */
+.index-statistics-live-v1_3 {
+    background-color: @bgColor-secondary;
+    border-bottom: 1px solid  @borderColor-primary; /* no */
+    position: relative;
+    z-index: 1;
+    .slideInDown();
+    .animation-duration(0.65s);
+    .animation-delay(0.8s);
+
+    .isl-item {
+        padding: @gapSize-public;
+        font-size: @fontSize-default;
+    }
+}
+
 /* --- 战略合作 --- */
+.central-img() { //战略合作伙伴公用图片结构样式 mixin
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: stretch;
+
+    > p {
+        order: 1;
+        flex: 1 1 auto;
+        width: 33.33%;
+
+        > img {
+            .size(75%,auto);
+            display: block;
+            margin: 0 auto;
+            .image-onload();
+        }
+    }
+}
+
+.central-title( @title ) { //战略合作伙伴公用标题样式 mixin
+    position: relative;
+
+    &::before {
+        content: @title;
+        font-size: floor(@fontSize-default*0.86);
+        position: absolute;
+        top: -(floor(@fontSize-default*0.86))/1.4;
+        left: 50%;
+        transform: translate(-50%,0);
+        background-color: @bgColor-primary;
+        padding: 0 @gapSize-public;
+        color: @fontColor-default;
+    }
+}
+
 .index-post {
     padding: @gapSize-public;
     background-color: @bgColor-primary;
@@ -138,51 +190,41 @@ ul.index-statistics {
     &-box {
         display: block;
         border: 2px solid @borderColor-primary; /* no */
-        .reset-list(none,@fontSize-default,@lineHeight-base);
-        .rounded(@borderRadius-public);
-        position: relative;
+        .reset-list( none,@fontSize-default,@lineHeight-base );
+        .rounded( @borderRadius-public );
         margin-top: 48px;
         padding: 26px 0;
+        .central-title( '合作金融机构' );
 
         > li {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            align-items: stretch;
-
-            > p {
-                order: 1;
-                flex: 1 1 auto;
-                width: 33.33%;
-
-                > img {
-                    .size(75%,auto);
-                    display: block;
-                    margin: 0 auto;
-                    .image-onload();
-                }
-            }
+            .central-img();
         }
 
-        &::before {
-            content: '合作金融机构';
-            font-size: floor(@fontSize-default*0.86);
-            position: absolute;
-            top: -(floor(@fontSize-default*0.86))/1.4;
-            left: 50%;
-            transform: translate(-50%,0);
-            background-color: @bgColor-primary;
-            padding: 0 @gapSize-public;
-            color: @fontColor-default;
-        }
+        // 合作核心企业 (这种结构在 v1.3 版本去除)
+        // & + & {
+        //     margin-top: 64px;
+        //
+        //     &::before {
+        //         content: '合作核心企业';
+        //     }
+        // }
+    }
+}
 
-        & + & {
-            margin-top: 64px;
+/* --- 战略合作 云平台v1.3 版本展示样式--- */
+.the-central {
+    margin-top: @gapSize-public*2;
+    width: 600px;
+    border: 2px solid @borderColor-primary; /* no */
+    .rounded(@borderRadius-public);
+    .central-title( '合作核心企业' );
 
-            &::before {
-                content: '合作核心企业';
-            }
-        }
+    &-items {
+        padding: @gapSize-public 0;
+    }
+
+    &-item {
+        .central-img();
     }
 }
 
