@@ -15,6 +15,7 @@ import IndexPostBox from './serviceComponents/indexPostBox/indexPostBox'
 import IndexPostBoxItem from './serviceComponents/indexPostBox/indexPostBoxItem'
 import AppliForm from './serviceComponents/appliForm'
 import SharePanel from './publicComponents/sharePanel'
+import LoginForm from './serviceComponents/loginForm'
 import './serviceComponents/wechat'
 
 export {
@@ -27,5 +28,6 @@ export {
     IndexPostBox,
     IndexPostBoxItem,
     AppliForm,
-    SharePanel
+    SharePanel,
+    LoginForm
 }

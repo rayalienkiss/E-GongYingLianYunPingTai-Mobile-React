@@ -35,7 +35,6 @@ export default class Home extends Component {
                 UDEnterpriseNum: 0,
                 loanAmount: 0,
             },
-            isLogin: <Icon type="user" />
         }
     }
 
@@ -78,7 +77,7 @@ export default class Home extends Component {
                                 coreEnterpriseNum: assistconfig.data.data.coreEnterpriseNum || 0,
                                 UDEnterpriseNum: assistconfig.data.data.UDEnterpriseNum || 0,
                                 loanAmount: assistconfig.data.data.loanAmount || 0,
-                            }
+                            },
                         });
                     }
                 )
@@ -113,8 +112,7 @@ export default class Home extends Component {
 
         //找回路径缩写里面的需要用的数据
         const { applyShowNum, registerShowAmount } = statistics,
-              { coreEnterpriseNum, UDEnterpriseNum, loanAmount } = config,
-              { isLogin } = source;
+              { coreEnterpriseNum, UDEnterpriseNum, loanAmount } = config;
 
         //IndexPostBox 里面装的图片数据
         //合作金融机构 LOGO 图片
@@ -125,44 +123,6 @@ export default class Home extends Component {
         }, {
             image: require('img/index-logo/ZhaoShangJiJin.jpg')
         }];
-        // 合作核心企业 LOGO 图片（v1.3版本不用这组图片）
-        // const imagesGroup2 = [{
-        //     image: require('img/index-logo/WanKe.jpg')
-        // }, {
-        //     image: require('img/index-logo/ZhongHaiDiChan.jpg')
-        // }, {
-        //     image: require('img/index-logo/HuaRunZhiDi.jpg')
-        // }, {
-        //     image: require('img/index-logo/AnBangBaoXian.jpg')
-        // }, {
-        //     image: require('img/index-logo/ZhongGuoRenBao.jpg')
-        // }, {
-        //     image: require('img/index-logo/JiuZhouTong.jpg')
-        // }, {
-        //     image: require('img/index-logo/PuTianYaoXieJiaoYiWang.jpg')
-        // }, {
-        //     image: require('img/index-logo/MeiLuoYaoYe.jpg')
-        // }, {
-        //     image: require('img/index-logo/JinHaiMaJiaJu.jpg')
-        // }, {
-        //     image: require('img/index-logo/YunShengKeJi.jpg')
-        // }, {
-        //     image: require('img/index-logo/CrownePlaza.jpg')
-        // }, {
-        //     image: require('img/index-logo/GongSuDa.jpg')
-        // }, {
-        //     image: require('img/index-logo/HaiTian.jpg')
-        // }, {
-        //     image: require('img/index-logo/HongDouJiaFang.jpg')
-        // }, {
-        //     image: require('img/index-logo/JingBoWuLiu.jpg')
-        // }, {
-        //     image: require('img/index-logo/MengNiu.jpg')
-        // }, {
-        //     image: require('img/index-logo/ShanDongGaoSu.jpg')
-        // }, {
-        //     image: require('img/index-logo/ShengMuGaoKe.jpg')
-        // }];
 
         // v1.3版本 合作核心企业 LOGO 组别（一）
         const theCentralImg1 = [{
@@ -211,18 +171,8 @@ export default class Home extends Component {
 
         return (
             <div className="container-inner">
-                <NavBar
-                    //leftContent="返回" onLeftClick={() => console.log('onLeftClick')}
-                    iconName = { false }
-                    rightContent={ isLogin }
-                    className = "header-v1_3"
-                >
-                    <span>
-
-                    </span>
-                </NavBar>
                 {/* nav */}
-                {/* <Header title="供应链云平台" linkTo="" headCls="header index-header"/> */}
+                <Header inIndex={ true }/>
                 {/* banner */}
                 <div className="index-banner">
                     <img src={ require('img/index-banner-1x1.jpg') } alt=""/>
@@ -231,22 +181,24 @@ export default class Home extends Component {
                     </Link>
                 </div>
                 {/* 实时统计滚动 */}
-                <Carousel className="index-statistics-live-v1_3" dots={ false } dragging={ false } autoplay infinite vertical>
-                    <div className="isl-item">
-                        今日登记：
-                        <span className="fontcolor-warning">
-                            { applyShowNum }
-                        </span>
-                        &nbsp;笔
-                    </div>
-                    <div className="isl-item">
-                        登记金额：
-                        <span className="fontcolor-warning">
-                            { registerShowAmount }
-                        </span>
-                        &nbsp;元
-                    </div>
-                </Carousel>
+                <div className="the-statistics-live">
+                    <Carousel className="index-statistics-live-v1_3" dots={ false } dragging={ false } autoplay infinite vertical>
+                        <div className="isl-item">
+                            今日登记：
+                            <span className="fontcolor-warning">
+                                { applyShowNum }
+                            </span>
+                            &nbsp;笔
+                        </div>
+                        <div className="isl-item">
+                            登记金额：
+                            <span className="fontcolor-warning">
+                                { registerShowAmount }
+                            </span>
+                            &nbsp;元
+                        </div>
+                    </Carousel>
+                </div>
                 {/* 统计广告 */}
                 <div className="index-statistics">
                     {/* 静态统计 */}

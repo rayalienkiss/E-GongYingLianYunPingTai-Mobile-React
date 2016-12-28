@@ -55,8 +55,13 @@
 //公共圆角尺寸
 @borderRadius-public: 5px;
 
+
 //公共距离尺寸
 @gapSize-public: 20px;
+
+
+//网站整体宽度
+@width-web-body-public: 640px;
 
 
 //边框
@@ -83,11 +88,20 @@
 //各组件的 Z 轴排序
 
 
+//各组件的动画播放时间
+@duration-header: 0.5s;
+@duration-index-banner-img: 0.3s;
+@duration-index-statistics: @duration-header;
+@duration-index-statistics-live: @duration-header;
+@duration-index-post: 1s;
+
+
 //头部
     //色调
     @bgColor-header: @domColor1-mobile;
     //尺寸
     @height-header: 80px;
+
 
 //页脚
     //色调
@@ -96,10 +110,12 @@
     //尺寸
     @height-footer: 186px;
 
+
 //bitmap
     //色调
-    @bgColor-bitmap: darken(@bgColor-primary,5%);
-    @fontColor-bitmap: darken(@bgColor-bitmap,15%);
+    @bgColor-bitmap: darken(@bgColor-primary,0%);
+    @fontColor-bitmap: darken(@bgColor-bitmap,25%);
+
 
 //按钮
     //色调
@@ -112,11 +128,13 @@
     @height-default-gylypt-button: 70px;
     @borderRadius-gylypt-button: @borderRadius-public;
 
+
 //文章
     //色调
     //尺寸
     @height-img-title-gylypt-article: 64px;
     @height-img-case-co-gylypt-article: 50px;
+
 
 //流程结果
     //色调
@@ -124,6 +142,7 @@
     //尺寸
     @height-img-title-gylypt-article: 64px;
     @height-img-case-co-gylypt-article: 50px;
+
 
 //内页banner
     //色调

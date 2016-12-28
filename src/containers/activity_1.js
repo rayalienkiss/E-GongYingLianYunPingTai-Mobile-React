@@ -27,11 +27,11 @@ export default class Activity extends Component {
             var p4 = $('.mb-p4').offset().top;
             var p5 = $('.mb-p5').offset().top;
             var p6 = $('.mb-p6').offset().top;
-           
+
             if (wH > p6)
             {
                $('.mb-p6>img').addClass('appear');
-             
+
             }
               else if (wH + 50 > p5)
             {
@@ -69,7 +69,7 @@ export default class Activity extends Component {
 
     render() {
 
-        const articleTitle = <img src={ require('img/frontpay.jpg') } alt=""/>
+        // const articleTitle = <img src={ require('img/frontpay.jpg') } alt=""/>
 
         let mobileTitle = (
             <div className="PB-nav-wrap ">

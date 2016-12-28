@@ -73,10 +73,12 @@ export default class ApplicationCommitted extends Component {
 
     render() {
 
+        const title = '申请结果'; // 导航文案
+
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="申请结果" linkTo="/" headCls="header"/>
+                <Header title={ title } linkTo="/"/>
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"/>
                 <Link to="/Application" className="gylypt-button secondary flow-result-btn2">继续登记</Link>

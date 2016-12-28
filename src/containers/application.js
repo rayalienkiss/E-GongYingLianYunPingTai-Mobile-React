@@ -24,12 +24,13 @@ export default class Application extends Component {
 
     render() {
 
-        const imgUrl = require('img/inside-page-banner-1.jpg') //页面 banner 图片地址
+        const imgUrl = require('img/inside-page-banner-1.jpg'), //页面 banner 图片地址
+              title = '融资需求登记'; // 导航文案
 
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="融资需求登记" linkTo="" headCls="header"/>
+                <Header title={ title }/>
                 {/* 内页banner */}
                 <InsidePageBanner imgUrl={ imgUrl } alt=""/>
                 {/* 表单 */}

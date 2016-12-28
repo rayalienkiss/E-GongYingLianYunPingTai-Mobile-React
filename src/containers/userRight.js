@@ -13,12 +13,14 @@ export default class UserRight extends Component {
 
     render() {
 
-        const articleTitle = '用户须知';
+
+        const articleTitle = '用户须知', // 文章标题
+              navTitle = articleTitle; // 导航文案
 
         return (
             <div className="container-inner">
                 {/* nav */}
-                <Header title="用户须知" linkTo="" headCls="header"/>
+                <Header title={ navTitle }/>
                 <Article articleCls="gylpt-article" articleTitle={ articleTitle }>
                     <p>
                         <b>

@@ -8,18 +8,19 @@
 /* --- 焦点图 --- */
 .index-banner {
     position: relative;
+    overflow: hidden;
     padding-top: 100%;
     z-index: 2;
     .image-onload();
-    .slideInLeft();
-    .animation-duration(0.3s);
-    .animation-delay(0.5s);
 
     > img {
         position: absolute;
         top: 0;
         left: 0;
-        .square(100%);
+        .square( 100% );
+        .slideInLeft();
+        .animation-duration( @duration-index-banner-img );
+        .animation-delay( @duration-header );
     }
 
     > .index-banner-btn {
@@ -27,8 +28,17 @@
         bottom: 36px;
         left: 50%;
         width: 33.33%;
-        transform: translate(-50%,0);
         margin: 0;
+        .animation-s(
+            indexBannerBtn,
+            0.3s,
+            ease-out,
+            ( @duration-header + @duration-index-banner-img + @duration-index-statistics-live ),
+            1,
+            normal,
+            running,
+            both
+        );
     }
 }
 
@@ -39,9 +49,16 @@
 }
 
 div.index-statistics {
-    .slideInDown();
-    .animation-duration(0.65s);
-    .animation-delay(1s);
+    .animation-s(
+        statistics,
+        @duration-index-statistics,
+        ease-out,
+        ( @duration-header + @duration-index-banner-img*1.5 ),
+        1,
+        normal,
+        running,
+        both
+    );
 }
 
 ul.index-statistics {
@@ -53,7 +70,7 @@ ul.index-statistics {
     height: 192px;
     background-color: @bgColor-primary;
     border-bottom: 1px solid @borderColor-primary; /* no */
-    .reset-list(none,floor(@fontSize-default*0.8),@lineHeight-base);
+    .reset-list( none,floor( @fontSize-default*0.8 ),@lineHeight-base );
 
     > li {
         overflow: hidden;
@@ -63,16 +80,16 @@ ul.index-statistics {
         position: relative;
         max-width: 33.33%;
         border-left: 1px solid @borderColor-primary; /* no */
-        background: url('@{images-url}index-statistics-2.png') transparent center 16px no-repeat;
+        background: url( '@{images-url}index-statistics-2.png' ) transparent center 16px no-repeat;
         background-size: auto 45%;
 
-        &:first-child:not(:last-child) {
+        &:first-child:not( :last-child ) {
             border-left: none;
-            background-image: url('@{images-url}index-statistics-1.png');
+            background-image: url( '@{images-url}index-statistics-1.png' );
         }
 
-        &:last-child:not(:first-child) {
-            background-image: url('@{images-url}index-statistics-3.png');
+        &:last-child:not( :first-child ) {
+            background-image: url( '@{images-url}index-statistics-3.png' );
         }
 
         > p {
@@ -80,7 +97,7 @@ ul.index-statistics {
             margin-top: 110px;
             text-align: center;
 
-            &:last-child:not(:first-child) {
+            &:last-child:not( :first-child ) {
                 margin-top: 5px;
                 color: @fontColor-default;
 
@@ -92,45 +109,56 @@ ul.index-statistics {
     }
 }
 
-/* --- 每日实时统计 --- */
-.index-statistics-live {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: flex-start;
-    align-items: stretch;
-    overflow: hidden;
-    background-color: @bgColor-secondary;
-    padding: @gapSize-public;
-    font-size: floor(@fontSize-default*0.86);
-    border-bottom: 1px solid @borderColor-primary; /* no */
-
-    > p {
-        order: 1;
-        flex: 1 1 auto;
-        position: relative;
-        line-height: @lineHeight-base;
-
-        color: @fontColor-default;
-
-        > span {
-            color: @domColor1-mobile;
-        }
-
-        &:last-child:not(:first-child) {
-            text-align: right;
-        }
-    }
-}
+/* --- 每日实时统计 云平台v1.3 版本弃用 --- */
+// .index-statistics-live {
+//     display: flex;
+//     flex-flow: row nowrap;
+//     justify-content: flex-start;
+//     align-items: stretch;
+//     overflow: hidden;
+//     background-color: @bgColor-secondary;
+//     padding: @gapSize-public;
+//     font-size: floor(@fontSize-default*0.86);
+//     border-bottom: 1px solid @borderColor-primary; /* no */
+//
+//     > p {
+//         order: 1;
+//         flex: 1 1 auto;
+//         position: relative;
+//         line-height: @lineHeight-base;
+//
+//         color: @fontColor-default;
+//
+//         > span {
+//             color: @domColor1-mobile;
+//         }
+//
+//         &:last-child:not(:first-child) {
+//             text-align: right;
+//         }
+//     }
+// }
 
 /* --- 每日实时统计 云平台v1.3 版本展示样式--- */
+.the-statistics-live {
+    width: @width-web-body-public;
+    position: relative;
+    z-index: 1;
+    .animation-s(
+        statisticsLive,
+        @duration-index-statistics-live,
+        ease-out,
+        ( @duration-header + @duration-index-banner-img ),
+        1,
+        normal,
+        running,
+        both
+    );
+}
+
 .index-statistics-live-v1_3 {
     background-color: @bgColor-secondary;
     border-bottom: 1px solid  @borderColor-primary; /* no */
-    position: relative;
-    z-index: 1;
-    .slideInDown();
-    .animation-duration(0.65s);
-    .animation-delay(0.8s);
 
     .isl-item {
         padding: @gapSize-public;
@@ -151,7 +179,7 @@ ul.index-statistics {
         width: 33.33%;
 
         > img {
-            .size(75%,auto);
+            .size( 75%,auto );
             display: block;
             margin: 0 auto;
             .image-onload();
@@ -164,11 +192,11 @@ ul.index-statistics {
 
     &::before {
         content: @title;
-        font-size: floor(@fontSize-default*0.86);
+        font-size: floor( @fontSize-default*0.86 );
         position: absolute;
-        top: -(floor(@fontSize-default*0.86))/1.4;
+        top: -( floor( @fontSize-default*0.86 ) )/1.4;
         left: 50%;
-        transform: translate(-50%,0);
+        transform: translate( -50%,0 );
         background-color: @bgColor-primary;
         padding: 0 @gapSize-public;
         color: @fontColor-default;
@@ -178,10 +206,21 @@ ul.index-statistics {
 .index-post {
     padding: @gapSize-public;
     background-color: @bgColor-primary;
-    .animation-s( indexPost,0.7s,ease-out,0,1,normal,running,both );
+    .animation-s(
+        indexPost,
+        @duration-index-post,
+        linear,
+        ( @duration-header + @duration-index-banner-img + @duration-index-statistics-live ),
+        1,
+        normal,
+        running,
+        both
+    );
+    position: relative;
+    z-index: 3;
 
     > h1 {
-        font-size: round(@fontSize-default*1.2);
+        font-size: round( @fontSize-default*1.2 );
         line-height: @lineHeight-base;
         color: @fontColor-heading;
         text-align: center;
@@ -214,9 +253,9 @@ ul.index-statistics {
 /* --- 战略合作 云平台v1.3 版本展示样式--- */
 .the-central {
     margin-top: @gapSize-public*2;
-    width: 600px;
+    width: @width-web-body-public - @gapSize-public*2;
     border: 2px solid @borderColor-primary; /* no */
-    .rounded(@borderRadius-public);
+    .rounded( @borderRadius-public );
     .central-title( '合作核心企业' );
 
     &-items {
@@ -235,14 +274,54 @@ ul.index-statistics {
     .-frames(@-...) {
         0% {
             opacity: 0;
-            @{-}transform: translate3d(0,-100%,0) scale(0.3);
-        }
-        70% {
-            @{-}transform: translate3d(0,-100%,0) scale(1);
         }
         100% {
             opacity: 1;
-            @{-}transform: translate3d(0,0,0);
+        }
+    }
+}
+
+/* --- 每日实时统计出场动画 --- */
+& {
+    .keyframes( indexBannerBtn );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate3d( -50%, 200%, 0 );
+            visibility: visible;
+        }
+        100% {
+            @{-}transform: translate3d( -50%, 0, 0 );
+        }
+    }
+}
+
+/* --- 广告数据统计出场动画 --- */
+& {
+    .keyframes( statistics );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate3d( 0, -200%, 0 );
+            visibility: visible;
+        }
+        100% {
+            @{-}transform: translate3d( 0, 0, 0 );
+        }
+    }
+}
+
+/* --- 每日实时统计出场动画 --- */
+& {
+    .keyframes( statisticsLive );
+
+    .-frames(@-...) {
+        0% {
+            @{-}transform: translate3d( 0, -100%, 0 );
+            visibility: visible;
+        }
+        100% {
+            @{-}transform: translate3d( 0, 0, 0 );
         }
     }
 }

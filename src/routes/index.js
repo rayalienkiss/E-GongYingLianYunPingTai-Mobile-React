@@ -83,6 +83,14 @@ const routes = {
             }, 'UserRight')
         }
     }, {
+        //登录
+        path: 'Login',
+        getComponent(nextState, cb) {
+            require.ensure([], require => {
+                cb(null, require('../containers/login.js').default)
+            }, 'Login')
+        }
+    },{
       // 404
       path: '*',
       onEnter: (nextState, replace) => replace('', '/')

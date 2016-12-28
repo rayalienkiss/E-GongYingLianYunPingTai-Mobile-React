@@ -14,11 +14,11 @@
     height: @height-header;
     .clearfix();
     .slideInDown();
-    .animation-duration(0.5s);
+    .animation-duration( @duration-header );
     z-index: 2;
 
     &-title {
-        font-size: floor(@fontSize-default*1.22);
+        font-size: floor( @fontSize-default*1.22 );
         color: rgba(255,255,255,1);
         height: @height-header;
         line-height: @height-header;
@@ -27,41 +27,50 @@
         .text-hide();
     }
 
-    &-btn {
-        .square(@height-header);
+    &-btn-left,
+    &-btn-right {
+        .size( auto,@height-header );
+        padding: 0 @gapSize-public*2;
         position: absolute;
         top: 0;
-        left: 0;
         line-height: @height-header;
         text-align: center;
-        background: url("@{images-url}svg-icon/chevron-thin-left-fff.svg") center center no-repeat;
+        background-color: transparent;
+        background-position: center;
+        background-repeat: no-repeat;
         background-size: 50%;
 
         &:active {
-            background-color: darken(@bgColor-header,10%);
+            background-color: darken( @bgColor-header,10% );
         }
     }
 
+    &-btn-left {
+        left: 0;
+        background-image: url( "@{images-url}svg-icon/chevron-thin-left-fff.svg" );
+    }
+
+    &-btn-right {
+        right: 0;
+        background-image: url( "@{images-url}svg-icon/user-fff.svg" );
+    }
+
     //当需页面头部只有网站 LOGO
-    &.index-header {
-        height: @height-header;
-        background: url('@{images-url}svg-icon/logo-fff.svg') @bgColor-header center center no-repeat;
+    &.index {
+        background: url( '@{images-url}svg-icon/logo-fff.svg' ) @bgColor-header center center no-repeat;
         background-size: 60% 60%;
 
         .header-title {
             display: none;
         }
 
-        .header-btn {
+        .header-btn-left {
             display: none;
         }
     }
-}
 
-.header-v1_3 { //用 antd 的 NavBar
-    background-color: @bgColor-header !important;
-    position: relative;
-    z-index: 2;
-    .slideInDown();
-    .animation-duration(0.5s);
+    // 登录及个人中心相关页面不需要个人中心按钮
+    &.user .header-btn-right {
+        display: none;
+    }
 }
