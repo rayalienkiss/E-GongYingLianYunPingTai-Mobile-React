@@ -24,7 +24,7 @@ export default class Login extends Component {
                 {/* nav */}
                 <Header title={ title } inUser={ true }/>
                 {/* 表单 */}
-                {/* <LoginForm location={ this.props.location }/> */}
+                <LoginForm location={ this.props.location }/>
                 {/* 页脚 */}
                 <Footer/>
             </div>

@@ -32,63 +32,40 @@ body {
         top: 50%;
         left: 50%;
         .rounded( 50% );
-        .square( 80px );
         margin-top: -40px;
         margin-left: -40px;
-        //border: 10px solid lighten(@bgColor-header,30%);
-        //border-left-color: @bgColor-primary;
-        //border-right-color: @bgColor-primary;
-        .animation-s( bodySpinner,2s,linear,0,infinite,normal,running,both );
-    }
-
-    &::after {
-        content: '';
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        .rounded( @borderRadius-public );
-        .square( 40px );
-        margin-top: -20px;
-        margin-left: -20px;
-        background-color: @bgColor-header;
-        //border: 10px solid lighten(@bgColor-header,30%);
-        //border-left-color: @bgColor-primary;
-        //border-right-color: @bgColor-primary;
-        .animation-s( bodySpinnerA,1.45s,linear,0,infinite,normal,running,both );
+        border-top: 40px dashed @bgColor-header;
+        border-bottom: 40px dashed @domColor3-mobile;
+        border-right: 40px solid transparent;
+        border-left: 40px solid transparent;
+        .animation-s( bodySpinner,1.4s,linear,0,infinite,normal,running,both );
     }
 }
 
-& {
-  .keyframes( bodySpinner );
-
-  .-frames(@-...) {
+@keyframes bodySpinner {
+    // safari 为什么这么蛋疼要设置这么多关键帧
     0% {
-      //@{-}transform: rotate(0deg);
-      box-shadow: 0 0 0 10px rgba(213,78,31,0.5);
+        opacity: 0.5;
+        transform: rotate( 0deg ) scale( 0.6 );
     }
-    80% {
-      //@{-}transform: rotate(359deg);
-      box-shadow: 0 0 0 100px rgba(213,78,31,0);
-    }
-    100% {
-    }
-  }
-}
 
-& {
-  .keyframes( bodySpinnerA );
+    25% {
+        transform: rotate( 360deg ) scale( 0.9 );
+    }
 
-  .-frames(@-...) {
-    0% {
-      @{-}transform: rotate3d(1,1,0,0deg);
-      //box-shadow: 0 0 0 10px rgba(255, 138, 0, 1);
+    50% {
+        opacity: 1;
+        transform: rotate( 1440deg ) scale( 1.2 );
+    }
+
+    75% {
+        transform: rotate( 1800deg ) scale( 0.9 );
     }
 
     100% {
-      @{-}transform: rotate3d(1,1,0,359deg);
-      //box-shadow: 0 0 0 50px rgba(255, 138, 0, 0);
+        opacity: 0.5;
+        transform: rotate( 2160deg ) scale( 0.6 );
     }
-  }
 }
 
 /* --- 取消移动端浏览器下渲染以下元素点击区域的默认有色遮罩 --- */
@@ -125,6 +102,9 @@ img {
 #app {
     height: 100%;
     .part-transition-set();
+    //解决 safari 里面 body::before 元素的 CSS3 3D属性 忽略 Z 轴的问题，黑科技
+    //z-index: 1;
+    //transform: translateZ(120px);
 }
 
 .container {

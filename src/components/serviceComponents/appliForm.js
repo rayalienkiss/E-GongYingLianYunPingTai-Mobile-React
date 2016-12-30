@@ -3,27 +3,14 @@
 // --------------------------------------------------
 */
 
-import React, {
-    Component
-} from 'react'
+import React, { Component } from 'react'
 
-import {
-    Button,
-    List,
-    Radio,
-    Picker,
-    InputItem,
-    Icon,
-    Checkbox,
-    Flex,
-    Toast
-} from 'antd-mobile'
+import { Button, List, Radio, Picker, InputItem, Icon, Checkbox, Flex, Toast } from 'antd-mobile'
 
-import {
-    createForm
-} from 'rc-form'
+import { createForm } from 'rc-form'
 
 import store from 'store';
+
 // ajax
 import axios from 'axios'
 
@@ -34,10 +21,7 @@ const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
 
 //helpers
-import {
-    ruleType,
-    tools
-} from 'helpers';
+import { ruleType, tools } from 'helpers';
 
 class AppliForm extends React.Component {
 
