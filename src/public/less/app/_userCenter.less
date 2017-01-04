@@ -1,0 +1,133 @@
+/*
+// 个人中心
+// --------------------------------------------------
+*/
+@charset "UTF-8";
+
+/* --- 个人中心内自定义 andt 组件样式 --- */
+#gylypt-user-center {
+
+    .am-badge.in-user-center .am-badge-text {
+        transform: translate( 0,-5% );
+        font-size: @fontSize-default;
+        height: auto;
+        line-height: @lineHeight-base;
+        background-color: transparent;
+        border: 1px solid @borderColor-primary; /* no */
+        color: @fontColor-viceText;
+        .rounded( @borderRadius-public );
+    }
+
+    .am-card {
+        padding-bottom: 0;
+
+        &.am-card-full {
+            border-bottom: 0;
+            border-top: 0;
+        }
+    }
+
+    .am-card-header {
+        padding: @gapSize-public;
+        margin-left: 0;
+    }
+
+    .am-card-header-content {
+
+        .user-name {
+            display: inline-block;
+            vertical-align: middle;
+
+            > p {
+                font-size: ceil( @fontSize-default*0.8 );
+                color: @fontColor-viceText;
+            }
+        }
+
+        img {
+            display: inline-block;
+            .square( 120px );
+            .rounded( @borderRadius-public );
+            margin-right: @gapSize-public;
+        }
+    }
+
+    .am-list-item {
+        padding-left: @gapSize-public;
+
+        &.am-list-item-middle .am-list-line {
+            padding-right: @gapSize-public;
+
+            .am-list-extra {
+                text-overflow: clip;
+                white-space: normal;
+            }
+        }
+    }
+
+    &.base-info .am-list-body {
+        border-top: 0;
+    }
+
+    .title {
+        padding: @gapSize-public;
+        font-size: @fontSize-default;
+    }
+
+    .am-list.only-textarea .am-list-body {
+        border: 1px solid @borderColor-primary; /* no */
+        .rounded( @borderRadius-public );
+        margin: 0 @gapSize-public;
+
+        .am-list-item.am-textarea-item {
+            padding-right: @gapSize-public;
+
+            &::after {
+                content: none;
+            }
+        }
+    }
+}
+
+/* --- 个人中心组件进场动画 --- */
+@delay-public-userCenter: 0.1s;
+
+.card-in {
+    .fadeInDown();
+    .animation-duration( @duration-userCenter-card );
+    .animation-delay( @duration-header - 0.3s );
+}
+
+.textarea-in {
+    .fadeInUp();
+    .animation-duration( @duration-userCenter-card );
+    .animation-delay( @duration-header );
+}
+
+.list-item-in( @delay ) {
+    .fadeInLeft();
+    .animation-duration( @duration-userCenter-listItem );
+    .animation-delay( @delay - 0.3s );
+}
+
+.list-item-in-1 {
+    .list-item-in( @duration-header );
+}
+
+.list-item-in-2 {
+    .list-item-in( @duration-header + @delay-public-userCenter );
+}
+
+.list-item-in-3 {
+    .list-item-in( @duration-header + @delay-public-userCenter*2 );
+}
+
+.list-item-in-4 {
+    .list-item-in( @duration-header + @delay-public-userCenter*3 );
+}
+
+.button-in {
+    .fadeInUp();
+    .animation-duration( @duration-userCenter-button );
+    .animation-delay( @duration-header + @delay-public-userCenter*2 );
+}

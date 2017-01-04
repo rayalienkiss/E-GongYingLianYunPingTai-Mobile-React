@@ -53,7 +53,7 @@
 
 
 //公共圆角尺寸
-@borderRadius-public: 5px;
+@borderRadius-public: 10px;
 
 
 //公共距离尺寸
@@ -89,11 +89,17 @@
 
 
 //各组件的动画播放时间
-@duration-header: 0.5s;
-@duration-index-banner-img: 0.3s;
-@duration-index-statistics: @duration-header;
-@duration-index-statistics-live: @duration-header;
-@duration-index-post: 1s;
+    //公用 header
+    @duration-header: 0.5s;
+    //首页
+    @duration-index-banner-img: 0.3s;
+    @duration-index-statistics: @duration-header;
+    @duration-index-statistics-live: @duration-header;
+    @duration-index-post: 1s;
+    //个人中心
+    @duration-userCenter-card: @duration-header;
+    @duration-userCenter-listItem: @duration-header;
+    @duration-userCenter-button: @duration-header;
 
 
 //头部

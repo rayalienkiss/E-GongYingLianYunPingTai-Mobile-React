@@ -12,9 +12,11 @@
 }
 
 /* --- 包装 jiathis 外部分享插件的容器 --- */
+@size-jiathis-icon: 120px;
+
 .share-panel {
     position: relative;
-    padding: @gapSize-public*5 0;
+    padding: @gapSize-public*2 0;
     text-align: center;
     font-size: 0;
     line-height: 0;
@@ -27,10 +29,62 @@
         [class^="jiathis_button_"],
         [class*=" jiathis_button_"] {
 
-            &:last-child:not(:first-child) > .jtico {
-                //padding-left: 32px !important; /* no */
+            > .jtico {
+                height: @size-jiathis-icon !important;
+                width: @size-jiathis-icon !important;
+                border: 1px solid @borderColor-primary; /* no */
+                .rounded( @borderRadius-public );
+                background-size: cover;
+                padding-left: 0 !important;
+                margin: 0 @gapSize-public*2;
+
+                &.jtico_tsina {
+                    background-image: url( '@{images-url}tsina-logo.jpg' );
+                    background-position: 0 0;
+                }
+
+                &.jtico_qzone {
+                    background-image: url( '@{images-url}qzone-logo.jpg' );
+                    background-position: 0 0;
+                }
             }
         }
+    }
+
+    .share-icon-name {
+        font-size: 0;
+        line-height: 0;
+        padding-top: @gapSize-public;
+
+        > span {
+            display: inline-block;
+            width: @size-jiathis-icon;
+            text-align: center;
+            font-size: @fontSize-default;
+            line-height: 1;
+            margin: 0 @gapSize-public*2;
+        }
+    }
+}
+
+//只用在分享面板
+.share-tips {
+    position: relative;
+    font-size: @fontSize-default;
+    line-height: @lineHeight-base;
+    padding: @gapSize-public @gapSize-public @gapSize-public @gapSize-public*4;
+    border: 1px solid rgba( 173,233,202,1 ); /* no */
+    background-color: rgba( 233,249,241,1 );
+    text-align: left;
+    color: rgba( 43,159,99,1 );
+    .rounded( @borderRadius-public );
+
+    [class^="anticon anticon-"],
+    [class*=" anticon anticon-"] {
+        position: absolute;
+        left: @gapSize-public;
+        top: @gapSize-public;
+        font-size: ceil( @fontSize-default*1.4 );
     }
 }
 

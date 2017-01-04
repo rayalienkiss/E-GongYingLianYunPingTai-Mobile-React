@@ -42,18 +42,18 @@ export default class ApplicationCommitted extends Component {
         };
     }
 
-    onClick() {
-        Popup.show (
-            <SharePanel/>, { animationType: 'slide-up', wrapProps, maskClosable: true }
-        );
-    }
+    // onClick() {
+    //     Popup.show (
+    //         <SharePanel/>, { animationType: 'slide-up', wrapProps, maskClosable: true }
+    //     );
+    // }
 
-    onClose(sel) {
-        this.setState ({
-            sel
-        });
-        Popup.hide();
-    }
+    // onClose(sel) {
+    //     this.setState ({
+    //         sel
+    //     });
+    //     Popup.hide();
+    // }
 
     componentDidMount() {
         this.setLogin();
@@ -82,7 +82,8 @@ export default class ApplicationCommitted extends Component {
                 {/* 流程结果 */}
                 <FlowResult mainNotice="申请成功" florResultCls="flow-result success"/>
                 <Link to="/Application" className="gylypt-button secondary flow-result-btn2">继续登记</Link>
-                <a className="gylypt-button primary flow-result-btn" href="javascript:void(0)" onClick={ this.onClick }>立即分享</a>
+                {/* <a className="gylypt-button primary flow-result-btn" href="javascript:void(0)" onClick={ this.onClick }>立即分享</a> */}
+                <Link to="/ShareLink" className="gylypt-button primary flow-result-btn">邀请朋友加入</Link>
                 {/* 页脚 */}
                 <Footer/>
             </div>
