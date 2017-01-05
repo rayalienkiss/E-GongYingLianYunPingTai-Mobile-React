@@ -23,27 +23,86 @@ import axios from 'axios'
 export default class UserCenter extends Component {
 
     static contextTypes = {
-        router: React.PropTypes.object.isRequired,
-    };
+        router: React.PropTypes.object.isRequired
+    }
+
+    constructor( props ) {
+        super( props );
+
+        this.state = {
+            data: {
+                registriesTotal: 0,
+                shareLogTotal: 0,
+                infoName: '',
+                infoHiddenPhone: '',
+            },
+        }
+    }
+
+    // 设置个人中心页面的数据
+    setRes() {
+
+        let me = this;
+
+        function queryFinanceByUserIdAPI() {
+            return axios.get( '/api/user/queryFinanceByUserId' );
+        }
+
+        function queryLinkUserAPI() {
+            return axios.get( '/api/user/queryLinkUser' );
+        }
+
+        function infoAPI() {
+            return axios.get( '/api/user/info' );
+        }
+
+        axios.all(
+            [
+                queryFinanceByUserIdAPI(),
+                queryLinkUserAPI(),
+                infoAPI(),
+            ],
+        )
+        .then(
+            axios.spread(
+                function( queryFinanceByUserIdAPI,queryLinkUserAPI,infoAPI ) {
+                    me.setState({
+                        data: {
+                            registriesTotal: queryFinanceByUserIdAPI.data.data.total,
+                            shareLogTotal: queryLinkUserAPI.data.data.total,
+                            infoName: infoAPI.data.data.name,
+                            infoHiddenPhone: infoAPI.data.data.hiddenPhone,
+                        },
+                    });
+                }
+            )
+        );
+    }
 
     // 跳转我的登记
     toRegistries() {
-        this.context.router.push(`Registries`);
+        this.context.router.push( `Registries` );
     }
 
     // 跳转我的分享
     toShareLog() {
-        this.context.router.push(`ShareLog`);
+        this.context.router.push( `ShareLog` );
     }
 
     // 跳转分享步骤
     toShareLink() {
-        this.context.router.push(`ShareLink`);
+        this.context.router.push( `ShareLink` );
+    }
+
+    componentDidMount() {
+        this.setRes();
     }
 
     render() {
 
         let me = this;
+
+        let data = me.state.data;
 
         const title = '个人中心'; // 导航文案
 
@@ -64,15 +123,15 @@ export default class UserCenter extends Component {
                                 title={
                                     <div className="user-name">
                                         <h4>
-                                            犬志龙
+                                            { data.infoName }
                                         </h4>
                                         <p>
-                                            13570578445
+                                            { data.infoHiddenPhone }
                                         </p>
                                     </div>
                                 }
                                 thumb={
-                                    require('img/user-headshot-default.jpg')
+                                    require( 'img/user-headshot-default.jpg' )
                                 }
                                 extra={
                                     <Icon type="setting"></Icon>
@@ -83,7 +142,7 @@ export default class UserCenter extends Component {
                     <List>
                         <Item
                             thumb={
-                                require('img/my-registries-icon.png')
+                                require( 'img/my-registries-icon.png' )
                             }
                             arrow={
                                 "horizontal"
@@ -94,7 +153,7 @@ export default class UserCenter extends Component {
                             extra={
                                 <Badge
                                     overflowCount = { 9999 }
-                                    text={ 5 }
+                                    text={ data.registriesTotal }
                                     className="in-user-center"
                                 />
                             }
@@ -104,7 +163,7 @@ export default class UserCenter extends Component {
                         </Item>
                         <Item
                             thumb={
-                                require('img/my-share-icon.png')
+                                require( 'img/my-share-icon.png' )
                             }
                             arrow={
                                 "horizontal"
@@ -115,7 +174,7 @@ export default class UserCenter extends Component {
                             extra={
                                 <Badge
                                     overflowCount = { 9999 }
-                                    text={ 102 }
+                                    text={ data.shareLogTotal }
                                     className="in-user-center"
                                 />
                             }
@@ -128,10 +187,10 @@ export default class UserCenter extends Component {
                                 "horizontal"
                             }
                             thumb={
-                                require('img/share-link.png')
+                                require( 'img/share-link.png' )
                             }
                             onClick={
-                                me.toShareLink.bind(me)
+                                me.toShareLink.bind( me )
                             }
                             className="list-item-in-3"
                         >

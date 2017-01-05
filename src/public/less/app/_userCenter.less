@@ -7,8 +7,13 @@
 /* --- 个人中心内自定义 andt 组件样式 --- */
 #gylypt-user-center {
 
+    .am-table-horizonTitle {
+        text-align: left;
+    }
+
     .am-badge.in-user-center .am-badge-text {
         transform: translate( 0,-5% );
+        font-size: ceil( @fontSize-default*0.9 );
         font-size: @fontSize-default;
         height: auto;
         line-height: @lineHeight-base;
@@ -65,13 +70,36 @@
         }
     }
 
-    &.base-info .am-list-body {
-        border-top: 0;
+    &.base-info,
+    &.share-log {
+
+        .am-list-body {
+            border-top: 0;
+            width: @width-web-body-public;
+        }
+    }
+
+    &.share-log {
+
+        .am-list-item.am-list-item-middle {
+            padding-left: 0;
+
+            .am-list-line {
+                padding-left: @gapSize-public;
+            }
+        }
+
+        .am-list-item.am-list-item-middle .am-list-line .am-list-extra {
+            max-width: 30%;
+        }
     }
 
     .title {
         padding: @gapSize-public;
-        font-size: @fontSize-default;
+
+        &.border {
+            border-bottom: 1px solid @borderColor-primary; /* no */
+        }
     }
 
     .am-list.only-textarea .am-list-body {
@@ -87,11 +115,38 @@
             }
         }
     }
+
+    //我的分享页面里面的公司名称条目
+    .share-log-item-main {
+        .clearfix();
+
+        > .name,
+        > .company {
+            float: left;
+            max-width: 50%;
+        }
+
+        > .name {
+            .text-hide();
+        }
+
+        > .company {
+            color: @fontColor-viceText;
+
+            > span {
+                display: inline-block;
+                vertical-align: text-top;
+                max-width: 110%;
+                .text-hide();
+            }
+        }
+    }
 }
 
 /* --- 个人中心组件进场动画 --- */
 @delay-public-userCenter: 0.1s;
 
+.search-in,
 .card-in {
     .fadeInDown();
     .animation-duration( @duration-userCenter-card );

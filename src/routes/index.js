@@ -115,6 +115,30 @@ const routes = {
             }, 'ShareLink')
         }
     },{
+        //我的分享
+        path: 'ShareLog',
+        getComponent(nextState, cb) {
+            require.ensure([], require => {
+                cb(null, require('../containers/shareLog.js').default)
+            }, 'ShareLog')
+        }
+    },{
+        //我的登记
+        path: 'Registries',
+        getComponent(nextState, cb) {
+            require.ensure([], require => {
+                cb(null, require('../containers/registries.js').default)
+            }, 'Registries')
+        }
+    },{
+        //我的登记详细页
+        path: 'RegistriesDetail',
+        getComponent(nextState, cb) {
+            require.ensure([], require => {
+                cb(null, require('../containers/registriesDetail.js').default)
+            }, 'RegistriesDetail')
+        }
+    },{
       // 404
       path: '*',
       onEnter: (nextState, replace) => replace('', '/')

@@ -20,31 +20,65 @@ import { Link } from 'react-router';
 // ajax
 import axios from 'axios'
 
-//创建并输出页面组件
+// 创建并输出页面组件
 export default class BaseInfo extends Component {
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
     };
 
-    // 跳转我的登记
-    toRegistries() {
-        this.context.router.push(`/`);
+    constructor( props ) {
+        super( props );
+
+        this.state = {
+            data: {
+                infoName: '',
+                infoHiddenPhone: '',
+                infoEmail: '先空着，没接口数据',
+                infoEnterprise: '',
+            },
+        }
     }
 
-    // 跳转我的分享
-    toShareLog() {
-        this.context.router.push(`/`);
+    // 设置基础信息页面的数据
+    setRes() {
+
+        let me = this;
+
+        function infoAPI() {
+            return axios.get( '/api/user/info' );
+        }
+
+        axios.all(
+            [
+                infoAPI(),
+            ],
+        )
+        .then(
+            axios.spread(
+                function( infoAPI ) {
+                    me.setState({
+                        data: {
+                            infoName: infoAPI.data.data.name,
+                            infoHiddenPhone: infoAPI.data.data.hiddenPhone,
+                            //infoEmail: infoAPI.data.data.email,
+                            infoEnterprise: infoAPI.data.data.name,
+                        },
+                    });
+                }
+            )
+        );
     }
 
-    // 跳转分享步骤
-    toShareLink() {
-        this.context.router.push(`/`);
+    componentDidMount() {
+        this.setRes();
     }
 
     render() {
 
         let me = this;
+
+        let data = me.state.data;
 
         const title = '基础信息'; // 导航文案
 
@@ -59,19 +93,19 @@ export default class BaseInfo extends Component {
                 <div id="gylypt-user-center" className="base-info">
                     <List>
                         <Item
-                            extra="犬志龙"
+                            extra={ data.infoName }
                             className="list-item-in-1"
                         >
                             真实姓名
                         </Item>
                         <Item
-                            extra="13700137000"
+                            extra={ data.infoHiddenPhone }
                             className="list-item-in-2"
                         >
                             手机号码
                         </Item>
                         <Item
-                            extra="13700137000@163.com"
+                            extra={ data.infoEmail }
                             className="list-item-in-3"
                         >
                             电子邮件
@@ -80,14 +114,14 @@ export default class BaseInfo extends Component {
                             arrow={
                                 "horizontal"
                             }
-                            extra="广东对外贸易合作有限公司"
+                            extra={ data.infoEnterprise }
                             className="list-item-in-4"
                             onClick={ () => prompt(
                                 '编辑单位名称',
                                 <span className="fontcolor-vice">推荐人所在单位名称</span>,
                                 [
                                     { text: '取消' },
-                                    { text: '提交', onPress: value => console.log(`输入的内容:${value}`) },
+                                    { text: '提交', onPress: value => console.log(`输入的内容:${ value }`) },
                                 ],
                                 'plain-text', '100'
                             )}
