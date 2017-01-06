@@ -42,7 +42,7 @@ export default class ShareLog extends Component {
 
         //获取我的分享页面的接口
         function queryLinkUserAPI() {
-            return axios.get('/api/user/queryLinkUser');
+            return axios.get( '/api/user/queryLinkUser' );
         }
 
         //调用 我的分享页面 的接口
@@ -77,7 +77,7 @@ export default class ShareLog extends Component {
 
         const title = '我的分享';
 
-        const shareLogItem = data.list.map((item, index) => {
+        const shareLogItem = data.list.map(( item, index ) => {
             return (
                 <Item
                     multipleLine

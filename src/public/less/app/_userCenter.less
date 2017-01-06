@@ -143,6 +143,25 @@
     }
 }
 
+#gylypt-form-in-modal {
+
+    .am-list-body {
+        border: none;
+
+        &::after {
+            content: none;
+        }
+    }
+
+    .am-list .am-list-item.am-input-item {
+        border: 1px solid @borderColor-primary; /* no */
+
+        &::after {
+            content: none;
+        }
+    }
+}
+
 /* --- 个人中心组件进场动画 --- */
 @delay-public-userCenter: 0.1s;
 
