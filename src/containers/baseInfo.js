@@ -62,6 +62,51 @@ class BaseInfo extends Component {
         });
     }
 
+    // 修改提交的
+    handleSubmit() {
+
+        let me = this;
+
+        this.props.form.validateFields(( errors, values ) => {
+            if ( errors ) {
+                console.log('Errors in form!!!');
+                return false;
+            }
+            console.log( values.editEnterprise,'现在单位名称的值' )
+
+            function getUpdateUserInfoAPI() {
+                return axios.get( '/api/user/updateUserInfo?enterprise='+values.editEnterprise );
+            }
+
+            axios.all(
+                    [
+                        getUpdateUserInfoAPI(),
+                    ]
+                )
+                .then(
+                    axios.spread(
+                        //将 getDaliyStatistics() 定义为 daliystatistics， 将 getAssistConfig() 定义为 assistconfig
+                        function( getUpdateUserInfoAPI ) {
+                            let data = getUpdateUserInfoAPI.data.data;
+                            let code = getUpdateUserInfoAPI.data.code;
+                            if( code == 200 ){
+                                me.setState({
+                                    data
+                                });
+                                console.log( data,'code==200得到的data' );
+                                Toast.success( '单位名称已保存' );
+                            } else {
+                                Toast.fail( '保存失败，内部错误' );
+                            }
+                        }
+                    )
+                );
+            me.setState({
+                modalVisible: false,
+            });
+        });
+    }
+
     // 设置基础信息页面的数据
     setRes() {
 
@@ -91,37 +136,6 @@ class BaseInfo extends Component {
             )
         );
     }
-
-    // handleSubmit() {
-    //     let me = this;
-    //     this.props.form.validateFields((errors, values) => {
-    //       if (!!errors) {
-    //         console.log('Errors in form!!!');
-    //         return;
-    //       }
-    //       console.log(values.enterprise)
-    //       let enterpriseUrl = [
-    //           '/api/user/updateUserInfo?enterprise='+values.enterprise
-    //       ]
-    //       promiseAll(enterpriseUrl, (res) => {
-    //
-    //           //设置 this　的　data 为 res 里面的 data 里面的 list;
-    //           let data = res[0].data;
-    //           if(res[0].code==200){
-    //               me.setState({
-    //                   data
-    //               });
-    //               Message.success("提示，保存成功")
-    //           }else{
-    //               Message.error("提示，内部错误",res)
-    //           }
-    //       })
-    //       console.log('Submit!!!');
-    //       console.log(values);
-    //
-    //       self.setState({editCoNameModalVisible: false});
-    //     });
-    // }
 
     componentDidMount() {
         this.setRes();
@@ -227,10 +241,11 @@ class BaseInfo extends Component {
                                 [
                                     {
                                         text: '保存',
-                                        onPress: () => {
-                                            console.log('ok');
-                                            this.closeModal();
-                                        }
+                                        // onPress: () => {
+                                        //     console.log('ok');
+                                        //     this.closeModal();
+                                        // }
+                                        onPress: me.handleSubmit.bind( me )
                                     }
                                 ]
                             }

@@ -65,7 +65,7 @@ export default class Home extends Component {
             .then(
                 axios.spread(
                     //将 getDaliyStatistics() 定义为 daliystatistics， 将 getAssistConfig() 定义为 assistconfig
-                    function(daliystatistics, assistconfig) {
+                    function( daliystatistics, assistconfig ) {
                         //渲染新的首页数据
                         self.setState({
                             //重新渲染首页当日融资记录接口拿到得数据
