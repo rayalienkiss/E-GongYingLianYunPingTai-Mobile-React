@@ -11,7 +11,7 @@ let start = () => {
       // // shareUrl: location.href,
       // shareUrl: 'http://www.paywe.cn',
     // });
-    const url = '/api/shareUrl?shareUrl=' + 'http://www.paywe.cn'
+    const url = '/api/shareUrl?shareUrl=' + encodeURIComponent(location.href)
     // // console.log(location)
 
     axios.get(url).then(res => {
@@ -34,6 +34,7 @@ let start = () => {
 
         res.jsApiList = ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ'];
         // res.debug = true;
+        res.nonceStr = res.noncestr;
         wx.config(res);
         // wx.config({
             // debug: true,
