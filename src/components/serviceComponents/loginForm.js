@@ -31,49 +31,9 @@ class LoginForm extends Component {
             data: {
                 smsDisabled: false,
                 smsContext: '获取验证码',
-                smsMsg: '',
-                isLogin: false,
             },
         };
         this.smsIsSending = false;
-    };
-
-    componentDidMount() {
-        let me = this;
-        me.loginInfoInit();
-        //me.loadData();
-    };
-
-    componentWillUnmount() {
-        let me = this;
-        if( me.timer ) {
-            //组件准备卸载时，清除 timer 的 状态
-            clearInterval( me.timer );
-        };
-    };
-
-    // 页面登录信息初始化
-    loginInfoInit() {
-        let me = this;
-        let data = me.state.data;
-
-        let payWeLoginData = store.get('payWeLoginData');
-
-        if ( !payWeLoginData ) {
-            return false;
-        };
-
-        let fieldsValues = {
-            userPhone: payWeLoginData.user.phone,
-        };
-
-        me.props.form.setFieldsValue( fieldsValues );
-
-        data.isLogin = true;
-
-        me.setState({
-            data
-        });
     };
 
     // 验证码发送
@@ -81,7 +41,7 @@ class LoginForm extends Component {
 
         let me = this;
 
-        if (me.smsIsSending) {
+        if ( me.smsIsSending ) {
             return false;
         };
 
@@ -89,13 +49,13 @@ class LoginForm extends Component {
 
         me.props.form.validateFields(['userPhone'], (errors, data) => {
             if (errors) {
-                me.showError(errors);
+                //me.showError( errors );
                 me.smsIsSending = false;
                 return false;
             }
             console.log("passed");
             // 推荐人手机验证通过TODO
-            console.log(data);
+            console.log( data );
             const url = tools.urlAddParam('/api/sms/send', {
                 phone: data.userPhone,
                 type: 1
@@ -113,16 +73,16 @@ class LoginForm extends Component {
     };
 
     // 点击登录按钮时，如表单验证有误，需要显示最先的一条错误
-    showError(errors) {
-        let message = "";
-        for (let prop in errors) {
-            if (errors[prop] && errors[prop].errors && errors[prop].errors[0] && errors[prop].errors[0].message) {
-                message = errors[prop].errors[0].message;
-                break;
-            }
-        }
-        Toast.fail(message, 2);
-    };
+    // showError( errors ) {
+    //     let message = "";
+    //     for (let prop in errors) {
+    //         if (errors[prop] && errors[prop].errors && errors[prop].errors[0] && errors[prop].errors[0].message) {
+    //             message = errors[prop].errors[0].message;
+    //             break;
+    //         }
+    //     }
+    //     Toast.fail( message, 2 );
+    // };
 
     // 验证码倒计时交互
     smsCodeTimerStart() {
@@ -161,24 +121,24 @@ class LoginForm extends Component {
 
     // 立即登录
     submit() {
-
         let me = this;
-
         me.props.form.validateFields( ( errors, data ) => {
             if ( errors ) {
-                me.showError( errors );
+                console.log( errors );
                 return false;
             }
-            console.log("passed");
             // 验证通过TODO
-            let submitData = me._getSubmitData(data);
-            console.log(submitData);
+            axios.get('/api/login/login', data).then(res => {
 
-            axios.post('/api/login/login', submitData).then(res => {
-                switch (res.data.code) {
+                if ( !res.data.user ) {
+                    res.data.user = {};
+                }
+
+                switch ( res.data.code ) {
                     case 200:
-                        // store.set('payWeIsLogin', true);
-                        me.context.router.push(`/`);
+                        // 200登录成功
+                        store.set("payWeLoginData", res.data);
+                        me.context.router.push(`UserCenter`);
                         break;
 
                     case 300:
@@ -199,27 +159,27 @@ class LoginForm extends Component {
         });
     }
 
-    _getSubmitData(data) {
+    componentDidMount() {
+        //let me = this;
+        //me.loginInfoInit();
+        //me.loadData();
+    };
 
+    componentWillUnmount() {
         let me = this;
-
-        let submitData = Object.assign({}, data);
-
-        //  是否登录处理
-        submitData['isLogin'] = me.state.data.isLogin ? 1 : 0;
-        return submitData;
-    }
+        if( me.timer ) {
+            //组件准备卸载时，清除 timer 的 状态
+            clearInterval( me.timer );
+        };
+    };
 
     render() {
 
-        // 获取组件的 this 和 状态里面的 data
-        let me = this,
-            data = me.state.data;
+        let me = this;
+        let data = me.state.data;
 
-        // 表单属性
         const { getFieldProps, getFieldValue, getFieldError, } = me.props.form;
 
-        // fieldProps
         const fieldProps = {
             userPhone: {
                 validateTrigger: 'onBlur',
@@ -297,38 +257,10 @@ class LoginForm extends Component {
 
                     </List>
 
-                    {/* 推荐人信息 */}
-                    {/* <List renderHeader={() => <div><h4 style={{ color: '#e15b2c' }}>推荐人信息</h4><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-2">
-                        <div className="label-fake">推荐人身份</div>
-                        <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
-                          <List.Item arrow="horizontal"/>
-                        </Picker>
-                        <div className="iosDisabled">
-                            <div className="label-fake">真实姓名</div>
-                            <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
-                            <div className="label-fake">手机号码</div>
-                            <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
-                        </div>
-                        {
-                            data.isLogin ? "" :
-                            <div>
-                                <div className="label-fake">验证码</div>
-                                <InputItem
-                                    {...getFieldProps('SMScode',fieldProps['SMScode'])}
-                                    error={!!getFieldError('SMScode')}
-                                    clear labelNumber={5}
-                                    className="input-extra-for-btn"
-                                    type="number"
-                                    placeholder="请输入验证码"
-                                    extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}/>
-                            </div>
-                        }
-                    </List> */}
-
                     {/* 表单提交 */}
                     <div className="appli-form-btn-box" style={{ paddingTop: 0 }}>
-                        {/* <Button className="btn" type="primary" onClick={ me.submit.bind(this) }>立即登录</Button> */}
-                        <Button className="btn" type="primary">立即登录</Button>
+                        <Button className="btn" type="primary" onClick={ me.submit.bind(this) }>立即登录</Button>
+                        {/* <Button className="btn" type="primary">立即登录</Button> */}
                     </div>
 
                 </form>

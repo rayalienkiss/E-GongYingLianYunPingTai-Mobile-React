@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 
 import classNames from 'classnames';
 
+import store from 'store';
+
 import { Link } from 'react-router';
 
 export default class Header extends Component {
@@ -50,13 +52,23 @@ export default class Header extends Component {
             user: me.props.inUser,
         })
 
+        let payWeLoginData = store.get('payWeLoginData');
+        let user = (
+            <Link to="/Login" className="header-btn-right"></Link>
+        )
+        if ( payWeLoginData ) {
+            user = (
+                <Link to="/UserCenter" className="header-btn-right"></Link>
+            )
+        }
+
         return (
             <div className={ headCls }>
                 <Link to={ this.props.linkTo } className="header-btn-left"></Link>
                 <p className="header-title">
                     { this.props.title }
                 </p>
-                <Link to="Login" className="header-btn-right"></Link>
+                { user }
             </div>
         )
     }
