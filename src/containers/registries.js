@@ -10,7 +10,7 @@ import React, { Component } from 'react'
 import { Header, Footer } from 'components'
 
 // am 组件
-import { List, SearchBar, Badge } from 'antd-mobile';
+import { List, SearchBar, Badge, Toast } from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -30,7 +30,7 @@ export default class Registries extends Component {
             value: '',
             data: {
                 list: [],
-            }
+            },
         };
     }
 
@@ -45,37 +45,42 @@ export default class Registries extends Component {
     // 设置我的登记页面的登记数据
     setRes() {
 
-        // 拿到组件 Registries 的 this 赋值给当前域
         let me = this;
 
-        //获取我的登记页面的接口
-        function queryFinanceByUserIdAPI() {
-            return axios.get( '/api/user/queryFinanceByUserId' );
-        }
+        axios.post('/api/user/queryFinanceByUserId', {})
+        .then( res => {
 
-        //调用 我的登记页面 的接口
-        //axios 用法 https://github.com/mzabriskie/axios
-        axios.all(
-            [
-                queryFinanceByUserIdAPI(),
-            ],
-        )
-        .then(
-            axios.spread(
-                function( queryFinanceByUserIdAPI ) {
+            switch ( res.data.code ) {
+
+                case 200:
                     me.setState({
+                        code: res.data.code,
                         data: {
-                            list: queryFinanceByUserIdAPI.data.data.list,
+                            list: res.data.data.list,
                         },
                     });
-                }
-            )
-        );
+                    break;
+
+                case 301:
+                    Toast.info('您好！请先登录账号');
+                    me.context.router.push(`/Login`);
+                    break;
+
+                case 304:
+                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                    break;
+
+                default:
+            }
+        });
     }
 
     //跳转我的登记详细页
-    toRegistriesDetail() {
-        this.context.router.push( `RegistriesDetail` );
+    toRegistriesDetail( id ) {
+
+        console.log( id );
+        this.context.router.push( `RegistriesDetail/${ id }` );
+
     }
 
     componentDidMount() {
@@ -89,6 +94,9 @@ export default class Registries extends Component {
         let data = me.state.data;
 
         const registriesLogItem = data.list.map(( item, index ) => {
+
+            //console.log( item,'item' );
+
             return (
                 <Item
                     multipleLine
@@ -100,7 +108,7 @@ export default class Registries extends Component {
                         />
                     }
                     onClick={
-                        me.toRegistriesDetail.bind( me )
+                        this.toRegistriesDetail.bind(this, item.id)
                     }
                     key={
                         index

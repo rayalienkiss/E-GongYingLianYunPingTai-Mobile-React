@@ -1,5 +1,5 @@
 /*
-// 融资申请表单
+// 登录表单
 // --------------------------------------------------
 */
 
@@ -128,7 +128,10 @@ class LoginForm extends Component {
                 return false;
             }
             // 验证通过TODO
-            axios.get('/api/login/login', data).then(res => {
+            axios.get(
+                '/api/login/login?phone='+ data.userPhone + "&SMScode=" + data.SMScode
+            )
+                .then(res => {
 
                 if ( !res.data.user ) {
                     res.data.user = {};
@@ -142,7 +145,7 @@ class LoginForm extends Component {
                         break;
 
                     case 300:
-                        Toast.fail(res.data.message);
+                        Toast.fail( res.data.message );
                         break;
 
                     case 304:

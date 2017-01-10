@@ -36,10 +36,10 @@ class BaseInfo extends Component {
 
         this.state = {
             data: {
-                infoName: '',
-                infoHiddenPhone: '',
-                infoUserEmail: '',
-                infoEnterprise: '',
+                name: '',
+                hiddenPhone: '',
+                userEmail: '',
+                enterprise: '',
             },
             modalVisible: false,
         }
@@ -68,39 +68,29 @@ class BaseInfo extends Component {
         let me = this;
 
         this.props.form.validateFields(( errors, values ) => {
-            if ( errors ) {
+
+            if ( !!errors ) {
                 console.log('Errors in form!!!');
-                return false;
-            }
-            console.log( values.editEnterprise,'现在单位名称的值' )
-
-            function getUpdateUserInfoAPI() {
-                return axios.get( '/api/user/updateUserInfo?enterprise='+values.editEnterprise );
+                return;
             }
 
-            axios.all(
-                    [
-                        getUpdateUserInfoAPI(),
-                    ]
-                )
-                .then(
-                    axios.spread(
-                        //将 getDaliyStatistics() 定义为 daliystatistics， 将 getAssistConfig() 定义为 assistconfig
-                        function( getUpdateUserInfoAPI ) {
-                            let data = getUpdateUserInfoAPI.data.data;
-                            let code = getUpdateUserInfoAPI.data.code;
-                            if( code == 200 ){
-                                me.setState({
-                                    data
-                                });
-                                console.log( data,'code==200得到的data' );
-                                Toast.success( '单位名称已保存' );
-                            } else {
-                                Toast.fail( '保存失败，内部错误' );
-                            }
-                        }
-                    )
-                );
+            axios.get(
+                '/api/user/updateUserInfo?enterprise='+ values.editEnterprise
+            )
+            .then( res => {
+
+                const data = res.data.data;
+                const code = res.data.code;
+
+                if( code == 200 ){
+                    me.setState({
+                        data,
+                    });
+                    Toast.success( '单位名称已保存' );
+                } else {
+                    Toast.fail( '保存失败，服务器异常' );
+                }
+            });
             me.setState({
                 modalVisible: false,
             });
@@ -112,29 +102,32 @@ class BaseInfo extends Component {
 
         let me = this;
 
-        function infoAPI() {
-            return axios.get( '/api/user/info' );
-        }
-
-        axios.all(
-            [
-                infoAPI(),
-            ],
+        axios.get(
+            '/api/user/info'
         )
-        .then(
-            axios.spread(
-                function( infoAPI ) {
+        .then( res => {
+
+            const data = res.data.data;
+
+            switch ( res.data.code ) {
+                case 200:
                     me.setState({
-                        data: {
-                            infoName: infoAPI.data.data.name,
-                            infoHiddenPhone: infoAPI.data.data.hiddenPhone,
-                            infoUserEmail: infoAPI.data.data.userEmail,
-                            infoEnterprise: infoAPI.data.data.name,
-                        },
+                        data,
                     });
-                }
-            )
-        );
+                    break;
+
+                case 301:
+                    Toast.info('您好！请先登录账号');
+                    me.context.router.push(`/Login`);
+                    break;
+
+                case 304:
+                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                    break;
+
+                default:
+            }
+        });
     }
 
     componentDidMount() {
@@ -171,7 +164,7 @@ class BaseInfo extends Component {
                         message: '长度必须为2-50个字符'
                     },
                 ],
-                initialValue: data.infoEnterprise,
+                initialValue: data.enterprise,
             },
         };
 
@@ -186,19 +179,19 @@ class BaseInfo extends Component {
                 <div id="gylypt-user-center" className="base-info">
                     <List>
                         <Item
-                            extra={ data.infoName }
+                            extra={ data.name }
                             className="list-item-in-1"
                         >
                             真实姓名
                         </Item>
                         <Item
-                            extra={ data.infoHiddenPhone }
+                            extra={ data.hiddenPhone }
                             className="list-item-in-2"
                         >
                             手机号码
                         </Item>
                         <Item
-                            extra={ data.infoUserEmail }
+                            extra={ data.userEmail }
                             className="list-item-in-3"
                         >
                             电子邮件
@@ -207,18 +200,8 @@ class BaseInfo extends Component {
                             arrow={
                                 "horizontal"
                             }
-                            extra={ data.infoEnterprise }
+                            extra={ data.enterprise }
                             className="list-item-in-4"
-                            // onClick={ () => prompt(
-                            //     '编辑单位名称',
-                            //     <span className="fontcolor-vice">推荐人所在单位名称</span>,
-                            //     [
-                            //         { text: '取消' },
-                            //         //{ text: '提交', onPress: value => console.log(`输入的内容:${ value }`) },
-                            //         { text: '提交', onPress: value => console.log(`输入的内容:${ value }`) },
-                            //     ],
-                            //     'plain-text', '100'
-                            // )}
                             onClick={
                                 me.showModal.bind( me )
                             }

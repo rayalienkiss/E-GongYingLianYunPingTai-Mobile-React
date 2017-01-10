@@ -53,6 +53,7 @@ export default class Header extends Component {
         })
 
         let payWeLoginData = store.get('payWeLoginData');
+
         let user = (
             <Link to="/Login" className="header-btn-right"></Link>
         )

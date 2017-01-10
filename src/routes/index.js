@@ -132,11 +132,11 @@ const routes = {
         }
     },{
         //我的登记详细页
-        path: 'RegistriesDetail',
+        path: 'RegistriesDetail/:financeEnterpriseId',
         getComponent(nextState, cb) {
             require.ensure([], require => {
                 cb(null, require('../containers/registriesDetail.js').default)
-            }, 'RegistriesDetail')
+            }, 'Registries')
         }
     },{
       // 404

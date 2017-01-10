@@ -10,7 +10,7 @@ import React, { Component } from 'react'
 import { Header, Footer } from 'components'
 
 // am 组件
-import { List, Badge } from 'antd-mobile';
+import { List, Badge, Toast } from 'antd-mobile';
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -24,8 +24,8 @@ export default class ShareLog extends Component {
         router: React.PropTypes.object.isRequired
     }
 
-    constructor(props) {
-        super(props);
+    constructor( props ) {
+        super( props );
 
         this.state = {
             data: {
@@ -37,32 +37,34 @@ export default class ShareLog extends Component {
     // 设置我的分享页面的分享数据
     setShareLogRes() {
 
-        // 拿到组件 ShareLog 的 this 赋值给当前域
         let me = this;
 
-        //获取我的分享页面的接口
-        function queryLinkUserAPI() {
-            return axios.get( '/api/user/queryLinkUser' );
-        }
-
-        //调用 我的分享页面 的接口
-        //axios 用法 https://github.com/mzabriskie/axios
-        axios.all(
-            [
-                queryLinkUserAPI(),
-            ],
+        axios.get(
+            '/api/user/queryLinkUser'
         )
-        .then(
-            axios.spread(
-                function(res) {
+        .then( res => {
+
+            switch ( res.data.code ) {
+                case 200:
                     me.setState({
                         data: {
-                            list: res.data.data.list,
-                        },
+                            list: res.data.data.list
+                        }
                     });
-                }
-            )
-        );
+                    break;
+
+                case 301:
+                    Toast.info('您好！请先登录账号');
+                    me.context.router.push(`/Login`);
+                    break;
+
+                case 304:
+                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                    break;
+
+                default:
+            }
+        });
     }
 
     componentDidMount() {
@@ -78,6 +80,19 @@ export default class ShareLog extends Component {
         const title = '我的分享';
 
         const shareLogItem = data.list.map(( item, index ) => {
+
+            function haveCompanyNameOrNot() {
+                if( !item.enterprise ){
+                    return (
+                        <small>未保存单位名称</small>
+                    );
+                } else {
+                    return (
+                        <small className="fontcolor-vice">{ item.enterprise }</small>
+                    );
+                }
+            }
+
             return (
                 <Item
                     multipleLine
@@ -94,7 +109,7 @@ export default class ShareLog extends Component {
                             { item.name }
                         </div>
                         <div className="company">
-                            （ <span>{ item.enterprise }</span> ）
+                            （<span>{ haveCompanyNameOrNot() }</span>）
                         </div>
                     </div>
                     <Brief>

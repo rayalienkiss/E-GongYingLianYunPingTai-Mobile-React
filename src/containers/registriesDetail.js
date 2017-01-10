@@ -10,7 +10,7 @@ import React, { Component } from 'react'
 import { Header, Footer } from 'components'
 
 // am 组件
-import { Table } from 'antd-mobile';
+import { Table, Toast } from 'antd-mobile';
 
 // ajax
 import axios from 'axios'
@@ -18,8 +18,12 @@ import axios from 'axios'
 //创建并输出页面组件
 export default class RegistriesDetail extends Component {
 
-    constructor(props) {
-        super(props);
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
+    };
+
+    constructor( props ) {
+        super( props );
 
         this.state = {
             data: {
@@ -29,8 +33,8 @@ export default class RegistriesDetail extends Component {
                 coreEnterprises: '',
                 createTime: '',
                 financeEnterprise: '',
-                followContent: '',
-                isFollow: '',
+                feedbackContent: '',
+                financeStatus: '',
                 name: '',
             },
         }
@@ -41,40 +45,41 @@ export default class RegistriesDetail extends Component {
 
         let me = this;
 
+        const id = this.props.params.financeEnterpriseId;
+
         axios.post(
             '/api/user/queryFinanceByUserIdFinanceId',
             {
-                financeEnterpriseId: 1,
+                financeEnterpriseId: id,
             }
         )
-        .then(res => {
-            // switch (res.data.code) {
-            //     case 200:
-            //         //  立即登记成功TODO
-            //         // console.log('立即登记成功TODO');
-            //         // store.set('payWeIsLogin', true);
-            //         me.context.router.push(`ApplicationCommitted`);
-            //         break;
-            //
-            //     case 300:
-            //         Toast.fail(res.data.message);
-            //         break;
-            //
-            //     case 304:
-            //         Toast.fail(res.data.data[0].errorMsg);
-            //         break;
-            //
-            //     case 500:
-            //         Toast.fail('服务器正在开小差')
-            //         break;
-            //
-            //     default:
-            //}
+        .then( res => {
+
+            let data = res.data.data
+
+            switch ( res.data.code ) {
+                case 200:
+                    me.setState({
+                        data
+                    });
+                    break;
+
+                case 301:
+                    Toast.info('您好！请先登录账号');
+                    me.context.router.push(`/Login`);
+                    break;
+
+                case 304:
+                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                    break;
+
+                default:
+            }
         });
     }
 
     componentDidMount() {
-        //this.setRes();
+        this.setRes();
     }
 
     render() {
@@ -85,7 +90,7 @@ export default class RegistriesDetail extends Component {
 
         const title = '我的登记'; // 导航文案
 
-        const isFollow = data.isFollow == 1 ? "跟踪中" : "未跟踪";
+        const financeStatus = data.financeStatus == 1 ? '已回访' : '未回访';
 
         const columns = [
             {
@@ -104,7 +109,7 @@ export default class RegistriesDetail extends Component {
         const tableRes = [
             {
                 label: '状态',
-                content: isFollow, //接口返回 1 为跟踪中，2 为未跟中，通过上面的 const isFollow = data.isFollow == 1 ? "跟踪中" : "未跟踪"; 进行展示形式转化
+                content: financeStatus, //接口返回 1 为跟踪中，2 为未跟中，通过上面的 const financeStatus = data.financeStatus == 1 ? "跟踪中" : "未跟踪"; 进行展示形式转化
             },
             {
                 label: '企业联系人',
@@ -132,7 +137,7 @@ export default class RegistriesDetail extends Component {
             },
             {
                 label: '联系人反馈',
-                content: data.followContent,
+                content: data.feedbackContent,
             },
         ];
 

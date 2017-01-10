@@ -10,8 +10,10 @@ import React, { Component } from 'react'
 import { Header, Footer } from 'components'
 
 // am 组件
-import { Card, WhiteSpace, Icon, List, Button, Badge } from 'antd-mobile';
+import { Card, WhiteSpace, Icon, List, Button, Badge, Toast } from 'antd-mobile';
 const Item = List.Item;
+
+import store from 'store';
 
 // react-router 组件
 import { Link } from 'react-router';
@@ -45,7 +47,7 @@ export default class UserCenter extends Component {
         let me = this;
 
         function queryFinanceByUserIdAPI() {
-            return axios.get( '/api/user/queryFinanceByUserId' );
+            return axios.post( '/api/user/queryFinanceByUserId',{} );
         }
 
         function queryLinkUserAPI() {
@@ -66,14 +68,30 @@ export default class UserCenter extends Component {
         .then(
             axios.spread(
                 function( queryFinanceByUserIdAPI,queryLinkUserAPI,infoAPI ) {
-                    me.setState({
-                        data: {
-                            registriesTotal: queryFinanceByUserIdAPI.data.data.total,
-                            shareLogTotal: queryLinkUserAPI.data.data.total,
-                            infoName: infoAPI.data.data.name,
-                            infoHiddenPhone: infoAPI.data.data.hiddenPhone,
-                        },
-                    });
+
+                    switch ( queryFinanceByUserIdAPI.data.code && queryLinkUserAPI.data.code && infoAPI.data.code ) {
+                        case 200:
+                            me.setState({
+                                data: {
+                                    registriesTotal: queryFinanceByUserIdAPI.data.data.total,
+                                    shareLogTotal: queryLinkUserAPI.data.data.total,
+                                    infoName: infoAPI.data.data.name,
+                                    infoHiddenPhone: infoAPI.data.data.hiddenPhone,
+                                },
+                            });
+                            break;
+
+                        case 301:
+                            Toast.info('您好！请先登录账号');
+                            me.context.router.push(`/Login`);
+                            break;
+
+                        case 304:
+                            Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                            break;
+
+                        default:
+                    }
                 }
             )
         );
@@ -87,6 +105,29 @@ export default class UserCenter extends Component {
     // 跳转我的分享
     toShareLog() {
         this.context.router.push( `ShareLog` );
+    }
+
+    // 登出跳转
+    logout() {
+
+        let me = this;
+
+        const failCallback = ( res ) => {
+            if ( res.code == 300 ) {
+                console.log("登出状态")
+            } else if ( res.code == 304 ) {
+                console.log("服务器异常")
+            }
+        }
+
+        axios.get('/api/login/logout', {
+            failCallback: failCallback,
+        })
+        .then( res => {
+            console.log( res,'res' );
+            store.remove('payWeLoginData');
+            this.context.router.push( `/` );
+        });
     }
 
     // 跳转分享步骤
@@ -198,7 +239,14 @@ export default class UserCenter extends Component {
                         </Item>
                     </List>
                     <div className="gylypt-single-button-wrap button-in">
-                        <Button type="default">退出登录</Button>
+                        <Button
+                            type="default"
+                            onClick={
+                                me.logout.bind(me)
+                            }
+                        >
+                            退出登录
+                        </Button>
                     </div>
                 </div>
                 {/* 页脚 */}

@@ -66,6 +66,7 @@
             .am-list-extra {
                 text-overflow: clip;
                 white-space: normal;
+                .word-wrap();
             }
         }
     }
@@ -131,13 +132,17 @@
         }
 
         > .company {
-            color: @fontColor-viceText;
+            color: lighten( @fontColor-viceText,30% );
 
             > span {
                 display: inline-block;
                 vertical-align: text-top;
                 max-width: 110%;
                 .text-hide();
+
+                > small {
+                    color: lighten( @fontColor-viceText,30% );
+                }
             }
         }
     }
