@@ -71,15 +71,21 @@
         }
     }
 
+    &.registries-log,
     &.base-info,
     &.share-log {
 
         .am-list-body {
             border-top: 0;
             width: @width-web-body-public;
+
+            &::after {
+                content: none;
+            }
         }
     }
 
+    &.registries-log,
     &.share-log {
 
         .am-list-item.am-list-item-middle {
@@ -92,6 +98,13 @@
 
         .am-list-item.am-list-item-middle .am-list-line .am-list-extra {
             max-width: 30%;
+        }
+
+        .am-list-body .am-list-item {
+
+            &:last-child .am-list-line {
+                border-bottom: 1px solid @borderColor-primary; /* no */
+            }
         }
     }
 

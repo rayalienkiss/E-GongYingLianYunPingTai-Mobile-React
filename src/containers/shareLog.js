@@ -28,9 +28,9 @@ export default class ShareLog extends Component {
         super( props );
 
         this.state = {
-            data: {
-                list: [],
-            },
+            shareLogItem: (
+                <div className="no-data"></div>
+            ),
         }
     }
 
@@ -44,25 +44,70 @@ export default class ShareLog extends Component {
         )
         .then( res => {
 
-            switch ( res.data.code ) {
-                case 200:
-                    me.setState({
-                        data: {
-                            list: res.data.data.list
+            const code = res.data.code;
+
+            const list = res.data.data.list;
+            //console.log( list,'list' );
+
+            const { shareLogItem } = me.state;
+            //console.log( shareLogItem,'shareLogItem' );
+
+            if ( code == 200 && list.length > 0 ) {
+
+                const shareLogItem = list.map(( item, index ) => {
+
+                    function haveCompanyNameOrNot() {
+                        if ( !item.enterprise ) {
+                            return (
+                                <small>未保存单位名称</small>
+                            );
+                        } else {
+                            return (
+                                <small className="fontcolor-vice">{ item.enterprise }</small>
+                            );
                         }
-                    });
-                    break;
+                    }
 
-                case 301:
-                    Toast.info('您好！请先登录账号');
-                    me.context.router.push(`/Login`);
-                    break;
+                    return (
+                        <Item
+                            multipleLine
+                            extra={
+                                <Badge
+                                    text='已注册'
+                                    className="in-user-center"
+                                />
+                            }
+                            key={ index }
+                        >
+                            <div className="share-log-item-main">
+                                <div className="name">
+                                    { item.name }
+                                </div>
+                                <div className="company">
+                                    （<span>{ haveCompanyNameOrNot() }</span>）
+                                </div>
+                            </div>
+                            <Brief>
+                                <span className="fontcolor-heading">
+                                    { item.hiddenPhone }
+                                </span>
+                            </Brief>
+                        </Item>
+                    );
+                });
+                me.setState({
+                    shareLogItem,
+                });
 
-                case 304:
-                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
-                    break;
+            } else if ( code == 301 ) {
 
-                default:
+                Toast.info( '您好！请先登录账号' );
+                me.context.router.push( `/Login` );
+
+            } else if ( code == 304 ) {
+
+                Toast.offline( '数据失联，服务器正在开小差，请稍后刷新' );
+
             }
         });
     }
@@ -77,49 +122,9 @@ export default class ShareLog extends Component {
 
         let data = me.state.data;
 
+        const { shareLogItem } = me.state;
+
         const title = '我的分享';
-
-        const shareLogItem = data.list.map(( item, index ) => {
-
-            function haveCompanyNameOrNot() {
-                if( !item.enterprise ){
-                    return (
-                        <small>未保存单位名称</small>
-                    );
-                } else {
-                    return (
-                        <small className="fontcolor-vice">{ item.enterprise }</small>
-                    );
-                }
-            }
-
-            return (
-                <Item
-                    multipleLine
-                    extra={
-                        <Badge
-                            text='已注册'
-                            className="in-user-center"
-                        />
-                    }
-                    key={ index }
-                >
-                    <div className="share-log-item-main">
-                        <div className="name">
-                            { item.name }
-                        </div>
-                        <div className="company">
-                            （<span>{ haveCompanyNameOrNot() }</span>）
-                        </div>
-                    </div>
-                    <Brief>
-                        <span className="fontcolor-heading">
-                            { item.hiddenPhone }
-                        </span>
-                    </Brief>
-                </Item>
-            );
-        });
 
         return (
             <div className="container-inner">

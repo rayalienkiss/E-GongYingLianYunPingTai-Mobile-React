@@ -27,60 +27,120 @@ export default class Registries extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-            value: '',
-            data: {
-                list: [],
-            },
+            registriesLogItem: (
+                <div className="no-data"></div>
+            ),
+            financeEnterprise: '',
         };
     }
 
-    onChange( value ) {
-        this.setState({ value });
+    searchInputOnChange( value ) {
+        //console.log( value,'value' );
+        this.setState({
+            financeEnterprise: value,
+        });
     }
 
-    clear() {
-        this.setState({ value: '' });
+    searchInputOnWork() {
+        //e.preventDefault();
+        this.getList();
+    }
+
+    searchInputOnClear() {
+        this.setState({
+            financeEnterprise: '',
+        });
+        //console.log( 'cancel search' );
     }
 
     // 设置我的登记页面的登记数据
     setRes() {
+        this.getList();
+    }
+
+    getList( name ){
 
         let me = this;
+        const { financeEnterprise } = me.state;
 
-        axios.post('/api/user/queryFinanceByUserId', {})
+        this.setState({
+            financeEnterprise: name || financeEnterprise,
+        })
+
+        let data = me.state.data;
+
+        let _financeEnterprise = financeEnterprise
+            _financeEnterprise = _financeEnterprise.replace(/(_|%)/g, ( match, p1 ) => {
+            return '[' + p1 + ']';
+        });
+
+        let params = {
+            financeEnterprise: _financeEnterprise,
+            pageSize: 10,
+            pageNumber: 1
+        };
+        //console.log( params,'params' );
+
+        axios.post( '/api/user/queryFinanceByUserId', params )
         .then( res => {
 
-            switch ( res.data.code ) {
+            const code = res.data.code;
 
-                case 200:
-                    me.setState({
-                        code: res.data.code,
-                        data: {
-                            list: res.data.data.list,
-                        },
-                    });
-                    break;
+            const list = res.data.data.list;
 
-                case 301:
-                    Toast.info('您好！请先登录账号');
-                    me.context.router.push(`/Login`);
-                    break;
+            const { registriesLogItem } = me.state;
 
-                case 304:
-                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
-                    break;
+            if ( code == 200 && list.length > 0 ) {
 
-                default:
+                const registriesLogItem = list.map(( item, index ) => {
+
+                    const financeStatus = item.financeStatus == 1 ? '待回访' : '已回访';
+                    //console.log( item.financeStatus,'item.financeStatus' );
+
+                    return (
+                        <Item
+                            multipleLine
+                            arrow="horizontal"
+                            extra={
+                                <Badge
+                                    text={ financeStatus }
+                                    className="in-user-center"
+                                />
+                            }
+                            onClick={
+                                this.toRegistriesDetail.bind( this, item.id )
+                            }
+                            key={
+                                index
+                            }
+                        >
+                            { item.financeEnterprise }
+                            <Brief>
+                                { item.financeTypeName }
+                            </Brief>
+                        </Item>
+                    );
+                });
+                me.setState({
+                    registriesLogItem,
+                });
+
+            } else if ( code == 301 ) {
+
+                Toast.info( '您好！请先登录账号' );
+                me.context.router.push( `/Login` );
+
+            } else if ( code == 304 ) {
+
+                Toast.offline( '数据失联，服务器正在开小差，请稍后刷新' );
+
             }
         });
     }
 
     //跳转我的登记详细页
     toRegistriesDetail( id ) {
-
-        console.log( id );
         this.context.router.push( `RegistriesDetail/${ id }` );
-
     }
 
     componentDidMount() {
@@ -93,32 +153,7 @@ export default class Registries extends Component {
 
         let data = me.state.data;
 
-        const registriesLogItem = data.list.map(( item, index ) => {
-
-            //console.log( item,'item' );
-
-            return (
-                <Item
-                    multipleLine
-                    arrow="horizontal"
-                    extra={
-                        <Badge
-                            text="未回访"
-                            className="in-user-center"
-                        />
-                    }
-                    onClick={
-                        this.toRegistriesDetail.bind(this, item.id)
-                    }
-                    key={
-                        index
-                    }
-                >
-                    { item.coreEnterprises }
-                    <Brief>{ item.financeTypeName }</Brief>
-                </Item>
-            );
-        });
+        const { registriesLogItem,financeEnterprise } = me.state;
 
         const title = '我的登记'; // 导航文案
 
@@ -128,19 +163,23 @@ export default class Registries extends Component {
                 <Header
                     title={ title }
                     inUser={ true }
-                    linkTo="UserCenter"
+                    linkTo="/UserCenter"
                 />
                 <SearchBar
-                    value={ this.state.value }
-                    placeholder="搜索"
-                    onSubmit={(value) => console.log(value, 'onSubmit')}
-                    onClear={(value) => console.log(value, 'onClear')}
-                    onFocus={() => console.log('onFocus')}
-                    onBlur={() => console.log('onBlur')}
-                    onChange={ this.onChange.bind(this) }
+                    value={ financeEnterprise }
+                    placeholder="请输入企业名称"
+                    onSubmit={
+                        me.searchInputOnWork.bind( me )
+                    }
+                    onChange={
+                        me.searchInputOnChange.bind( me )
+                    }
+                    onCancel={
+                        me.searchInputOnClear.bind( me )
+                    }
                     className="search-in"
                   />
-                <div id="gylypt-user-center" className="share-log animated fadeInDown">
+                <div id="gylypt-user-center" className="registries-log animated fadeIn">
                     <List>
                         { registriesLogItem }
                     </List>

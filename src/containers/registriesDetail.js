@@ -15,6 +15,8 @@ import { Table, Toast } from 'antd-mobile';
 // ajax
 import axios from 'axios'
 
+import Moment from 'moment';
+
 //创建并输出页面组件
 export default class RegistriesDetail extends Component {
 
@@ -90,7 +92,7 @@ export default class RegistriesDetail extends Component {
 
         const title = '我的登记'; // 导航文案
 
-        const financeStatus = data.financeStatus == 1 ? '已回访' : '未回访';
+        const financeStatus = data.financeStatus == 1 ? '待回访' : '已回访';
 
         const columns = [
             {
@@ -109,7 +111,7 @@ export default class RegistriesDetail extends Component {
         const tableRes = [
             {
                 label: '状态',
-                content: financeStatus, //接口返回 1 为跟踪中，2 为未跟中，通过上面的 const financeStatus = data.financeStatus == 1 ? "跟踪中" : "未跟踪"; 进行展示形式转化
+                content: financeStatus, //接口返回 2 为已回访，1 为待回访，通过上面的 const financeStatus = data.financeStatus == 1 ? '待回访' : '已回访'; 进行展示形式翻译
             },
             {
                 label: '企业联系人',
@@ -133,7 +135,7 @@ export default class RegistriesDetail extends Component {
             },
             {
                 label: '登记时间',
-                content: data.createTime,
+                content: data.createTime = Moment(data.createTime).format("YYYY-MM-DD HH:mm"),
             },
             {
                 label: '联系人反馈',
