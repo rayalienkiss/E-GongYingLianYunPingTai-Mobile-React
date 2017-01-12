@@ -67,12 +67,12 @@ export default class RegistriesDetail extends Component {
                     break;
 
                 case 301:
-                    Toast.info('您好！请先登录账号');
-                    me.context.router.push(`/Login`);
+                    Toast.info( '您好！请先登录账号' );
+                    me.context.router.push( `/Login` );
                     break;
 
                 case 304:
-                    Toast.offline('数据失联，服务器正在开小差，请稍后刷新');
+                    Toast.offline( '数据失联，服务器正在开小差，请稍后刷新' );
                     break;
 
                 default:
@@ -135,7 +135,7 @@ export default class RegistriesDetail extends Component {
             },
             {
                 label: '登记时间',
-                content: data.createTime = Moment(data.createTime).format("YYYY-MM-DD HH:mm"),
+                content: data.createTime = Moment( data.createTime ).format( "YYYY-MM-DD HH:mm" ),
             },
             {
                 label: '联系人反馈',
