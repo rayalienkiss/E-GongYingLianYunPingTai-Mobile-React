@@ -155,7 +155,7 @@ export default class UserCenter extends Component {
                     inUser={ true }
                 />
                 <div id="gylypt-user-center">
-                    <Link to="BaseInfo">
+                    <Link to="ProFile">
                         <Card
                             full
                             className="card-in"

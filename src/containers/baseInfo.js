@@ -25,7 +25,7 @@ import axios from 'axios'
 import { ruleType, tools } from 'helpers';
 
 // 创建并输出页面组件
-class BaseInfo extends Component {
+class ProFile extends Component {
 
     static contextTypes = {
         router: React.PropTypes.object.isRequired,
@@ -258,4 +258,4 @@ class BaseInfo extends Component {
     }
 }
 
-export default createForm()(BaseInfo);
+export default createForm()( ProFile );

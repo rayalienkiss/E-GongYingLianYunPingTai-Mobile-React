@@ -100,11 +100,11 @@ const routes = {
         }
     },{
         //基础信息
-        path: 'BaseInfo',
+        path: 'ProFile',
         getComponent(nextState, cb) {
             require.ensure([], require => {
-                cb(null, require('../containers/baseInfo.js').default)
-            }, 'BaseInfo')
+                cb(null, require('../containers/profile.js').default)
+            }, 'ProFile')
         }
     },{
         //分享链接
