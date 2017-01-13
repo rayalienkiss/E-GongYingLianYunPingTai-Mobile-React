@@ -29,7 +29,8 @@
 
     &-btn,
     &-btn-left,
-    &-btn-right {
+    &-btn-right,
+    &-btn-fun {
         .size( auto,@height-header );
         padding: 0 @gapSize-public*2;
         position: absolute;
@@ -39,7 +40,7 @@
         background-color: transparent;
         background-position: center;
         background-repeat: no-repeat;
-        background-size: 50%;
+        background-size: 80%;
 
         &:active {
             background-color: darken( @bgColor-header,10% );
@@ -48,12 +49,23 @@
 
     &-btn-left {
         left: 0;
-        background-image: url( "@{images-url}svg-icon/chevron-thin-left-fff.svg" );
+        background-image: url( "@{images-url}svg-icon/angle-left-fff.svg" );
     }
 
     &-btn-right {
         right: 0;
         background-image: url( "@{images-url}svg-icon/user-fff.svg" );
+        background-size: 50%;
+    }
+
+    &-btn-fun {
+        display: none;
+        background-size: 45%;
+        right: 0;
+
+        &.add {
+            background-image: url( "@{images-url}svg-icon/add-fff.svg" );
+        }
     }
 
     //当需页面头部只有网站 LOGO
@@ -73,5 +85,9 @@
     // 登录及个人中心相关页面不需要个人中心按钮
     &.user .header-btn-right {
         display: none;
+    }
+
+    &.registries .header-btn-fun {
+        display: block;
     }
 }

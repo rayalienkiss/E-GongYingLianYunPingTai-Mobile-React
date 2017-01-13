@@ -26,6 +26,7 @@ export default class Header extends Component {
         // 设置 nav 默认属性
         inIndex: false,
         inUser: false,
+        inRegistries: false,
         linkTo: '',
     };
 
@@ -33,23 +34,21 @@ export default class Header extends Component {
         // 验证 nav 的属性
         inIndex: React.PropTypes.bool.isRequired,
         inUser: React.PropTypes.bool.isRequired,
+        inRegistries: React.PropTypes.bool.isRequired,
         linkTo: React.PropTypes.string.isRequired,
     };
 
     render() {
 
         // 把组件的 this 带到这里
-        let me = this,
-            source = me.state;
-
-        // 找回路径缩写里面的需要用的数据
-        const { isLogin } = source;
+        let me = this;
 
         // 需要开启的导航样式
         const headCls = classNames({
             header: true,
             index: me.props.inIndex,
             user: me.props.inUser,
+            registries: me.props.inRegistries,
         })
 
         let payWeLoginData = store.get('payWeLoginData');
@@ -70,6 +69,7 @@ export default class Header extends Component {
                     { this.props.title }
                 </p>
                 { user }
+                <Link to="/Application" className="header-btn-fun add"></Link>
             </div>
         )
     }

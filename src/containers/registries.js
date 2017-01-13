@@ -163,6 +163,7 @@ export default class Registries extends Component {
                 <Header
                     title={ title }
                     inUser={ true }
+                    inRegistries={ true }
                     linkTo="/UserCenter"
                 />
                 <SearchBar
