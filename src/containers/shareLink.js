@@ -33,6 +33,9 @@ export default class ShareLink extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: {
+                link: 'link',
+            }
         };
     }
 
@@ -80,19 +83,45 @@ export default class ShareLink extends Component {
         Popup.hide();
     }
 
+    // 获取个人信息页面的接口
+    getRes() {
+
+        let me = this;
+
+        let data = me.state.data;
+
+        axios.get(
+            '/api/user/info'
+        )
+        .then( res => {
+
+            const { link } = data = res.data.data;
+
+            this.setState({
+                data
+            });
+        });
+    }
+
+    componentDidMount() {
+        this.getRes();
+    }
+
     render() {
 
         let me = this;
 
-        const title = '推广链接分享'; // 导航文案
+        let data = me.state.data;
 
-        const shareLink = '我在E+供应链云平台，这里融资更轻松，邀请你一起来http://www.paywe.cn/?t='
+        const { link } = data;
+
+        const shareLink = '我在E+供应链云平台，这里融资更轻松，邀请你一起来http://www.paywe.cn/?t=' + link
 
         return (
             <div className="container-inner">
                 {/* nav */}
                 <Header
-                    title={ title }
+                    title="推广链接分享"
                     inUser={ true }
                     linkTo="UserCenter"
                 />

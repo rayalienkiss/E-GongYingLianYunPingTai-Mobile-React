@@ -9,12 +9,12 @@ import { Button, List, InputItem, Icon, Flex, Toast } from 'antd-mobile'
 
 import { createForm } from 'rc-form'
 
-import store from 'store';
+import store from 'store'
 
 // ajax
 import axios from 'axios'
 
-import './appli-fill.less';
+import './appli-fill.less'
 
 //helpers
 import { ruleType, tools } from 'helpers';
@@ -49,7 +49,7 @@ class LoginForm extends Component {
 
         me.props.form.validateFields(['userPhone'], (errors, data) => {
             if (errors) {
-                //me.showError( errors );
+                // me.showError( errors );
                 me.smsIsSending = false;
                 return false;
             }
@@ -63,7 +63,7 @@ class LoginForm extends Component {
             axios.get(url).then(res => {
                 me.smsIsSending = false;
                 if (res.data && res.data.code == 200) {
-                    //  短信发送成功TODO
+                    // 短信发送成功TODO
                     me.smsCodeTimerStart();
                 } else {
                     Toast.fail(res.data.message, 1.5);
@@ -131,7 +131,7 @@ class LoginForm extends Component {
             axios.get(
                 '/api/login/login?phone='+ data.userPhone + "&SMScode=" + data.SMScode
             )
-                .then(res => {
+            .then(res => {
 
                 if ( !res.data.user ) {
                     res.data.user = {};

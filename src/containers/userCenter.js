@@ -125,7 +125,7 @@ export default class UserCenter extends Component {
         })
         .then( res => {
             console.log( res,'res' );
-            store.remove('payWeLoginData');
+            store.remove( 'payWeLoginData' );
             this.context.router.push( `/` );
         });
     }

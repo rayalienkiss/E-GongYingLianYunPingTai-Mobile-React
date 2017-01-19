@@ -11,6 +11,9 @@ import store from 'store';
 
 import { Link } from 'react-router';
 
+// ajax
+import axios from 'axios'
+
 export default class Header extends Component {
 
     constructor(props) {
@@ -37,6 +40,27 @@ export default class Header extends Component {
         inRegistries: React.PropTypes.bool.isRequired,
         linkTo: React.PropTypes.string.isRequired,
     };
+
+    // 服务器端账户超时登录，根据 token 业务 code 判断是否清除 local Storage
+    ifLogout() {
+
+        let me = this;
+
+        axios.get(
+            '/api/token',
+        )
+        .then(res => {
+            let code = res.data.code;
+            if ( code == 300 ) {
+                store.remove( 'payWeLoginData' );
+            }
+        });
+    }
+
+
+    componentDidMount() {
+        this.ifLogout();
+    }
 
     render() {
 
