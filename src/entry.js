@@ -8,7 +8,6 @@ import 'public/less/app'
 import React from 'react'
 import { render } from 'react-dom'
 
-
 // 路由配置
 import routes from 'routes'
 

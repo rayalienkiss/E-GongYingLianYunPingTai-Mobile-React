@@ -42,6 +42,7 @@
     "babel-preset-stage-2": "^6.13.0",
     "classnames": "^2.2.5",
     "clean-webpack-plugin": "^0.1.10",
+    "clipboard": "^1.5.16",
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.24.0",
     "es6-promise": "^3.2.1",
@@ -70,6 +71,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
-    "webpack-merge": "^0.14.1"
+    "webpack-merge": "^0.14.1",
+    "zeroclipboard": "^2.3.0"
   }
 }

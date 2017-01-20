@@ -10,13 +10,16 @@ import React, { Component } from 'react'
 import { Header, Footer, SharePanel } from 'components'
 
 // am 组件
-import { TextareaItem, List, Button, Popup, Icon } from 'antd-mobile';
+import { TextareaItem, List, Button, Popup, Icon, Toast } from 'antd-mobile';
+
+// Clipboard 剪贴板插件
+import Clipboard from 'Clipboard'
 
 // react-router 组件
 import { Link } from 'react-router';
 
 // ajax
-import axios from 'axios'
+import axios from 'axios';
 
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
 let wrapProps;
@@ -41,41 +44,44 @@ export default class ShareLink extends Component {
 
     // 打开分享面板
     sharePanelShow() {
-
-        let copyCon = document.getElementById('csv');
-
-        copyCon.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-
         // 展示分享面板
         Popup.show(
             <div>
-                <div className="fn-pa-20">
+                {/* <div className="fn-pa-20">
                     <p className="share-tips fn-mb-20">
                         <Icon type="check-circle"/>
                         复制成功，可以粘贴分享到以下网站！
                     </p>
                     <SharePanel/>
-                </div>
-                <Button
-                    type="default"
-                    htmlType="button"
-                    style={
-                        {
-                            borderBottom: 'none',
-                            borderLeft: 'none',
-                            borderRight: 'none',
-                            borderRadius: 0
+                </div> */}
+                <SharePanel/>
+                <div className="fn-pl-20 fn-pr-20 fn-pb-20">
+                    <Button
+                        type="default"
+                        htmlType="button"
+                        onClick={
+                            this.sharePanelHide.bind( this )
                         }
-                    }
-                    onClick={
-                        this.sharePanelHide.bind( this )
-                    }
-                >
-                    取消
-                </Button>
+                    >
+                        取消分享
+                    </Button>
+                </div>
             </div>
         );
+    }
+
+    // 分享链接的复制 用 Clipboard 实现
+    useClipboard() {
+        // 初始化
+        var clipboard = new Clipboard( '.forClipboard' );
+        //优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
+        clipboard.on( 'success', function( e ) {
+            Toast.success( '复制成功，可以粘贴分享到以上网站！',2 );
+            e.clearSelection();
+        });
+        clipboard.on( 'error', function( e ) {
+            Toast.fail( '请选择“拷贝”进行复制!', 2 );
+        });
     }
 
     // 关闭分享面板
@@ -105,6 +111,7 @@ export default class ShareLink extends Component {
 
     componentDidMount() {
         this.getRes();
+        this.useClipboard();
     }
 
     render() {
@@ -126,8 +133,12 @@ export default class ShareLink extends Component {
                     linkTo="UserCenter"
                 />
                 <div id="gylypt-user-center">
+
+                    {/* <input id="foo"  value="http://www.968309.com/mobile.php"/>
+                    <Button className="btn" data-clipboard-target="#foo">复制</Button> */}
+
                     <h3 className="title animated fadeInDown">您的分享内容是：</h3>
-                    <List className="only-textarea animated fadeInDown">
+                    {/* <List className="only-textarea animated fadeInDown">
                         <TextareaItem
                             //disabled
                             readOnly
@@ -136,9 +147,15 @@ export default class ShareLink extends Component {
                             rows={ 3 }
                             id='csv'
                          />
-                    </List>
+                    </List> */}
+                    {/* 展示会被 Clipboard 复制的内容 */}
+                    <p className="share-link animated fadeInDown">
+                        { shareLink }
+                    </p>
                     <div className="gylypt-single-button-wrap animated fadeInUp">
                         <Button
+                            className="forClipboard"
+                            data-clipboard-text={ shareLink }
                             type="primary"
                             onClick={
                                 me.sharePanelShow.bind( me )
