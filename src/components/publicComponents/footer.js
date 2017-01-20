@@ -64,7 +64,7 @@ export default class Footer extends Component {
                     版权所有&copy;广东钱途互联商务服务有限公司&nbsp;粤ICP备&nbsp;14098252号-1
                 </p>
                 <p>
-                    客服电话：400-106-6698
+                    客服电话：400-9928-699
                 </p>
             </footer>
         )

@@ -15,7 +15,7 @@ export default class FlowResult extends Component {
                     <b>{ this.props.mainNotice }</b>
                 </h1>
                 <p>我们将尽快与您联系，请保持电话畅通</p>
-                <p>如需立即获得结果，请联系客服电话：400-106-6698</p>
+                <p>如需立即获得结果，请联系客服电话：400-9928-699</p>
             </div>
         )
     }
