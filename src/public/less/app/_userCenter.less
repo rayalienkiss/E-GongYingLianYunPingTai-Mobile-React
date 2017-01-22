@@ -14,11 +14,11 @@
     .am-badge.in-user-center .am-badge-text {
         transform: translate( 0,-5% );
         font-size: ceil( @fontSize-default*0.9 );
-        font-size: @fontSize-default;
+        //font-size: @fontSize-default;
         height: auto;
         line-height: @lineHeight-base;
         background-color: transparent;
-        border: 1px solid @borderColor-primary; /* no */
+        //border: 1px solid @borderColor-primary; /* no */
         color: @fontColor-viceText;
         .rounded( @borderRadius-public );
     }
@@ -87,6 +87,7 @@
     }
 
     &.registries-log,
+    &.registries-log-detail,
     &.share-log {
 
         .am-list-body {
@@ -98,7 +99,13 @@
             }
         }
 
-        .am-list-item.am-list-item-middle {
+        .am-list-item .am-list-content,
+        .am-list-item .am-list-extra {
+            font-size: @fontSize-default !important;
+        }
+
+        .am-list-item.am-list-item-middle,
+        .am-list-item.am-list-item-top {
             padding-left: 0;
 
             .am-list-line {
@@ -114,6 +121,25 @@
 
             &:last-child .am-list-line {
                 border-bottom: 1px solid @borderColor-primary; /* no */
+            }
+        }
+    }
+
+    &.registries-log-detail {
+
+        .am-list-item .am-list-content {
+            max-width: 40%;
+        }
+
+        .am-list-item.am-list-item-top .am-list-line .am-list-extra {
+            text-align: left;
+        }
+
+        .coreEnterprisesName {
+            padding-top: @gapSize-public;
+
+            &:first-child:not( :last-child ) {
+                padding-top: 0;
             }
         }
     }

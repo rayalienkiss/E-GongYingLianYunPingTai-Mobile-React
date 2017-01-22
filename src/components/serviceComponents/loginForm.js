@@ -228,6 +228,7 @@ class LoginForm extends Component {
                                 }
                             }
                             labelNumber={ 0 }
+                            type="number"
                             placeholder="请输入您的手机号码"
                         />
 

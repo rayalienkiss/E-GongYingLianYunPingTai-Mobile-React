@@ -140,7 +140,7 @@ export default class Registries extends Component {
 
     //跳转我的登记详细页
     toRegistriesDetail( id ) {
-        this.context.router.push( `RegistriesDetail/${ id }` );
+        this.context.router.push( `RegistriesDetail${ id }` );
     }
 
     componentDidMount() {

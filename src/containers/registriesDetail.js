@@ -10,7 +10,9 @@ import React, { Component } from 'react'
 import { Header, Footer } from 'components'
 
 // am 组件
-import { Table, Toast } from 'antd-mobile';
+import { Toast, List } from 'antd-mobile';
+const Item = List.Item;
+const Brief = Item.Brief;
 
 // ajax
 import axios from 'axios'
@@ -32,7 +34,7 @@ export default class RegistriesDetail extends Component {
                 amount: '',
                 contactsName: '',
                 contactsPhone: '',
-                coreEnterprises: '',
+                coreEnterprises: [],
                 createTime: '',
                 financeEnterprise: '',
                 feedbackContent: '',
@@ -57,9 +59,13 @@ export default class RegistriesDetail extends Component {
         )
         .then( res => {
 
-            let data = res.data.data
+            let code = res.data.code;
 
-            switch ( res.data.code ) {
+            let data = me.state.data = res.data.data;
+
+            const coreEnterprises = me.state.data.coreEnterprises = res.data.data.coreEnterprises;
+
+            switch ( code ) {
                 case 200:
                     me.setState({
                         data
@@ -87,10 +93,21 @@ export default class RegistriesDetail extends Component {
     render() {
 
         let me = this;
-
         let data = me.state.data;
+        const { coreEnterprises } = data;
 
-        const title = '我的登记'; // 导航文案
+        const coreEnterprisesName = coreEnterprises.map(( item, index ) => {
+            return (
+                <p
+                    key={ index }
+                    className="coreEnterprisesName"
+                >
+                    { item.coreEnterpriseName }；
+                </p>
+            );
+        });
+
+        const title = data.financeEnterprise; // 导航文案
 
         const financeStatus = data.financeStatus == 1 ? '待回访' : '已回访';
 
@@ -108,7 +125,7 @@ export default class RegistriesDetail extends Component {
             },
         ];
 
-        const tableRes = [
+        const listItemRes = [
             {
                 label: '状态',
                 content: financeStatus, //接口返回 2 为已回访，1 为待回访，通过上面的 const financeStatus = data.financeStatus == 1 ? '待回访' : '已回访'; 进行展示形式翻译
@@ -127,7 +144,7 @@ export default class RegistriesDetail extends Component {
             },
             {
                 label: '对应核心企业',
-                content: data.coreEnterprises,
+                content: coreEnterprisesName,
             },
             {
                 label: '登记金额(万元)',
@@ -137,11 +154,21 @@ export default class RegistriesDetail extends Component {
                 label: '登记时间',
                 content: data.createTime = Moment( data.createTime ).format( "YYYY-MM-DD HH:mm" ),
             },
-            {
-                label: '联系人反馈',
-                content: data.feedbackContent,
-            },
         ];
+
+        const listItems = listItemRes.map(( item, index ) => {
+            return (
+                <Item
+                    key={ index }
+                    extra={ item.content }
+                    multipleLine
+                    align="top"
+                    wrap
+                >
+                    { item.label }
+                </Item>
+            );
+        });
 
         return (
             <div className="container-inner">
@@ -151,15 +178,16 @@ export default class RegistriesDetail extends Component {
                     inUser={ true }
                     linkTo="Registries"
                 />
-                <div id="gylypt-user-center">
-                    <h2 className="title border">
+                <div id="gylypt-user-center" className="registries-log-detail">
+                    {/* <h2 className="title border">
                         { data.financeEnterprise }
-                    </h2>
-                    <Table
-                        direction="horizon"
-                        columns={ columns }
-                        dataSource={ tableRes }
-                     />
+                    </h2> */}
+                     <List>
+                         { listItems }
+                     </List>
+                     <h3 className="title fontcolor-vice">
+                         联系人反馈：<br/>{ data.feedbackContent }
+                     </h3>
                 </div>
                 {/* 页脚 */}
                 <Footer/>
