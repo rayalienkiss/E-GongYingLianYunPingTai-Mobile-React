@@ -4,16 +4,16 @@
 */
 
 // 依赖框架
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 // 公用组件
-import { Header, Footer, SharePanel } from 'components'
+import { Header, Footer, SharePanel } from 'components';
 
 // am 组件
 import { TextareaItem, List, Button, Popup, Icon, Toast } from 'antd-mobile';
 
 // Clipboard 剪贴板插件
-import Clipboard from 'Clipboard'
+import clipboard from 'Clipboard';
 
 // react-router 组件
 import { Link } from 'react-router';
@@ -73,13 +73,13 @@ export default class ShareLink extends Component {
     // 分享链接的复制 用 Clipboard 实现
     useClipboard() {
         // 初始化
-        var clipboard = new Clipboard( '.forClipboard' );
+        var letClipboard = new clipboard( '.forClipboard' );
         //优雅降级:safari 版本号>=10,提示复制成功;否则提示需在文字选中后，手动选择“拷贝”进行复制
-        clipboard.on( 'success', function( e ) {
+        letClipboard.on( 'success', function( e ) {
             Toast.success( '复制成功，可以粘贴分享到以上网站！',2 );
             e.clearSelection();
         });
-        clipboard.on( 'error', function( e ) {
+        letClipboard.on( 'error', function( e ) {
             Toast.fail( '请选择“拷贝”进行复制!', 2 );
         });
     }
@@ -133,9 +133,6 @@ export default class ShareLink extends Component {
                     linkTo="UserCenter"
                 />
                 <div id="gylypt-user-center">
-
-                    {/* <input id="foo"  value="http://www.968309.com/mobile.php"/>
-                    <Button className="btn" data-clipboard-target="#foo">复制</Button> */}
 
                     <h3 className="title animated fadeInDown">您的分享内容是：</h3>
                     {/* <List className="only-textarea animated fadeInDown">
