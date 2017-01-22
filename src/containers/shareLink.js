@@ -13,7 +13,7 @@ import { Header, Footer, SharePanel } from 'components';
 import { TextareaItem, List, Button, Popup, Icon, Toast } from 'antd-mobile';
 
 // Clipboard 剪贴板插件
-import clipboard from 'Clipboard';
+import clipboard from 'clipboard';
 
 // react-router 组件
 import { Link } from 'react-router';
@@ -37,7 +37,7 @@ export default class ShareLink extends Component {
         super(props);
         this.state = {
             data: {
-                link: 'link',
+                link: '用户未登录',
             }
         };
     }
