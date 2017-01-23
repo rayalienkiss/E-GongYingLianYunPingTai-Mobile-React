@@ -599,23 +599,56 @@ class AppliForm extends React.Component {
                 });
 
                 const inputItems = getFieldValue('num').map((val, index) => {
-                            const icon = index == 0 ? "plus" : "cross";
-                            const type = index == 0 ? "primary" : "ghost";
-                            const onClick = index == 0 ? me.add.bind(me) : me.remove.bind(me);
-                            const disabled = index == 0 && me.state.addDisabled ? true : false;
-                            return (
-                                    <InputItem
-                    clear
-                    labelNumber={6.5}
-                    className="input-extra-for-btn"
-                    key={index}
-                    {...getFieldProps(`coreEnterprises${index}`,fieldProps['coreEnterprises'])}
-                    error={!!getFieldError(`coreEnterprises${index}`)}
-                    extra={<Button icon={icon} type={ type } inline size="small" onClick={() => {onClick(index)}} disabled={disabled}></Button>}
-                    placeholder="请输入核心企业名称"
-                />
-            );
-        });
+                    const icon = index == 0 ? "plus" : "cross";
+                    const type = index == 0 ? "primary" : "ghost";
+                    const onClick = index == 0 ? me.add.bind(me) : me.remove.bind(me);
+                    const disabled = index == 0 && me.state.addDisabled ? true : false;
+                    return (
+                        <InputItem
+                            clear
+                            labelNumber={6.5}
+                            className="input-extra-for-btn"
+                            key={index}
+                            {
+                                ...getFieldProps(
+                                    `coreEnterprises${index}`,
+                                    fieldProps['coreEnterprises']
+                                )
+                            }
+                            error={
+                                !!getFieldError(
+                                    `coreEnterprises${index}`
+                                )
+                            }
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError(`coreEnterprises${index}`),2 );
+                                }
+                            }
+                            extra={
+                                <Button
+                                    icon={
+                                        icon
+                                    }
+                                    type={
+                                        type
+                                    }
+                                    inline
+                                    size="small"
+                                    onClick={
+                                        () => {
+                                            onClick(index)
+                                        }
+                                    }
+                                    disabled={
+                                        disabled
+                                    }
+                                />
+                            }
+                            placeholder="请输入核心企业名称"
+                        />
+                    );
+                });
 
         const companyItems = data.coreEnterprisesArr.map((item, index) => {
             if (index > 3 && !me.state.isMore) { //  超过四个不展示
@@ -633,56 +666,314 @@ class AppliForm extends React.Component {
         return (
             <div className="custom-form-wrap form-box-in-1">
                 <form className="custom-form">
-                    {/* 选择融资类型 */}
 
                     {/* 融资企业信息 */}
-                    <List renderHeader={() => <h3><Icon type="edit"/>&nbsp;&nbsp;融资企业信息</h3>} className="customs-form-components no-border-bottom">
+                    <List
+                        renderHeader={
+                            () => (
+                                <h3><
+                                    Icon type="edit"/>&nbsp;&nbsp;融资企业信息
+                                </h3>
+                            )
+                        }
+                        className="customs-form-components no-border-bottom"
+                    >
+
+                        {/* 选择融资类型 */}
                         <div className="label-fake">选择融资类型</div>
-                        <Picker {...getFieldProps('financeType',fieldProps['financeType'])} data={data.financeTypesArr} cols={1} className="forss">
+                        <Picker
+                            {
+                                ...getFieldProps(
+                                    'financeType',
+                                    fieldProps['financeType']
+                                )
+                            }
+                            data={
+                                data.financeTypesArr
+                            }
+                            cols={
+                                1
+                            }
+                            className="forss"
+                        >
                           <List.Item arrow="horizontal"/>
                         </Picker>
+
+                        {/* 对应核心企业 */}
                         <div className="label-fake">对应核心企业</div>
                         { inputItems }
-                        <List.Item wrap={true} multipleLine={ true } style={{ border: 'none', marginTop: 0 }}>
-                            <List.Item.Brief style={ { whiteSpace : 'normal', lineHeight: 1.6 } }>
-                                <span>可选择的核心企业：&nbsp;</span>
-                                { companyItems }{ moreBtn }
+
+                        {/* 可选择的核心企业： */}
+                        <List.Item
+                            wrap={
+                                true
+                            }
+                            multipleLine={
+                                true
+                            }
+                            style={{
+                                border: 'none', marginTop: 0
+                            }}
+                        >
+                            <List.Item.Brief
+                                style={{
+                                    whiteSpace : 'normal',
+                                    lineHeight: 1.6
+                                }}
+                            >
+                                <span>
+                                    可选择的核心企业：&nbsp;
+                                </span>
+                                { companyItems }
+                                { moreBtn }
                             </List.Item.Brief>
                         </List.Item>
+
+                        {/* 融资企业 */}
                         <div className="label-fake">融资企业</div>
-                        <InputItem {...getFieldProps('financeEnterprise',fieldProps['financeEnterprise'])} clear placeholder="请输入您的企业名称" error={!!getFieldError('financeEnterprise')} labelNumber={1}/>
-                        <div className="label-fake">{ data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }</div>
-                        <InputItem {...getFieldProps('amount',fieldProps['amount'])} clear error={!!getFieldError('amount')} extra="万元" labelNumber={1}/>
+                        <InputItem
+                            {
+                                ...getFieldProps(
+                                    'financeEnterprise',
+                                    fieldProps['financeEnterprise']
+                                )
+                            }
+                            clear
+                            placeholder="请输入您的企业名称"
+                            error={
+                                !!getFieldError('financeEnterprise')
+                            }
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError('financeEnterprise'),2 );
+                                }
+                            }
+                            labelNumber={
+                                1
+                            }
+                        />
+
+                        {/* 存量应收账款 /  应付订单总额 */}
+                        <div className="label-fake">
+                            { data.financeType[0] == 1 ? '存量应收账款' : '应付订单总额' }
+                        </div>
+                        <InputItem
+                            {
+                                ...getFieldProps(
+                                    'amount',
+                                    fieldProps['amount']
+                                )
+                            }
+                            clear
+                            error={
+                                !!getFieldError('amount')
+                            }
+                            extra="万元"
+                            labelNumber={
+                                1
+                            }
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError('amount'),2 );
+                                }
+                            }
+                        />
+
+                        {/* 企业联系人 */}
                         <div className="label-fake">企业联系人</div>
-                        <InputItem {...getFieldProps('contactsName',fieldProps['contactsName'])} clear error={!!getFieldError('contactsName')} labelNumber={1} placeholder="联系人姓名"/>
+                        <InputItem
+                            {
+                                ...getFieldProps(
+                                    'contactsName',
+                                    fieldProps['contactsName']
+                                )
+                            }
+                            clear
+                            error={
+                                !!getFieldError('contactsName')
+                            }
+                            labelNumber={
+                                1
+                            }
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError('contactsName'),2 );
+                                }
+                            }
+                            placeholder="联系人姓名"
+                        />
+
+                        {/* 联系电话 */}
                         <div className="label-fake">联系电话</div>
-                        <InputItem {...getFieldProps('contactsPhone',fieldProps['contactsPhone'])} clear error={!!getFieldError('contactsPhone')} labelNumber={1}  placeholder="手机号码"/>
+                        <InputItem
+                                {
+                                ...getFieldProps(
+                                    'contactsPhone',
+                                    fieldProps['contactsPhone']
+                                )
+                            }
+                            clear
+                            error={
+                                !!getFieldError('contactsPhone')
+                            }
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError('contactsPhone'),2 );
+                                }
+                            }
+                            labelNumber={
+                                1
+                            }
+                            placeholder="手机号码"
+                        />
+
                     </List>
 
                     {/* 推荐人信息 */}
-                    <List renderHeader={() => <div><h4 style={{ color: '#e15b2c' }}>推荐人信息</h4><p>填写您的信息以便我们沟通合作</p></div>} className="customs-form-components no-border-bottom form-box-in-2">
+                    <List
+                        renderHeader={
+                            () => (
+                                <div>
+                                    <h4
+                                        style={{
+                                            color: '#e15b2c'
+                                        }}
+                                    >
+                                        推荐人信息
+                                    </h4>
+                                    <p>
+                                        填写您的信息以便我们沟通合作
+                                    </p>
+                                </div>
+                            )
+                        }
+                        className="customs-form-components no-border-bottom form-box-in-2"
+                    >
+                        {/* 推荐人身份 */}
                         <div className="label-fake">推荐人身份</div>
-                        <Picker {...getFieldProps('identity',fieldProps['identity'])} data={data.identitiesArr} cols={1} className="forss">
+                        <Picker
+                            {
+                                ...getFieldProps(
+                                    'identity',
+                                    fieldProps['identity']
+                                )
+                            }
+                            data={
+                                data.identitiesArr
+                            }
+                            cols={
+                                1
+                            }
+                            className="forss"
+                            onErrorClick={
+                                () => {
+                                    Toast.fail( getFieldError('identity'),2 );
+                                }
+                            }
+                        >
                           <List.Item arrow="horizontal"/>
                         </Picker>
                         <div className="iosDisabled">
+
+                            {/* 真实姓名 */}
                             <div className="label-fake">真实姓名</div>
-                            <InputItem {...getFieldProps('userName',fieldProps['userName'])} clear error={!!getFieldError('userName')} labelNumber={5} placeholder="推荐人真实姓名" disabled={ data.isLogin }/>
+                            <InputItem
+                                {
+                                    ...getFieldProps(
+                                        'userName',
+                                        fieldProps['userName']
+                                    )
+                                }
+                                clear
+                                error={
+                                    !!getFieldError('userName')
+                                }
+                                onErrorClick={
+                                    () => {
+                                        Toast.fail( getFieldError('userName'),2 );
+                                    }
+                                }
+                                labelNumber={
+                                    5
+                                }
+                                placeholder="推荐人真实姓名"
+                                disabled={
+                                    data.isLogin
+                                }
+                            />
+
+                            {/* 手机号码 */}
                             <div className="label-fake">手机号码</div>
-                            <InputItem {...getFieldProps('userPhone',fieldProps['userPhone'])} clear error={!!getFieldError('userPhone')} labelNumber={5} placeholder="推荐人手机号码" disabled={ data.isLogin }/>
+                            <InputItem
+                                {
+                                    ...getFieldProps(
+                                        'userPhone',
+                                        fieldProps['userPhone']
+                                    )
+                                }
+                                clear
+                                error={
+                                    !!getFieldError('userPhone')
+                                }
+                                onErrorClick={
+                                    () => {
+                                        Toast.fail( getFieldError('userPhone'),2 );
+                                    }
+                                }
+                                labelNumber={
+                                    5
+                                }
+                                placeholder="推荐人手机号码"
+                                disabled={
+                                    data.isLogin
+                                }
+                            />
+
                         </div>
                         {
                             data.isLogin ? "" :
                             <div>
+
+                                {/* 验证码 */}
                                 <div className="label-fake">验证码</div>
                                 <InputItem
-                                    {...getFieldProps('SMScode',fieldProps['SMScode'])}
-                                    error={!!getFieldError('SMScode')}
-                                    clear labelNumber={5}
+                                    {
+                                        ...getFieldProps(
+                                            'SMScode',
+                                            fieldProps['SMScode']
+                                        )
+                                    }
+                                    error={
+                                        !!getFieldError('SMScode')
+                                    }
+                                    onErrorClick={
+                                        () => {
+                                            Toast.fail( getFieldError('SMScode'),2 );
+                                        }
+                                    }
+                                    clear
+                                    labelNumber={
+                                        5
+                                    }
                                     className="input-extra-for-btn"
                                     type="number"
                                     placeholder="请输入验证码"
-                                    extra={<Button type="primary" onClick={ me.smsSend.bind(me) } inline size="small" disabled={ data.smsDisabled }>{ data.smsContext }</Button>}/>
+                                    extra={
+                                        <Button
+                                            type="primary"
+                                            onClick={
+                                                me.smsSend.bind(me)
+                                            }
+                                            inline
+                                            size="small"
+                                            disabled={
+                                                data.smsDisabled
+                                            }
+                                        >
+                                            { data.smsContext }
+                                        </Button>
+                                    }
+                                />
                             </div>
                         }
                     </List>
@@ -690,7 +981,14 @@ class AppliForm extends React.Component {
                     {/* 协议信息 */}
                     <Flex>
                         <Flex.Item>
-                          <AgreeItem data-seed="logId" {...getFieldProps('agree',fieldProps['agree'])}>
+                          <AgreeItem
+                              data-seed="logId" {
+                                  ...getFieldProps(
+                                      'agree',
+                                      fieldProps['agree']
+                                  )
+                              }
+                             >
                             已阅读并同意《<a href="/UserRight" target="_blank">用户须知</a>》
                           </AgreeItem>
                         </Flex.Item>
@@ -698,16 +996,26 @@ class AppliForm extends React.Component {
 
                     {/* 表单提交 */}
                     <div className="appli-form-btn-box">
-                        <Button className="btn" type="primary" disabled={ !data.agreeChecked } onClick={ me.submit.bind(this) }>立即登记</Button>
+
+                        <Button
+                            className="btn"
+                            type="primary"
+                            disabled={
+                                !data.agreeChecked
+                            }
+                            onClick={
+                                me.submit.bind(this)
+                            }
+                        >
+                            立即登记
+                        </Button>
 
                         {/* 切换推荐人 */}
                         {
-                            data.isLogin ?
-                                <Button className="btn" onClick={ me.loginOut.bind(me) } type="default" style={{ marginTop: 10 }}>切换推荐人</Button>
-                            :
-                            ""
+                            data.isLogin ? <Button className="btn" onClick={ me.loginOut.bind(me) } type="default" style={{ marginTop: 10 }}>切换推荐人</Button> : ""
                         }
                     </div>
+
                 </form>
             </div>
         )
