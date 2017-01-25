@@ -47,6 +47,9 @@ export default class Footer extends Component {
             <footer className="footer">
                 <ul>
                     <li>
+                        <Link to="/" className="footer-link">首页</Link>
+                    </li>
+                    <li>
                         <Link to="/about-frontpay" className="footer-link">关于钱途</Link>
                     </li>
                     <li>

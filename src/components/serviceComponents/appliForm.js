@@ -74,10 +74,14 @@ class AppliForm extends React.Component {
                 return false;
             }
 
+            //console.log(payWeLoginData);
+
             let fieldsValues = {
-                userName: payWeLoginData.user.name,
-                userPhone: payWeLoginData.user.phone
+                userName: payWeLoginData.data.user.name,
+                userPhone: payWeLoginData.data.user.phone
             }
+
+            //console.log(fieldsValues,'fieldsValues');
 
             me.props.form.setFieldsValue(fieldsValues);
 
@@ -894,7 +898,7 @@ class AppliForm extends React.Component {
                                     }
                                 }
                                 labelNumber={
-                                    5
+                                    1
                                 }
                                 placeholder="推荐人真实姓名"
                                 disabled={
@@ -921,7 +925,7 @@ class AppliForm extends React.Component {
                                     }
                                 }
                                 labelNumber={
-                                    5
+                                    1
                                 }
                                 placeholder="推荐人手机号码"
                                 disabled={
